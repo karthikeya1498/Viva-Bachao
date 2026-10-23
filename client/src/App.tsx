@@ -1,122 +1,150 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { Navbar, ActiveTab } from './components/Navbar';
+import { DashboardView } from './views/DashboardView';
+import { WhiteboardView } from './views/WhiteboardView';
+import { DocumentationView } from './views/DocumentationView';
+import { QualityView } from './views/QualityView';
+import { InterviewStudioView } from './views/InterviewStudioView';
+import { NewProjectModal } from './components/NewProjectModal';
+import { ReportModal } from './views/ReportModal';
+import { Project } from './types';
+import { api } from './services/api';
+import { Loader2 } from 'lucide-react';
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [currentProjectId, setCurrentProjectId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<ActiveTab>('dashboard');
+  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+  // Load projects on startup
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  const loadProjects = async () => {
+    setLoading(true);
+    try {
+      const data = await api.getProjects();
+      setProjects(data);
+      if (data.length > 0 && !currentProjectId) {
+        setCurrentProjectId(data[0].id);
+      }
+    } catch (err) {
+      console.error('Failed to load projects:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const currentProject = projects.find((p) => p.id === currentProjectId) || (projects.length > 0 ? projects[0] : null);
+
+  const handleSelectProject = async (id: string) => {
+    setCurrentProjectId(id);
+    try {
+      const updated = await api.getProject(id);
+      setProjects((prev) => prev.map((p) => (p.id === id ? updated : p)));
+    } catch (err) {
+      console.error('Failed to refresh project:', err);
+    }
+  };
+
+  const handleAnalyzeRepo = async (repoUrl: string) => {
+    const newProject = await api.analyzeRepo(repoUrl);
+    setProjects((prev) => [newProject, ...prev.filter((p) => p.id !== newProject.id)]);
+    setCurrentProjectId(newProject.id);
+    setActiveTab('whiteboard');
+  };
+
+  const handleDeleteProject = async (id: string) => {
+    if (!confirm('Are you sure you want to remove this project from your library?')) return;
+    try {
+      await api.deleteProject(id);
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+      if (currentProjectId === id) {
+        const remaining = projects.filter((p) => p.id !== id);
+        setCurrentProjectId(remaining[0]?.id || null);
+      }
+    } catch (err) {
+      console.error('Failed to delete project:', err);
+    }
+  };
+
+  if (loading && projects.length === 0) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#fbfaf6]">
+        <div className="sketch-box p-8 text-center bg-white space-y-3">
+          <Loader2 size={36} className="animate-spin mx-auto text-[#1d4ed8]" />
+          <h2 className="font-mono font-bold text-lg text-[#1f2421]">
+            Viva-Bachao Engine Loading...
+          </h2>
+          <p className="text-xs text-[#5c6770] font-mono">
+            Initializing local SQLite database and static analysis pipelines.
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </div>
+    );
+  }
 
-      <div className="ticks"></div>
+  return (
+    <div className="min-h-screen flex flex-col bg-[#fbfaf6]">
+      {/* Top Paper Sketch Navbar */}
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        projects={projects}
+        currentProject={currentProject}
+        onSelectProject={handleSelectProject}
+        onOpenNewModal={() => setIsNewModalOpen(true)}
+        onOpenReportModal={() => setIsReportModalOpen(true)}
+      />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Main View Router */}
+      <main className="flex-1">
+        {activeTab === 'dashboard' && (
+          <DashboardView
+            projects={projects}
+            currentProject={currentProject}
+            onSelectProject={handleSelectProject}
+            onOpenNewModal={() => setIsNewModalOpen(true)}
+            onDeleteProject={handleDeleteProject}
+            onNavigateTab={setActiveTab}
+          />
+        )}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {activeTab === 'whiteboard' && currentProject && (
+          <WhiteboardView project={currentProject} />
+        )}
+
+        {activeTab === 'docs' && currentProject && (
+          <DocumentationView project={currentProject} />
+        )}
+
+        {activeTab === 'quality' && currentProject && (
+          <QualityView project={currentProject} />
+        )}
+
+        {activeTab === 'interview' && currentProject && (
+          <InterviewStudioView project={currentProject} />
+        )}
+      </main>
+
+      {/* Modals */}
+      <NewProjectModal
+        isOpen={isNewModalOpen}
+        onClose={() => setIsNewModalOpen(false)}
+        onAnalyze={handleAnalyzeRepo}
+      />
+
+      <ReportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        project={currentProject}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;

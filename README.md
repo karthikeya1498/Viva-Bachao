@@ -1,4 +1,4 @@
-# Viva-Bachao (विवा बचाओ) 🎓📋
+# Viva-Bachao 🎓📋
 ### GitHub Project Intelligence, Workflow Whiteboard & Interview Preparation Platform
 
 > **"Turn any GitHub repository into a project you can understand, explain, improve, and defend during your viva and technical interviews."**

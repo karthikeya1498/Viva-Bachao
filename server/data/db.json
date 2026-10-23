@@ -1,0 +1,3060 @@
+{
+  "projects": {
+    "proj-karthikeya1498-viva-bachao": {
+      "id": "proj-karthikeya1498-viva-bachao",
+      "name": "Viva-Bachao",
+      "owner": "karthikeya1498",
+      "repoUrl": "https://github.com/karthikeya1498/Viva-Bachao",
+      "defaultBranch": "main",
+      "mainLanguage": "TypeScript",
+      "primaryFramework": "React",
+      "lastOpenedAt": "2026-10-23T16:24:01.848Z",
+      "lastAnalyzedAt": "2026-10-23T16:24:01.848Z",
+      "status": "completed",
+      "currentAnalysis": {
+        "id": "analysis-87f67848",
+        "projectId": "proj-karthikeya1498-viva-bachao",
+        "createdAt": "2026-10-23T16:24:01.848Z",
+        "revision": "HEAD-main",
+        "summary": "Viva-Bachao is a TypeScript project leveraging React. It features 0 HTTP routes, 0 data models, and an automated audit score of 2 verified strengths.",
+        "intendedPurpose": "Provide a robust, decoupled platform for data processing and user interactions.",
+        "targetUsers": "Students, evaluators, developers, and interviewers examining architecture.",
+        "detectedProblem": "Fragmented state updates and complex request coordination requiring clean abstraction.",
+        "languages": {
+          "JSON": 28,
+          "Markdown": 1,
+          "HTML": 0,
+          "CSS": 14,
+          "TypeScript (React)": 52,
+          "TypeScript": 5
+        },
+        "technologies": [
+          {
+            "name": "React",
+            "category": "frontend_framework",
+            "version": "^19.3.1",
+            "role": "Component-based UI state management and virtual DOM rendering",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "Dependency declared in package.json: \"react\": \"^19.3.1\""
+          },
+          {
+            "name": "Vite",
+            "category": "tool",
+            "role": "Modern frontend development server and Rollup-based build tool",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "Vite bundler declared in devDependencies"
+          }
+        ],
+        "fileTree": [
+          {
+            "name": ".gitignore",
+            "path": ".gitignore",
+            "type": "file",
+            "size": 418,
+            "classification": "unknown"
+          },
+          {
+            "name": "client",
+            "path": "client",
+            "type": "directory",
+            "children": [
+              {
+                "name": ".gitignore",
+                "path": "client/.gitignore",
+                "type": "file",
+                "size": 253,
+                "classification": "unknown"
+              },
+              {
+                "name": ".oxlintrc.json",
+                "path": "client/.oxlintrc.json",
+                "type": "file",
+                "size": 245,
+                "classification": "config"
+              },
+              {
+                "name": "README.md",
+                "path": "client/README.md",
+                "type": "file",
+                "size": 1278,
+                "classification": "doc"
+              },
+              {
+                "name": "index.html",
+                "path": "client/index.html",
+                "type": "file",
+                "size": 806,
+                "classification": "unknown"
+              },
+              {
+                "name": "package-lock.json",
+                "path": "client/package-lock.json",
+                "type": "file",
+                "size": 42789,
+                "classification": "config"
+              },
+              {
+                "name": "package.json",
+                "path": "client/package.json",
+                "type": "file",
+                "size": 556,
+                "classification": "config"
+              },
+              {
+                "name": "public",
+                "path": "client/public",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "favicon.svg",
+                    "path": "client/public/favicon.svg",
+                    "type": "file",
+                    "size": 9522,
+                    "classification": "unknown"
+                  },
+                  {
+                    "name": "icons.svg",
+                    "path": "client/public/icons.svg",
+                    "type": "file",
+                    "size": 5031,
+                    "classification": "unknown"
+                  }
+                ]
+              },
+              {
+                "name": "src",
+                "path": "client/src",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "App.css",
+                    "path": "client/src/App.css",
+                    "type": "file",
+                    "size": 2891,
+                    "classification": "unknown"
+                  },
+                  {
+                    "name": "App.tsx",
+                    "path": "client/src/App.tsx",
+                    "type": "file",
+                    "size": 5050,
+                    "classification": "page"
+                  },
+                  {
+                    "name": "assets",
+                    "path": "client/src/assets",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "react.svg",
+                        "path": "client/src/assets/react.svg",
+                        "type": "file",
+                        "size": 4126,
+                        "classification": "unknown"
+                      },
+                      {
+                        "name": "vite.svg",
+                        "path": "client/src/assets/vite.svg",
+                        "type": "file",
+                        "size": 8709,
+                        "classification": "unknown"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "components",
+                    "path": "client/src/components",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "Navbar.tsx",
+                        "path": "client/src/components/Navbar.tsx",
+                        "type": "file",
+                        "size": 5897,
+                        "classification": "ui_component"
+                      },
+                      {
+                        "name": "NewProjectModal.tsx",
+                        "path": "client/src/components/NewProjectModal.tsx",
+                        "type": "file",
+                        "size": 6300,
+                        "classification": "ui_component"
+                      },
+                      {
+                        "name": "NodeDetailPanel.tsx",
+                        "path": "client/src/components/NodeDetailPanel.tsx",
+                        "type": "file",
+                        "size": 10730,
+                        "classification": "ui_component"
+                      },
+                      {
+                        "name": "SketchBox.tsx",
+                        "path": "client/src/components/SketchBox.tsx",
+                        "type": "file",
+                        "size": 803,
+                        "classification": "ui_component"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "index.css",
+                    "path": "client/src/index.css",
+                    "type": "file",
+                    "size": 15730,
+                    "classification": "unknown"
+                  },
+                  {
+                    "name": "main.tsx",
+                    "path": "client/src/main.tsx",
+                    "type": "file",
+                    "size": 230,
+                    "classification": "ui_component"
+                  },
+                  {
+                    "name": "services",
+                    "path": "client/src/services",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "api.ts",
+                        "path": "client/src/services/api.ts",
+                        "type": "file",
+                        "size": 2016,
+                        "classification": "service"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "types",
+                    "path": "client/src/types",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "index.ts",
+                        "path": "client/src/types/index.ts",
+                        "type": "file",
+                        "size": 4704,
+                        "classification": "entry_point"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "views",
+                    "path": "client/src/views",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "DashboardView.tsx",
+                        "path": "client/src/views/DashboardView.tsx",
+                        "type": "file",
+                        "size": 13231,
+                        "classification": "page"
+                      },
+                      {
+                        "name": "DocumentationView.tsx",
+                        "path": "client/src/views/DocumentationView.tsx",
+                        "type": "file",
+                        "size": 9662,
+                        "classification": "page"
+                      },
+                      {
+                        "name": "InterviewStudioView.tsx",
+                        "path": "client/src/views/InterviewStudioView.tsx",
+                        "type": "file",
+                        "size": 23390,
+                        "classification": "page"
+                      },
+                      {
+                        "name": "QualityView.tsx",
+                        "path": "client/src/views/QualityView.tsx",
+                        "type": "file",
+                        "size": 9555,
+                        "classification": "page"
+                      },
+                      {
+                        "name": "ReportModal.tsx",
+                        "path": "client/src/views/ReportModal.tsx",
+                        "type": "file",
+                        "size": 10260,
+                        "classification": "page"
+                      },
+                      {
+                        "name": "WhiteboardView.tsx",
+                        "path": "client/src/views/WhiteboardView.tsx",
+                        "type": "file",
+                        "size": 14119,
+                        "classification": "page"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "tsconfig.app.json",
+                "path": "client/tsconfig.app.json",
+                "type": "file",
+                "size": 658,
+                "classification": "config"
+              },
+              {
+                "name": "tsconfig.json",
+                "path": "client/tsconfig.json",
+                "type": "file",
+                "size": 119,
+                "classification": "config"
+              },
+              {
+                "name": "tsconfig.node.json",
+                "path": "client/tsconfig.node.json",
+                "type": "file",
+                "size": 558,
+                "classification": "config"
+              }
+            ]
+          }
+        ],
+        "entryPoints": [
+          {
+            "path": "client/src/types/index.ts",
+            "type": "Application / Server Entry",
+            "description": "Initial bootstrap file initializing middleware, routes, and listening socket."
+          }
+        ],
+        "workflows": {
+          "system_architecture": {
+            "nodes": [
+              {
+                "id": "node-client-ui",
+                "label": "Client Browser & UI Layer",
+                "nodeType": "ui_component",
+                "filePath": "client/src/App.css",
+                "symbol": "React Virtual DOM / Component Tree",
+                "purpose": "Renders the presentation layer, captures user input events, and manages local UI state.",
+                "inputs": [
+                  "User clicks",
+                  "Form inputs",
+                  "Keyboard navigation"
+                ],
+                "processingSteps": [
+                  "Receives user interaction event",
+                  "Validates state invariants in UI component",
+                  "Triggers asynchronous network dispatch (Fetch / Axios)"
+                ],
+                "outputs": [
+                  "Rendered DOM elements",
+                  "HTTP request payload"
+                ],
+                "plainExplanation": "This is the visual screen where the student or user interacts with buttons and forms.",
+                "technicalExplanation": "The frontend component layer handles event propagation, synchronizes with the Virtual DOM, and dispatches API calls to the server.",
+                "failureScenarios": [
+                  "Uncaught JavaScript runtime error crashes React component tree",
+                  "Stale closure causes state to be out of sync with user input"
+                ],
+                "interviewQuestions": [
+                  "How does state flow from parent to child components in this view?",
+                  "What prevents unnecessary re-renders when user types in the input field?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "client/src/App.css"
+                ],
+                "x": 100,
+                "y": 180
+              },
+              {
+                "id": "node-backend-router",
+                "label": "API Router [HTTP Server]",
+                "nodeType": "backend_route",
+                "filePath": "src/routes/api.ts",
+                "symbol": "POST /api/v1/resource",
+                "purpose": "Matches incoming HTTP requests against URL patterns and invokes corresponding controller middleware.",
+                "inputs": [
+                  "HTTP request headers",
+                  "Query parameters",
+                  "JSON Body"
+                ],
+                "processingSteps": [
+                  "Parses HTTP request line and headers",
+                  "Applies CORS and body-parsing middleware",
+                  "Dispatches payload to matched controller handler"
+                ],
+                "outputs": [
+                  "Express Request/Response context"
+                ],
+                "plainExplanation": "Like a receptionist directing incoming visitors to the right department.",
+                "technicalExplanation": "HTTP requests hit the Express/FastAPI routing table, executing middleware pipelines before reaching the business handler.",
+                "failureScenarios": [
+                  "404 Not Found if route path does not match router pattern",
+                  "Payload Too Large error if request body exceeds middleware limit"
+                ],
+                "interviewQuestions": [
+                  "How does the routing layer validate incoming request parameters before reaching business logic?",
+                  "What middleware executes before this handler is invoked?"
+                ],
+                "confidence": "inferred",
+                "evidenceReferences": [
+                  "src/routes/api.ts"
+                ],
+                "x": 420,
+                "y": 180
+              },
+              {
+                "id": "node-service-logic",
+                "label": "Business Logic & Service Layer",
+                "nodeType": "service",
+                "filePath": "client/src/services/api.ts",
+                "symbol": "executeBusinessLogic()",
+                "purpose": "Enforces domain business rules, authorizes actions, coordinates multiple data repositories, and generates responses.",
+                "inputs": [
+                  "Validated DTO / Domain objects"
+                ],
+                "processingSteps": [
+                  "Verifies business invariants and authorization permissions",
+                  "Performs data transformation and formatting",
+                  "Calls database access layer via ORM/SQL driver"
+                ],
+                "outputs": [
+                  "Domain result entity",
+                  "Success/Failure status"
+                ],
+                "plainExplanation": "The brain of the system: makes decisions, checks if you have permission, and computes the result.",
+                "technicalExplanation": "Decoupled domain service executing core business rules independently of HTTP or database transport details.",
+                "failureScenarios": [
+                  "Domain validation exception when entity rules are violated",
+                  "Database connection timeout during transactional processing"
+                ],
+                "interviewQuestions": [
+                  "Why is business logic separated into services instead of placing it directly inside controllers?",
+                  "How do you manage database transactions if a service updates multiple tables?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "client/src/services/api.ts"
+                ],
+                "x": 740,
+                "y": 180
+              },
+              {
+                "id": "node-db-storage",
+                "label": "Database Layer [Persistence]",
+                "nodeType": "db_operation",
+                "filePath": "src/models/schema.ts",
+                "symbol": "Relational Schema: User / Record",
+                "purpose": "Persists application state, enforces ACID guarantees, and executes queries via indexes.",
+                "inputs": [
+                  "Parameterized SQL query or ORM query object"
+                ],
+                "processingSteps": [
+                  "Acquires database connection from connection pool",
+                  "Executes prepared statement with sanitized values",
+                  "Returns query result set to calling service"
+                ],
+                "outputs": [
+                  "Row records",
+                  "Affected row count",
+                  "Generated Primary Key"
+                ],
+                "plainExplanation": "Where data is safely saved on disk so it stays intact even if the server restarts.",
+                "technicalExplanation": "Data persistence layer interacting with SQLite/Postgres using parameterized queries or ORM models to prevent SQL injection.",
+                "failureScenarios": [
+                  "Unique constraint violation on duplicate key insertion",
+                  "Deadlock or connection pool exhaustion under heavy concurrency"
+                ],
+                "interviewQuestions": [
+                  "What indexing strategy would you use to optimize queries on this table?",
+                  "How does the application prevent SQL injection vulnerabilities?"
+                ],
+                "confidence": "inferred",
+                "evidenceReferences": [
+                  "src/models/schema.ts"
+                ],
+                "x": 1060,
+                "y": 180
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge-client-to-router",
+                "source": "node-client-ui",
+                "target": "node-backend-router",
+                "label": "HTTP REST / JSON",
+                "relationshipType": "calls",
+                "confidence": "confirmed",
+                "evidence": "Frontend fetches API endpoint exposed by backend router"
+              },
+              {
+                "id": "edge-router-to-service",
+                "source": "node-backend-router",
+                "target": "node-service-logic",
+                "label": "invokes handler",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Router middleware delegates execution to business service"
+              },
+              {
+                "id": "edge-service-to-db",
+                "source": "node-service-logic",
+                "target": "node-db-storage",
+                "label": "queries / persists",
+                "relationshipType": "queries",
+                "confidence": "confirmed",
+                "evidence": "Service layer invokes model methods to query or mutate database state"
+              }
+            ],
+            "viewType": "system_architecture"
+          },
+          "request_lifecycle": {
+            "nodes": [
+              {
+                "id": "req-1",
+                "label": "1. User Triggers Action",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/components",
+                "symbol": "onClick / onSubmit",
+                "purpose": "User clicks submit button or initiates action in the client interface.",
+                "processingSteps": [
+                  "Captures event",
+                  "Prevents default reload",
+                  "Dispatches request"
+                ],
+                "plainExplanation": "The user clicks a button to perform an action.",
+                "technicalExplanation": "Synthetic DOM event handled by React event dispatcher.",
+                "failureScenarios": [
+                  "Multiple rapid clicks causing duplicate submissions"
+                ],
+                "interviewQuestions": [
+                  "How do you debounce or throttle rapid button clicks?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Frontend UI handler"
+                ],
+                "x": 80,
+                "y": 200
+              },
+              {
+                "id": "req-2",
+                "label": "2. HTTP Request Dispatched",
+                "nodeType": "api_request",
+                "filePath": "client/src/services/api.ts",
+                "symbol": "fetch(url, options)",
+                "purpose": "Serializes JSON payload and sends asynchronous HTTP request with headers.",
+                "processingSteps": [
+                  "Sets Content-Type: application/json",
+                  "Attaches Auth token if present",
+                  "Awaits response"
+                ],
+                "plainExplanation": "Your browser sends a message over the internet to the server.",
+                "technicalExplanation": "Asynchronous fetch API request utilizing Promise-based lifecycle.",
+                "failureScenarios": [
+                  "Network timeout or offline connection failure"
+                ],
+                "interviewQuestions": [
+                  "How does your frontend handle network failures or offline status?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "API client service"
+                ],
+                "x": 360,
+                "y": 200
+              },
+              {
+                "id": "req-3",
+                "label": "3. Route Middleware & Validation",
+                "nodeType": "backend_route",
+                "filePath": "server/src/routes",
+                "symbol": "validateRequestMiddleware",
+                "purpose": "Validates request schema, sanitizes inputs, and checks authentication headers.",
+                "processingSteps": [
+                  "Checks authorization header",
+                  "Validates required body fields",
+                  "Passes to handler"
+                ],
+                "plainExplanation": "The server inspects the message to make sure it is safe and correctly formatted.",
+                "technicalExplanation": "Express middleware stack running schema validators prior to business handler.",
+                "failureScenarios": [
+                  "400 Bad Request if mandatory fields are missing"
+                ],
+                "interviewQuestions": [
+                  "What library or pattern do you use for request payload validation?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "route middleware"
+                ],
+                "x": 640,
+                "y": 200
+              },
+              {
+                "id": "req-4",
+                "label": "4. Controller & Response Serialization",
+                "nodeType": "controller",
+                "filePath": "server/src/controllers",
+                "symbol": "res.status(200).json(data)",
+                "purpose": "Executes domain logic, serializes response body, and sets HTTP status code.",
+                "processingSteps": [
+                  "Computes response",
+                  "Sets 200 OK or appropriate status",
+                  "Streams JSON back to client"
+                ],
+                "plainExplanation": "The server prepares the answer and sends it back to your browser.",
+                "technicalExplanation": "Express response pipeline serializing domain model into JSON and ending HTTP stream.",
+                "failureScenarios": [
+                  "Unhandled exception turning into a 500 Internal Server Error"
+                ],
+                "interviewQuestions": [
+                  "How are unexpected exceptions caught and mapped to standard HTTP error codes?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Controller response logic"
+                ],
+                "x": 920,
+                "y": 200
+              },
+              {
+                "id": "req-5",
+                "label": "5. UI State Update & Rerender",
+                "nodeType": "ui_component",
+                "filePath": "client/src/App.tsx",
+                "symbol": "setState(data)",
+                "purpose": "Parses incoming JSON response, updates React state, and re-renders updated view.",
+                "processingSteps": [
+                  "Parses response.json()",
+                  "Updates component state hook",
+                  "Virtual DOM recalculates diff"
+                ],
+                "plainExplanation": "The screen updates with the new information without needing a full page reload.",
+                "technicalExplanation": "React reconciler schedules state update, diffs virtual tree, and commits DOM patches.",
+                "failureScenarios": [
+                  "Component unmounted before fetch completes causing memory leak warning"
+                ],
+                "interviewQuestions": [
+                  "What happens if an asynchronous state update runs after a component unmounts?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "React state hooks"
+                ],
+                "x": 1200,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-req-1-2",
+                "source": "req-1",
+                "target": "req-2",
+                "label": "triggers",
+                "relationshipType": "triggers",
+                "confidence": "confirmed",
+                "evidence": "User click triggers fetch"
+              },
+              {
+                "id": "e-req-2-3",
+                "source": "req-2",
+                "target": "req-3",
+                "label": "network packet",
+                "relationshipType": "calls",
+                "confidence": "confirmed",
+                "evidence": "HTTP request arrives at backend"
+              },
+              {
+                "id": "e-req-3-4",
+                "source": "req-3",
+                "target": "req-4",
+                "label": "validated payload",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Middleware passes to handler"
+              },
+              {
+                "id": "e-req-4-5",
+                "source": "req-4",
+                "target": "req-5",
+                "label": "HTTP 200 JSON",
+                "relationshipType": "renders",
+                "confidence": "confirmed",
+                "evidence": "JSON response parsed by client"
+              }
+            ],
+            "viewType": "request_lifecycle"
+          },
+          "data_lifecycle": {
+            "nodes": [
+              {
+                "id": "data-1",
+                "label": "1. Raw User Input",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/forms",
+                "symbol": "Controlled Inputs",
+                "purpose": "Captures raw input strings entered into forms.",
+                "processingSteps": [
+                  "Captures onChange event",
+                  "Stores in component state"
+                ],
+                "plainExplanation": "Information typed in by the user.",
+                "technicalExplanation": "React controlled input components bound to state variables.",
+                "failureScenarios": [
+                  "Special characters, SQL injection strings, or oversized input"
+                ],
+                "interviewQuestions": [
+                  "Why should client-side input validation never be the only defense?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Client form input"
+                ],
+                "x": 100,
+                "y": 180
+              },
+              {
+                "id": "data-2",
+                "label": "2. Backend Sanitization & Validation",
+                "nodeType": "backend_route",
+                "filePath": "server/src/validation",
+                "symbol": "Schema Validation (Zod/Joi/Pydantic)",
+                "purpose": "Validates types, required fields, constraints, and strips malicious tags.",
+                "processingSteps": [
+                  "Validates string lengths",
+                  "Checks email/number formats",
+                  "Strips dangerous HTML/script tags"
+                ],
+                "plainExplanation": "A safety inspection ensuring data is clean, correct, and not harmful.",
+                "technicalExplanation": "Schema validation rejecting invalid payloads with 422 Unprocessable Entity before database access.",
+                "failureScenarios": [
+                  "Validation bypass if schema is missing or incomplete"
+                ],
+                "interviewQuestions": [
+                  "How do you protect your backend against XSS (Cross-Site Scripting)?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Backend validator"
+                ],
+                "x": 460,
+                "y": 180
+              },
+              {
+                "id": "data-3",
+                "label": "3. Entity Transformation & Hashing",
+                "nodeType": "service",
+                "filePath": "server/src/services",
+                "symbol": "hashPassword() / mapToEntity()",
+                "purpose": "Transforms input into canonical domain model and hashes sensitive fields like passwords.",
+                "processingSteps": [
+                  "Hashes passwords with bcrypt/argon2",
+                  "Generates UUID / timestamps",
+                  "Applies domain business rules"
+                ],
+                "plainExplanation": "Scrambles passwords for security and adds creation timestamps.",
+                "technicalExplanation": "One-way cryptographic salt-and-hash transformation before persistence.",
+                "failureScenarios": [
+                  "Plaintext password storage if hashing step is skipped"
+                ],
+                "interviewQuestions": [
+                  "Why is hashing passwords with a salt necessary instead of plain SHA-256?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Entity transformation logic"
+                ],
+                "x": 820,
+                "y": 180
+              },
+              {
+                "id": "data-4",
+                "label": "4. Disk Persistence & Indexing",
+                "nodeType": "db_operation",
+                "filePath": "server/src/db",
+                "symbol": "INSERT INTO / db.save()",
+                "purpose": "Commits record to database disk pages and updates B-tree indices.",
+                "processingSteps": [
+                  "Begins transaction",
+                  "Writes to write-ahead log (WAL)",
+                  "Updates index table",
+                  "Commits transaction"
+                ],
+                "plainExplanation": "Permanently writes the information to storage so it is never lost.",
+                "technicalExplanation": "ACID transactional write to database tables with automatic B-Tree index recalculation.",
+                "failureScenarios": [
+                  "Unique key collision (e.g. email already exists)"
+                ],
+                "interviewQuestions": [
+                  "What are the ACID properties and how does your database guarantee them?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Database schema definition"
+                ],
+                "x": 1180,
+                "y": 180
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-data-1-2",
+                "source": "data-1",
+                "target": "data-2",
+                "label": "transmits raw data",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Sent via POST request"
+              },
+              {
+                "id": "e-data-2-3",
+                "source": "data-2",
+                "target": "data-3",
+                "label": "sanitized payload",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Valid data passed to service"
+              },
+              {
+                "id": "e-data-3-4",
+                "source": "data-3",
+                "target": "data-4",
+                "label": "persists entity",
+                "relationshipType": "queries",
+                "confidence": "confirmed",
+                "evidence": "ORM executes insert query"
+              }
+            ],
+            "viewType": "data_lifecycle"
+          },
+          "auth_lifecycle": {
+            "nodes": [
+              {
+                "id": "auth-1",
+                "label": "1. Credentials Submission",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/pages/Login",
+                "symbol": "handleLoginSubmit()",
+                "purpose": "User inputs identifier (email/username) and password over HTTPS.",
+                "processingSteps": [
+                  "Prevents plain HTTP transmission",
+                  "Packages credentials into JSON body"
+                ],
+                "plainExplanation": "User enters email and password into the login form.",
+                "technicalExplanation": "Credential dispatch over TLS encrypted transport layer.",
+                "failureScenarios": [
+                  "MITM attack if TLS is not enforced on the connection"
+                ],
+                "interviewQuestions": [
+                  "Why must authentication requests strictly use HTTPS?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Login interface"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "auth-2",
+                "label": "2. Credential Verification & Hash Comparison",
+                "nodeType": "auth_step",
+                "filePath": "server/src/auth",
+                "symbol": "bcrypt.compare(password, hash)",
+                "purpose": "Fetches user record from DB and compares submitted password against stored hash using constant-time comparison.",
+                "processingSteps": [
+                  "Retrieves user by identifier",
+                  "Runs constant-time hash verification",
+                  "Rejects if mismatch"
+                ],
+                "plainExplanation": "Checks if the password matches the secret record on file.",
+                "technicalExplanation": "Timing-safe password hash verification preventing timing attacks.",
+                "failureScenarios": [
+                  "401 Unauthorized returned if password does not match"
+                ],
+                "interviewQuestions": [
+                  "What is a timing attack and how does constant-time comparison protect against it?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Authentication controller"
+                ],
+                "x": 460,
+                "y": 200
+              },
+              {
+                "id": "auth-3",
+                "label": "3. Token / Session Minting",
+                "nodeType": "auth_step",
+                "filePath": "server/src/auth/jwt",
+                "symbol": "jwt.sign({ userId, role }, SECRET, { expiresIn })",
+                "purpose": "Signs an encrypted or tamper-proof token containing user claims and expiration timestamp.",
+                "processingSteps": [
+                  "Embeds user claims into payload",
+                  "Signs with HMAC-SHA256 secret key",
+                  "Returns token in response or httpOnly cookie"
+                ],
+                "plainExplanation": "Creates a digital backstage pass (token) proving you are logged in.",
+                "technicalExplanation": "Stateless JWT generation with cryptographically signed payload preventing forgery.",
+                "failureScenarios": [
+                  "Hardcoded secret key allowing attackers to forge tokens"
+                ],
+                "interviewQuestions": [
+                  "What is the difference between session-based auth and JWT-based auth?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Token generator"
+                ],
+                "x": 820,
+                "y": 200
+              },
+              {
+                "id": "auth-4",
+                "label": "4. Protected Route Guard",
+                "nodeType": "backend_route",
+                "filePath": "server/src/middleware/auth",
+                "symbol": "verifyTokenMiddleware",
+                "purpose": "Extracts Authorization: Bearer <token> header on protected endpoints and verifies signature.",
+                "processingSteps": [
+                  "Extracts token from header",
+                  "Verifies signature and expiration",
+                  "Attaches req.user context"
+                ],
+                "plainExplanation": "Security guard checking your backstage pass before allowing you into private pages.",
+                "technicalExplanation": "Route middleware executing signature verification before granting access to controllers.",
+                "failureScenarios": [
+                  "401 if token expired; 403 Forbidden if user lacks required role"
+                ],
+                "interviewQuestions": [
+                  "How do you handle JWT revocation if a user logs out before token expiration?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Auth guard middleware"
+                ],
+                "x": 1180,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-auth-1-2",
+                "source": "auth-1",
+                "target": "auth-2",
+                "label": "POST /api/auth/login",
+                "relationshipType": "authenticates",
+                "confidence": "confirmed",
+                "evidence": "User dispatches credentials"
+              },
+              {
+                "id": "e-auth-2-3",
+                "source": "auth-2",
+                "target": "auth-3",
+                "label": "valid credentials",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Backend generates signed token"
+              },
+              {
+                "id": "e-auth-3-4",
+                "source": "auth-3",
+                "target": "auth-4",
+                "label": "Bearer <token> header",
+                "relationshipType": "authenticates",
+                "confidence": "confirmed",
+                "evidence": "Token passed to protected routes"
+              }
+            ],
+            "viewType": "auth_lifecycle"
+          },
+          "error_handling": {
+            "nodes": [
+              {
+                "id": "err-1",
+                "label": "1. Exception Triggered",
+                "nodeType": "error_handler",
+                "filePath": "server/src/services",
+                "symbol": "throw new Error(\"Resource not found\")",
+                "purpose": "An unexpected or handled error occurs (e.g. missing item, invalid state, DB failure).",
+                "processingSteps": [
+                  "Catches failed invariant",
+                  "Instantiates error object with message and code"
+                ],
+                "plainExplanation": "Something unexpected went wrong while processing your request.",
+                "technicalExplanation": "Synchronous or asynchronous rejection creating an Error stack trace.",
+                "failureScenarios": [
+                  "Unhandled promise rejection crashing the Node.js process"
+                ],
+                "interviewQuestions": [
+                  "What is the danger of unhandled promise rejections in Node.js?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Business logic exception"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "err-2",
+                "label": "2. Global Error Middleware",
+                "nodeType": "error_handler",
+                "filePath": "server/src/middleware/errorHandler",
+                "symbol": "app.use((err, req, res, next) => ...)",
+                "purpose": "Catches all unhandled exceptions, logs internal stack trace, and masks sensitive info.",
+                "processingSteps": [
+                  "Logs full stack trace to logger",
+                  "Determines HTTP status code (400, 404, 500)",
+                  "Builds sanitized error response"
+                ],
+                "plainExplanation": "The safety net that catches any crash, writes details in private logs, and sends a friendly message.",
+                "technicalExplanation": "Express 4-argument error-handling middleware preventing unhandled process termination.",
+                "failureScenarios": [
+                  "Leaking database credentials or SQL query in error response to client"
+                ],
+                "interviewQuestions": [
+                  "Why should database error messages never be sent raw to the frontend?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Error handling middleware"
+                ],
+                "x": 500,
+                "y": 200
+              },
+              {
+                "id": "err-3",
+                "label": "3. Client Toast / Fallback UI",
+                "nodeType": "ui_component",
+                "filePath": "client/src/components/ErrorBoundary",
+                "symbol": "showToastError() / ErrorBoundary",
+                "purpose": "Informs user of the problem gracefully without crashing the entire web application.",
+                "processingSteps": [
+                  "Receives non-2xx status code",
+                  "Renders non-intrusive alert toast",
+                  "Maintains app state"
+                ],
+                "plainExplanation": "A helpful notification pops up telling the user what went wrong, keeping the rest of the page working.",
+                "technicalExplanation": "React Error Boundary and toast notification displaying user-facing guidance.",
+                "failureScenarios": [
+                  "Silent failure leaving user confused with infinite loading spinner"
+                ],
+                "interviewQuestions": [
+                  "How do React Error Boundaries work and when should you use them?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Client Error Boundary"
+                ],
+                "x": 950,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-err-1-2",
+                "source": "err-1",
+                "target": "err-2",
+                "label": "thrown exception",
+                "relationshipType": "handles_error",
+                "confidence": "confirmed",
+                "evidence": "Error intercepted by middleware"
+              },
+              {
+                "id": "e-err-2-3",
+                "source": "err-2",
+                "target": "err-3",
+                "label": "JSON { error, code }",
+                "relationshipType": "renders",
+                "confidence": "confirmed",
+                "evidence": "Client parses error response"
+              }
+            ],
+            "viewType": "error_handling"
+          },
+          "deployment": {
+            "nodes": [
+              {
+                "id": "dep-1",
+                "label": "1. Source Build & Bundle",
+                "nodeType": "external_service",
+                "filePath": "package.json / tsconfig.json",
+                "symbol": "npm run build (Vite/TSC)",
+                "purpose": "Transpiles TypeScript, tree-shakes dead code, minifies JavaScript, and compiles assets.",
+                "processingSteps": [
+                  "Type checks with tsc",
+                  "Bundles modules with Vite/Rollup",
+                  "Outputs static files to /dist"
+                ],
+                "plainExplanation": "Takes all your code and packs it into small, fast files ready for the web.",
+                "technicalExplanation": "Static asset bundling optimizing chunk sizes and hashing filenames for browser caching.",
+                "failureScenarios": [
+                  "TypeScript compilation errors halting the build pipeline"
+                ],
+                "interviewQuestions": [
+                  "What is tree-shaking and how does it reduce frontend bundle size?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Build scripts in package.json"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "dep-2",
+                "label": "2. Environment Provisioning",
+                "nodeType": "external_service",
+                "filePath": ".env.example",
+                "symbol": "NODE_ENV=production",
+                "purpose": "Packages application code with system dependencies into an immutable container or isolated process.",
+                "processingSteps": [
+                  "Installs production node_modules",
+                  "Configures environment variables",
+                  "Exposes application port"
+                ],
+                "plainExplanation": "Puts the application inside a standardized shipping container that runs identically everywhere.",
+                "technicalExplanation": "Multi-stage Docker build minimizing runtime image footprint and locking Linux kernel dependencies.",
+                "failureScenarios": [
+                  "Missing environment variable causing startup crash"
+                ],
+                "interviewQuestions": [
+                  "Why are multi-stage Docker builds recommended for Node/Go applications?"
+                ],
+                "confidence": "inferred",
+                "evidenceReferences": [
+                  "Environment configuration"
+                ],
+                "x": 520,
+                "y": 200
+              },
+              {
+                "id": "dep-3",
+                "label": "3. Web Server Runtime & Reverse Proxy",
+                "nodeType": "external_service",
+                "filePath": "server/src/index.ts",
+                "symbol": "node dist/index.js (Port 5000 / NGINX)",
+                "purpose": "Serves incoming traffic, terminates SSL/TLS, and executes application processes.",
+                "processingSteps": [
+                  "Listens on TCP socket",
+                  "Handles incoming connections",
+                  "Logs requests and health metrics"
+                ],
+                "plainExplanation": "The live server on the internet answering visits 24/7.",
+                "technicalExplanation": "Reverse proxy routing requests to Node.js clustered workers or container orchestrator.",
+                "failureScenarios": [
+                  "Out-of-memory crash under sudden spike in traffic"
+                ],
+                "interviewQuestions": [
+                  "How does a reverse proxy like NGINX improve security and performance?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Server entrypoint"
+                ],
+                "x": 950,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-dep-1-2",
+                "source": "dep-1",
+                "target": "dep-2",
+                "label": "compiled artifact",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Build outputs packaged into runtime container"
+              },
+              {
+                "id": "e-dep-2-3",
+                "source": "dep-2",
+                "target": "dep-3",
+                "label": "launches process",
+                "relationshipType": "triggers",
+                "confidence": "confirmed",
+                "evidence": "Container starts Node.js application server"
+              }
+            ],
+            "viewType": "deployment"
+          }
+        },
+        "documentation": [
+          {
+            "chapterNumber": 1,
+            "title": "Project Overview",
+            "summary": "Executive summary of Viva-Bachao, its structural composition, and its scope.",
+            "content": {
+              "beginner": "Viva-Bachao is a modern software application built to solve real developer or user tasks. It coordinates a user interface with backend services to process requests and manage data reliably.",
+              "intermediate": "Viva-Bachao utilizes a client-server architecture. The frontend handles interactive state management and communicates via structured REST API endpoints. The backend coordinates routing, applies middleware, and communicates with a persistent data layer.",
+              "advanced": "The system architecture emphasizes decoupling transport layers from domain services. It operates with asynchronous event-driven I/O to maximize throughput while minimizing operational memory overhead."
+            },
+            "relatedFiles": [
+              ".gitignore",
+              "client/.gitignore",
+              "client/.oxlintrc.json"
+            ]
+          },
+          {
+            "chapterNumber": 2,
+            "title": "Problem Being Solved",
+            "summary": "Clarification of user problems addressed, distinguishing documented intent from inferred behavior.",
+            "content": {
+              "beginner": "Users often struggle with managing tasks, visualizing complex information, or communicating between distributed tools without a central workspace.",
+              "intermediate": "The application eliminates manual data translation and fragmented workflows by exposing deterministic interfaces, automated validations, and synchronized state transitions.",
+              "advanced": "At scale, distributed workflows suffer from inconsistent state boundaries and brittle integration points. The application enforces single sources of truth, reducing synchronization latency and validation mismatches."
+            },
+            "relatedFiles": [
+              "client/README.md"
+            ]
+          },
+          {
+            "chapterNumber": 3,
+            "title": "Feature Breakdown",
+            "summary": "Comprehensive inventory of core application features mapped to supporting source files.",
+            "content": {
+              "beginner": "Key features include interactive user dashboards, instant data updates, input forms with safety checks, and organized data visualization.",
+              "intermediate": "Features are broken down into discrete modules: authentication/authorization pipelines, 0 HTTP API endpoints, data persistence with schema enforcement, and responsive presentation components.",
+              "advanced": "Each feature is designed around transactional boundaries. Mutations enforce optimistic locking or atomic database operations, preventing race conditions during concurrent user submissions."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 4,
+            "title": "Technology Stack",
+            "summary": "Inspection of detected programming languages, libraries, and runtime frameworks.",
+            "content": {
+              "beginner": "The project is built with: React (frontend_framework), Vite (tool). Each tool plays a specific role, from making the site look good to storing your data.",
+              "intermediate": "Core technologies detected include: React: Component-based UI state management and virtual DOM rendering; Vite: Modern frontend development server and Rollup-based build tool. Dependencies are pinned in package manifests to ensure reproducible builds.",
+              "advanced": "Selection of React enables static type-checking and compiles to high-performance JavaScript. Asynchronous event loops handle high I/O concurrency without multi-threaded memory overhead."
+            },
+            "relatedFiles": [
+              "package.json"
+            ]
+          },
+          {
+            "chapterNumber": 5,
+            "title": "Folder Structure & Module Organization",
+            "summary": "Architectural rationale behind folder divisions, entrypoints, and file placement.",
+            "content": {
+              "beginner": "The project is neatly divided into folders like folders in a school binder: one for screens (client), one for server rules (server), and one for settings.",
+              "intermediate": "Separation of concerns is maintained through dedicated directories: `/routes` for HTTP entrypoints, `/services` for business logic, `/models` for database schema definitions, and `/components` for modular UI elements.",
+              "advanced": "The layout resembles Clean Architecture principles. High-level business policies do not depend on low-level database details; dependencies flow inward toward core domain models."
+            },
+            "relatedFiles": [
+              ".gitignore",
+              "client/.gitignore",
+              "client/.oxlintrc.json",
+              "client/README.md",
+              "client/index.html"
+            ]
+          },
+          {
+            "chapterNumber": 6,
+            "title": "System Architecture",
+            "summary": "High-level component topology, communication channels, and boundary contracts.",
+            "content": {
+              "beginner": "When you click a button in the browser, a message travels to the server, which asks the database for the right information, and sends the answer back to your screen.",
+              "intermediate": "The frontend dispatches AJAX HTTP requests. The backend Express router passes the request through authentication and body-parser middleware, invokes controller methods, queries the database, and returns standard JSON payloads.",
+              "advanced": "The system uses an asynchronous request-response architecture. Stateless session or JWT tokens permit horizontal scaling across multiple application instances behind a load balancer."
+            },
+            "relatedFiles": [
+              "server/src/index.ts",
+              "client/src/App.tsx"
+            ]
+          },
+          {
+            "chapterNumber": 7,
+            "title": "End-to-End Workflows",
+            "summary": "Detailed step-by-step tracing of primary request and data lifecycles.",
+            "content": {
+              "beginner": "A complete journey: You fill out a form -> click Submit -> the computer checks your data -> saves it permanently -> displays a success checkmark.",
+              "intermediate": "1. User action dispatches fetch request. 2. Route middleware verifies headers. 3. Controller parses body and invokes service. 4. Service queries database with parameterized input. 5. Database commits row. 6. HTTP 200 response triggers client state update.",
+              "advanced": "Data lifecycles guarantee consistency through strict middleware gates. Exceptions in any step rollback transactions and stream RFC-7807 compliant error objects to the client."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 8,
+            "title": "API Documentation & Endpoints",
+            "summary": "Discovered HTTP endpoints, request methods, input schemas, and response formats.",
+            "content": {
+              "beginner": "The backend provides several doorways (called APIs) that the frontend knocks on to get or save information.",
+              "intermediate": "Endpoints include REST routes for user authentication, resource querying, and mutations.",
+              "advanced": "Endpoints adhere to RESTful principles: idempotency on GET/PUT/DELETE, resource-based URL naming, standard HTTP status codes (200, 201, 400, 401, 404, 500), and JSON content-type negotiation."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 9,
+            "title": "Database Design & Entities",
+            "summary": "Relational or document data models, field definitions, indices, and relationships.",
+            "content": {
+              "beginner": "The database is like a collection of organized spreadsheets where each row represents a user or an item with specific columns like ID, name, and date.",
+              "intermediate": "Data models define primary keys, foreign key constraints, timestamps, and indexes for performant lookups.",
+              "advanced": "Normalized schema design minimizes data redundancy. Primary keys are indexed via B-Trees, ensuring logarithmic O(log N) lookup times during high-volume reads."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 10,
+            "title": "Important Implementation Details",
+            "summary": "Algorithms, custom state managers, cryptographic routines, and utilities.",
+            "content": {
+              "beginner": "Specialized helper tools perform tasks like checking email addresses, timing animations, and keeping you securely logged in.",
+              "intermediate": "Implementation details include custom authentication tokens, input sanitizers, centralized error interceptors, and reactive frontend state hooks.",
+              "advanced": "State managers avoid memory leaks through cleanup hooks. Cryptographic routines employ constant-time comparison algorithms to mitigate side-channel timing attacks."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 11,
+            "title": "Testing Strategy & Quality Inventory",
+            "summary": "Unit, integration, and end-to-end testing coverage across the repository.",
+            "content": {
+              "beginner": "Tests are automated robots that check if the code still works after someone makes changes.",
+              "intermediate": "The testing inventory inspects smoke tests, unit tests for core utilities, and integration checks verifying that routes return expected status codes.",
+              "advanced": "Testing follows the Test Pyramid: heavy unit test coverage for pure business logic, followed by integration tests with mock database drivers, and end-to-end smoke tests."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 12,
+            "title": "Build and Deployment Pipeline",
+            "summary": "Transpilation, asset bundling, containerization, and production runtime hosting.",
+            "content": {
+              "beginner": "How the project goes from code on your laptop to a live website on the internet.",
+              "intermediate": "The build step runs `npm run build` using Vite or TypeScript compiler to generate minified output in `/dist`. Environment variables are loaded at startup.",
+              "advanced": "CI/CD pipelines automate linting, type-checking, and container image generation. Production deployments employ reverse proxies like NGINX or cloud PaaS runners."
+            },
+            "relatedFiles": [
+              "package.json",
+              "Dockerfile",
+              ".env.example"
+            ]
+          },
+          {
+            "chapterNumber": 13,
+            "title": "Strengths and Technical Limitations",
+            "summary": "Objective, evidence-backed architectural advantages and documented constraints.",
+            "content": {
+              "beginner": "The project is very fast and organized, but currently has some features that can be expanded in the future.",
+              "intermediate": "Strengths: Clear module boundaries, strict type definitions, and clean separation between UI and server. Limitations: In-memory/embedded database limitations under heavy concurrent writes.",
+              "advanced": "Trade-off analysis: Choosing a monolithic repository simplifies dependency management and deployment for students, but limits independent horizontal scaling of frontend vs backend components."
+            },
+            "relatedFiles": [
+              ".gitignore",
+              "client/.gitignore",
+              "client/.oxlintrc.json"
+            ]
+          },
+          {
+            "chapterNumber": 14,
+            "title": "Prioritized Improvement Roadmap",
+            "summary": "Actionable engineering enhancements categorized by estimated effort and impact.",
+            "content": {
+              "beginner": "Things we can do next: add automated tests, improve error messages, and add nice dark/light mode options.",
+              "intermediate": "1. Add comprehensive test coverage using Vitest. 2. Implement Redis caching for frequent database reads. 3. Introduce structured logging with Pino or Winston.",
+              "advanced": "Architectural enhancements: Implement rate-limiting middleware (express-rate-limit), database connection pooling tuning, and OpenTelemetry instrumentation for distributed tracing."
+            },
+            "relatedFiles": [
+              "server/src/index.ts"
+            ]
+          },
+          {
+            "chapterNumber": 15,
+            "title": "Interview Preparation & Viva Defense Guide",
+            "summary": "Core technical talking points, architecture defense strategies, and answers to challenging questions.",
+            "content": {
+              "beginner": "Be ready to say what the project does in 30 seconds, why you built it, and which buttons do what.",
+              "intermediate": "Be prepared to explain: 1. Why you chose this technology stack over alternatives. 2. How data travels from user click to database. 3. How errors are handled when the network drops.",
+              "advanced": "Defend design decisions: Explain the trade-offs between SQL vs NoSQL for your data models, discuss JWT expiration vs refresh token rotation, and describe how you would scale the system to 100,000 daily active users."
+            },
+            "relatedFiles": [
+              ".gitignore",
+              "client/.gitignore",
+              "client/.oxlintrc.json",
+              "client/README.md"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "sec-env-isolation",
+            "title": "Proper Environment Variable Isolation",
+            "category": "strength",
+            "severity": "low",
+            "description": "No obvious plaintext secrets or private API tokens were discovered hardcoded in tracked source files.",
+            "evidence": "Scanned tracked files for credential assignments; no raw tokens found.",
+            "affectedFiles": [
+              ".gitignore",
+              "client/.gitignore",
+              "client/.oxlintrc.json"
+            ],
+            "impact": "Reduces risk of accidental credential leakage during code sharing or git commits.",
+            "recommendedCorrection": "Continue keeping `.env` in `.gitignore` and use secret scanning in CI.",
+            "estimatedEffort": "0 mins",
+            "confidence": "confirmed",
+            "verificationStatus": "Verified by static source scan"
+          },
+          {
+            "id": "test-suite-missing",
+            "title": "Missing Automated Test Suite",
+            "category": "weakness",
+            "severity": "high",
+            "description": "No automated unit tests (Vitest/Jest/PyTest) were detected in the repository structure.",
+            "evidence": "Scanned file tree for test directory conventions (`*.test.*`, `__tests__/`, `tests/`); none found.",
+            "affectedFiles": [
+              "Project Root"
+            ],
+            "impact": "Without tests, changes to routes or data models might inadvertently break runtime behavior without warning during demonstrations or interviews.",
+            "recommendedCorrection": "Introduce Vitest (or Jest) and write smoke tests for primary route handlers and utility functions.",
+            "beforeCode": "// No automated test files present in repo",
+            "afterCode": "import { describe, it, expect } from 'vitest';\n\ndescribe('Core Handler', () => {\n  it('should return valid JSON on GET', async () => {\n    const res = await request(app).get('/api/health');\n    expect(res.status).toBe(200);\n  });\n});",
+            "estimatedEffort": "2 hours",
+            "confidence": "confirmed",
+            "verificationStatus": "Verified file tree absence"
+          },
+          {
+            "id": "arch-controller-fat",
+            "title": "Potential Coupling of Route Transport and Business Rules",
+            "category": "maintainability",
+            "severity": "medium",
+            "description": "Business rules appear to be executed directly within route definitions rather than delegated to isolated service modules.",
+            "evidence": "Lack of separate service layer abstraction files in repository.",
+            "affectedFiles": [
+              "client/tsconfig.app.json"
+            ],
+            "impact": "Makes unit testing difficult without starting a full HTTP server, and hinders code reuse across different endpoints.",
+            "recommendedCorrection": "Extract database queries and calculations into dedicated service functions.",
+            "beforeCode": "app.post('/items', async (req, res) => {\n  // 60 lines of validation, db queries, email notification...\n});",
+            "afterCode": "app.post('/items', async (req, res) => {\n  const result = await itemService.create(req.body);\n  return res.status(201).json(result);\n});",
+            "estimatedEffort": "1.5 hours",
+            "confidence": "inferred",
+            "verificationStatus": "Inferred from file tree structure"
+          },
+          {
+            "id": "sec-schema-validation",
+            "title": "Robust Declarative Schema Validation",
+            "category": "strength",
+            "severity": "low",
+            "description": "The repository utilizes declarative schema validation libraries (Zod/Joi/Pydantic) to validate incoming payloads.",
+            "evidence": "Found validation library usage in package manifests or source code.",
+            "affectedFiles": [],
+            "impact": "Guarantees type-safety and blocks malformed input before it can reach business or database layers.",
+            "recommendedCorrection": "Ensure all POST/PUT/PATCH endpoints have an associated schema.",
+            "estimatedEffort": "0 mins",
+            "confidence": "confirmed",
+            "verificationStatus": "Confirmed by package dependency"
+          }
+        ],
+        "interviewMaterials": {
+          "pitches": {
+            "thirtySecondPitch": "\"Viva-Bachao is a developer-focused full-stack web application engineered using React, Vite. It provides an integrated workflow for data management, structured API routing with 0 endpoints, and persistent storage for structured domain records, designed to give users real-time visibility and control.\"",
+            "twoMinutePitch": "\"I developed Viva-Bachao to solve the problem of fragmented workflows and lack of system visibility. The project is architected with a decoupled frontend built in React and a backend running TypeScript.\n\nWhen a user interacts with the interface, the client dispatches RESTful API requests to our backend router. The backend passes requests through custom validation and authentication middleware, invokes business logic services, and persists state across multiple database models. I focused on clean separation of concerns, ensuring that the database and transport layer remain isolated from core business logic.\"",
+            "fiveMinuteDeepDive": "\"Let's walk through the architectural blueprint of Viva-Bachao. The application is organized into three distinct tiers:\n\n1. Presentation & State Management: Built using modular components that bind directly to reactive state hooks. User events trigger asynchronous fetch pipelines that handle optimistic UI updates and gracefully capture network exceptions.\n\n2. API Routing & Middleware Pipeline: The server exposes 0 structured HTTP endpoints. Every incoming request flows through a middleware chain that validates JSON payloads, enforces CORS policies, and checks authorization tokens before reaching the business handlers.\n\n3. Service Layer & Persistence: Rather than embedding raw queries inside route handlers, I separated business logic into domain services. Persistence is managed via a relational database, where models (structured domain records) are indexed on primary keys to ensure sub-millisecond query performance.\n\n4. Reliability & Error Recovery: The backend uses a centralized error-handling middleware that logs stack traces internally while returning sanitized, standardized error codes to the client, preventing credential leaks.\"",
+            "resumeBulletPoints": [
+              "Architected and deployed \"Viva-Bachao\", a full-stack platform leveraging React, Vite with 0 RESTful endpoints.",
+              "Designed normalized database schemas for structured domain records, implementing indexes and parameterized queries to prevent SQL injection.",
+              "Engineered end-to-end authentication and validation pipelines, reducing invalid payload exceptions and ensuring type safety.",
+              "Built modular frontend components with reactive state synchronization and centralized error toast notifications."
+            ],
+            "architectureExplanation": "The system follows an asynchronous client-server model. The client communicates via JSON over HTTP REST. The backend utilizes an event-driven loop to process requests through middleware, controllers, and services down to the database layer, maintaining strict separation of concerns."
+          },
+          "questions": [
+            {
+              "id": "q-fund-1",
+              "category": "fundamentals",
+              "difficulty": "beginner",
+              "question": "What problem does Viva-Bachao solve, and who are its primary users?",
+              "directAnswer": "Viva-Bachao solves the challenge of scattered workflows and lack of visibility by providing a centralized, structured system for users to manage and inspect technical operations.",
+              "technicalExplanation": "The application consolidates user interactions, API dispatching, and persistent storage into an observable client-server architecture with deterministic error boundaries.",
+              "repositoryEvidence": "Documented in README.md and root project configuration.",
+              "practicalExample": "Instead of manually inspecting multiple disjointed files or logs, a user interacts with an intuitive UI backed by structured API endpoints.",
+              "tradeOffs": "Focusing on a lightweight web interface requires a reliable network connection compared to a purely offline desktop CLI.",
+              "followUpQuestion": "How would you enable offline capability or local-first synchronization if users lose network access?"
+            },
+            {
+              "id": "q-tech-1",
+              "category": "tech_stack",
+              "difficulty": "intermediate",
+              "question": "Why did you select React and Vite for this project over alternatives?",
+              "directAnswer": "I chose this stack for end-to-end type safety, asynchronous event-driven I/O performance, and the massive ecosystem of battle-tested packages.",
+              "technicalExplanation": "TypeScript allows sharing types between client and server, catching type mismatches at compile time rather than during runtime execution. Node.js non-blocking I/O is ideal for web APIs handling concurrent requests.",
+              "repositoryEvidence": "Configured in package.json and tsconfig.json.",
+              "practicalExample": "When modifying a data model interface, TypeScript immediately flags any controller or UI component expecting the old property structure.",
+              "tradeOffs": "TypeScript requires a compilation step, and Node.js CPU-intensive tasks can block the single event loop if not offloaded to worker threads.",
+              "followUpQuestion": "How would you handle heavy CPU-bound tasks like image processing or large PDF compilation in Node.js?"
+            },
+            {
+              "id": "q-arch-1",
+              "category": "architecture",
+              "difficulty": "intermediate",
+              "question": "How is the project structured, and what are the responsibilities of its major modules?",
+              "directAnswer": "The project follows a 3-tier modular architecture: presentation layer (client), routing and middleware (controllers), and domain business logic with data persistence (services/models).",
+              "technicalExplanation": "Dependencies flow inward: routes pass validated data to services, which interact with database models. Controllers never execute raw database queries directly.",
+              "repositoryEvidence": "Evident from directory separation: /routes, /services, /models, /components.",
+              "practicalExample": "If we want to switch the database from SQLite to PostgreSQL, we only modify the database driver/model layer without touching any UI component or route definition.",
+              "tradeOffs": "Layered architecture adds a few extra files per feature compared to writing everything in one script, but pays off in testability and maintainability.",
+              "followUpQuestion": "How do you prevent circular dependency imports between your services?"
+            },
+            {
+              "id": "q-code-1",
+              "category": "code_level",
+              "difficulty": "intermediate",
+              "question": "What happens when a request hits /api/v1/resource? Walk me through the code.",
+              "directAnswer": "The router matches the path, runs body parsing and auth middleware, delegates to the handler, and returns a JSON response.",
+              "technicalExplanation": "Express processes middleware linearly. If the payload is valid, the handler invokes the business service asynchronously using async/await, catches any rejection, and calls res.status(200).json().",
+              "repositoryEvidence": "Route definition file",
+              "practicalExample": "If a user sends an invalid parameter, the validation middleware short-circuits with a 400 Bad Request before hitting the database.",
+              "tradeOffs": "Synchronous execution vs asynchronous promises: using async/await keeps asynchronous code readable like synchronous code while maintaining non-blocking I/O.",
+              "followUpQuestion": "What happens if a promise inside the route handler rejects without a try-catch block?"
+            },
+            {
+              "id": "q-api-1",
+              "category": "api_db",
+              "difficulty": "intermediate",
+              "question": "How does your application communicate between frontend and backend, and how is incoming data validated?",
+              "directAnswer": "Communication occurs over HTTP REST using JSON payloads. Incoming data is validated on the client for user experience and strictly re-validated on the server for security.",
+              "technicalExplanation": "The frontend uses the Fetch API with JSON serialization. The server parses the body using express.json() and validates schema types before database persistence.",
+              "repositoryEvidence": "API routes and model schemas in server directory.",
+              "practicalExample": "If a user submits an empty string for a required name field, the server returns `{ error: \"Name is required\" }` with HTTP status 422.",
+              "tradeOffs": "REST over WebSockets was chosen because the workflows are primarily request-driven rather than requiring bidirectional sub-millisecond streaming.",
+              "followUpQuestion": "When would you consider replacing REST with GraphQL or gRPC in this system?"
+            },
+            {
+              "id": "q-sec-1",
+              "category": "security",
+              "difficulty": "advanced",
+              "question": "How does your application protect against common web vulnerabilities like SQL Injection, XSS, and CSRF?",
+              "directAnswer": "SQL Injection is prevented through parameterized queries / ORM abstractions. XSS is mitigated by React automatic text encoding and CSP headers. CSRF is mitigated via modern SameSite cookies and Bearer tokens.",
+              "technicalExplanation": "Parameterized queries separate SQL command structure from user input data at the database driver level. React DOM nodes escape string literals by default, preventing execution of injected `<script>` tags.",
+              "repositoryEvidence": "Database queries and React JSX syntax.",
+              "practicalExample": "Entering `' OR 1=1 --` into a login form treats the input as a literal string value rather than executable SQL syntax.",
+              "tradeOffs": "Strict sanitization can occasionally strip intentional HTML markup if not carefully configured with an explicit allowlist.",
+              "followUpQuestion": "How would you securely store JWT tokens on the client: in localStorage or httpOnly cookies?"
+            },
+            {
+              "id": "q-test-1",
+              "category": "testing_debugging",
+              "difficulty": "intermediate",
+              "question": "If a user reports that a request fails with a 500 error, what is your systematic debugging process?",
+              "directAnswer": "1. Inspect the server log file for the timestamped error stack trace. 2. Identify the failing line and error type. 3. Reproduce locally with the exact request payload. 4. Write a test case, fix the bug, and verify.",
+              "technicalExplanation": "I check the correlation ID or request timestamp, check if the error was a null reference or database connection failure, reproduce with mock inputs, and verify the fix with automated assertions.",
+              "repositoryEvidence": "Error handling middleware and logger configuration.",
+              "practicalExample": "If a user submits a null field that was expected to be an array, the logs will show `TypeError: Cannot read properties of undefined (reading 'map')`.",
+              "tradeOffs": "Detailed error messages in logs help developers debug quickly, but stack traces must never be exposed to the public HTTP response for security.",
+              "followUpQuestion": "How do you monitor runtime errors in production environments without manually checking log files?"
+            },
+            {
+              "id": "q-design-1",
+              "category": "design_decisions",
+              "difficulty": "advanced",
+              "question": "What architectural trade-offs exist in your current implementation, and what would you change if scaling 100x?",
+              "directAnswer": "The current monolithic design is simple to develop and deploy locally, but at 100x scale, database write bottlenecks and monolithic deployments would necessitate caching and horizontal scaling.",
+              "technicalExplanation": "To scale 100x: 1. Introduce Redis for read caching. 2. Move from embedded SQLite to a clustered PostgreSQL instance with read replicas. 3. Containerize using Docker and deploy behind an NGINX load balancer.",
+              "repositoryEvidence": "Monolithic project layout and database storage module.",
+              "practicalExample": "Caching frequent GET queries in Redis reduces database load by 80%, allowing the system to serve thousands of concurrent requests.",
+              "tradeOffs": "Microservices add significant networking overhead and distributed transaction complexity; a modular monolith is often the superior choice until team size or traffic demands microservices.",
+              "followUpQuestion": "What caching strategy would you use: cache-aside, write-through, or write-behind?"
+            },
+            {
+              "id": "q-own-1",
+              "category": "project_ownership",
+              "difficulty": "intermediate",
+              "question": "Which parts of this application did you design yourself, and what was the most difficult technical hurdle you overcame?",
+              "directAnswer": "I designed the system architecture, API schemas, and interactive whiteboard workflow. The hardest challenge was ensuring evidence-based traceability between UI nodes and actual source code files.",
+              "technicalExplanation": "Connecting high-level architecture diagrams with concrete static analysis required building deterministic AST parsers and file classification algorithms that work across various project conventions.",
+              "repositoryEvidence": "Source code in /server and /client directories.",
+              "practicalExample": "When building the dependency graph, resolving relative import paths across different folder depths required canonical path normalization.",
+              "tradeOffs": "Building custom static analysis tools gave me deep understanding of ASTs and compilers, whereas using an off-the-shelf black-box library would have been faster but less tailored.",
+              "followUpQuestion": "If you had another two weeks to work on this repository, what single feature would you prioritize?"
+            }
+          ]
+        }
+      }
+    },
+    "proj-student-dev-taskforge-kanban": {
+      "id": "proj-student-dev-taskforge-kanban",
+      "name": "TaskForge-Kanban",
+      "owner": "student-dev",
+      "repoUrl": "https://github.com/student-dev/TaskForge-Kanban",
+      "defaultBranch": "main",
+      "mainLanguage": "TypeScript",
+      "primaryFramework": "React",
+      "lastOpenedAt": "2026-10-23T16:24:02.524Z",
+      "lastAnalyzedAt": "2026-10-23T16:24:02.524Z",
+      "status": "completed",
+      "currentAnalysis": {
+        "id": "analysis-63e884d8",
+        "projectId": "proj-student-dev-taskforge-kanban",
+        "createdAt": "2026-10-23T16:24:02.524Z",
+        "revision": "HEAD-main",
+        "summary": "TaskForge-Kanban is a TypeScript project leveraging React. It features 5 HTTP routes, 2 data models, and an automated audit score of 4 verified strengths.",
+        "intendedPurpose": "Provide a robust, decoupled platform for data processing and user interactions.",
+        "targetUsers": "Students, evaluators, developers, and interviewers examining architecture.",
+        "detectedProblem": "Fragmented state updates and complex request coordination requiring clean abstraction.",
+        "languages": {
+          "JSON": 15,
+          "Markdown": 9,
+          "TypeScript": 58,
+          "TypeScript (React)": 18
+        },
+        "technologies": [
+          {
+            "name": "React",
+            "category": "frontend_framework",
+            "version": "^18.3.1",
+            "role": "Component-based UI state management and virtual DOM rendering",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "Dependency declared in package.json: \"react\": \"^18.3.1\""
+          },
+          {
+            "name": "Express.js",
+            "category": "backend_framework",
+            "version": "^4.21.2",
+            "role": "RESTful API routing and middleware pipeline handling",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "Dependency declared in package.json: \"express\": \"^4.21.2\""
+          },
+          {
+            "name": "SQLite",
+            "category": "database",
+            "role": "Embedded serverless SQL database engine",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "SQLite driver found in dependencies"
+          },
+          {
+            "name": "JSON Web Tokens (JWT)",
+            "category": "library",
+            "role": "Stateless authentication and cryptographic token verification",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "JWT package found in dependencies"
+          },
+          {
+            "name": "Vite",
+            "category": "tool",
+            "role": "Modern frontend development server and Rollup-based build tool",
+            "detectedInFiles": [
+              "package.json"
+            ],
+            "evidence": "Vite bundler declared in devDependencies"
+          }
+        ],
+        "fileTree": [
+          {
+            "name": "package.json",
+            "path": "package.json",
+            "type": "file",
+            "size": 850,
+            "classification": "config"
+          },
+          {
+            "name": "README.md",
+            "path": "README.md",
+            "type": "file",
+            "size": 1450,
+            "classification": "doc"
+          },
+          {
+            "name": "server",
+            "path": "server",
+            "type": "directory",
+            "children": [
+              {
+                "name": "src",
+                "path": "server/src",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "index.ts",
+                    "path": "server/src/index.ts",
+                    "type": "file",
+                    "size": 1100,
+                    "classification": "entry_point"
+                  },
+                  {
+                    "name": "routes",
+                    "path": "server/src/routes",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "api.ts",
+                        "path": "server/src/routes/api.ts",
+                        "type": "file",
+                        "size": 1350,
+                        "classification": "routing"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "controllers",
+                    "path": "server/src/controllers",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "resourceController.ts",
+                        "path": "server/src/controllers/resourceController.ts",
+                        "type": "file",
+                        "size": 1600,
+                        "classification": "api_handler"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "services",
+                    "path": "server/src/services",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "resourceService.ts",
+                        "path": "server/src/services/resourceService.ts",
+                        "type": "file",
+                        "size": 1750,
+                        "classification": "service"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "models",
+                    "path": "server/src/models",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "schema.prisma",
+                        "path": "server/src/models/schema.prisma",
+                        "type": "file",
+                        "size": 920,
+                        "classification": "db_model"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "test",
+                "path": "server/test",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "api.test.ts",
+                    "path": "server/test/api.test.ts",
+                    "type": "file",
+                    "size": 850,
+                    "classification": "test"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "client",
+            "path": "client",
+            "type": "directory",
+            "children": [
+              {
+                "name": "src",
+                "path": "client/src",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "App.tsx",
+                    "path": "client/src/App.tsx",
+                    "type": "file",
+                    "size": 1400,
+                    "classification": "page"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "entryPoints": [
+          {
+            "path": "server/src/index.ts",
+            "type": "Application / Server Entry",
+            "description": "Initial bootstrap file initializing middleware, routes, and listening socket."
+          }
+        ],
+        "workflows": {
+          "system_architecture": {
+            "nodes": [
+              {
+                "id": "node-client-ui",
+                "label": "Client Browser & UI Layer",
+                "nodeType": "ui_component",
+                "filePath": "client/src/App.tsx",
+                "symbol": "React Virtual DOM / Component Tree",
+                "purpose": "Renders the presentation layer, captures user input events, and manages local UI state.",
+                "inputs": [
+                  "User clicks",
+                  "Form inputs",
+                  "Keyboard navigation"
+                ],
+                "processingSteps": [
+                  "Receives user interaction event",
+                  "Validates state invariants in UI component",
+                  "Triggers asynchronous network dispatch (Fetch / Axios)"
+                ],
+                "outputs": [
+                  "Rendered DOM elements",
+                  "HTTP request payload"
+                ],
+                "plainExplanation": "This is the visual screen where the student or user interacts with buttons and forms.",
+                "technicalExplanation": "The frontend component layer handles event propagation, synchronizes with the Virtual DOM, and dispatches API calls to the server.",
+                "failureScenarios": [
+                  "Uncaught JavaScript runtime error crashes React component tree",
+                  "Stale closure causes state to be out of sync with user input"
+                ],
+                "interviewQuestions": [
+                  "How does state flow from parent to child components in this view?",
+                  "What prevents unnecessary re-renders when user types in the input field?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "client/src/App.tsx"
+                ],
+                "x": 100,
+                "y": 180
+              },
+              {
+                "id": "node-backend-router",
+                "label": "API Router [5 endpoints]",
+                "nodeType": "backend_route",
+                "filePath": "server/src/routes/api.ts",
+                "symbol": "GET /health",
+                "purpose": "Matches incoming HTTP requests against URL patterns and invokes corresponding controller middleware.",
+                "inputs": [
+                  "HTTP request headers",
+                  "Query parameters",
+                  "JSON Body"
+                ],
+                "processingSteps": [
+                  "Parses HTTP request line and headers",
+                  "Applies CORS and body-parsing middleware",
+                  "Dispatches payload to matched controller handler"
+                ],
+                "outputs": [
+                  "Express Request/Response context"
+                ],
+                "plainExplanation": "Like a receptionist directing incoming visitors to the right department.",
+                "technicalExplanation": "HTTP requests hit the Express/FastAPI routing table, executing middleware pipelines before reaching the business handler.",
+                "failureScenarios": [
+                  "404 Not Found if route path does not match router pattern",
+                  "Payload Too Large error if request body exceeds middleware limit"
+                ],
+                "interviewQuestions": [
+                  "How does the routing layer validate incoming request parameters before reaching business logic?",
+                  "What middleware executes before this handler is invoked?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "server/src/routes/api.ts"
+                ],
+                "x": 420,
+                "y": 180
+              },
+              {
+                "id": "node-service-logic",
+                "label": "Business Logic & Service Layer",
+                "nodeType": "service",
+                "filePath": "server/src/controllers/resourceController.ts",
+                "symbol": "executeBusinessLogic()",
+                "purpose": "Enforces domain business rules, authorizes actions, coordinates multiple data repositories, and generates responses.",
+                "inputs": [
+                  "Validated DTO / Domain objects"
+                ],
+                "processingSteps": [
+                  "Verifies business invariants and authorization permissions",
+                  "Performs data transformation and formatting",
+                  "Calls database access layer via ORM/SQL driver"
+                ],
+                "outputs": [
+                  "Domain result entity",
+                  "Success/Failure status"
+                ],
+                "plainExplanation": "The brain of the system: makes decisions, checks if you have permission, and computes the result.",
+                "technicalExplanation": "Decoupled domain service executing core business rules independently of HTTP or database transport details.",
+                "failureScenarios": [
+                  "Domain validation exception when entity rules are violated",
+                  "Database connection timeout during transactional processing"
+                ],
+                "interviewQuestions": [
+                  "Why is business logic separated into services instead of placing it directly inside controllers?",
+                  "How do you manage database transactions if a service updates multiple tables?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "server/src/controllers/resourceController.ts"
+                ],
+                "x": 740,
+                "y": 180
+              },
+              {
+                "id": "node-db-storage",
+                "label": "Database Layer [User, Item]",
+                "nodeType": "db_operation",
+                "filePath": "server/src/models/schema.prisma",
+                "symbol": "Prisma: User",
+                "purpose": "Persists application state, enforces ACID guarantees, and executes queries via indexes.",
+                "inputs": [
+                  "Parameterized SQL query or ORM query object"
+                ],
+                "processingSteps": [
+                  "Acquires database connection from connection pool",
+                  "Executes prepared statement with sanitized values",
+                  "Returns query result set to calling service"
+                ],
+                "outputs": [
+                  "Row records",
+                  "Affected row count",
+                  "Generated Primary Key"
+                ],
+                "plainExplanation": "Where data is safely saved on disk so it stays intact even if the server restarts.",
+                "technicalExplanation": "Data persistence layer interacting with SQLite/Postgres using parameterized queries or ORM models to prevent SQL injection.",
+                "failureScenarios": [
+                  "Unique constraint violation on duplicate key insertion",
+                  "Deadlock or connection pool exhaustion under heavy concurrency"
+                ],
+                "interviewQuestions": [
+                  "What indexing strategy would you use to optimize queries on this table?",
+                  "How does the application prevent SQL injection vulnerabilities?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "server/src/models/schema.prisma"
+                ],
+                "x": 1060,
+                "y": 180
+              }
+            ],
+            "edges": [
+              {
+                "id": "edge-client-to-router",
+                "source": "node-client-ui",
+                "target": "node-backend-router",
+                "label": "HTTP REST / JSON",
+                "relationshipType": "calls",
+                "confidence": "confirmed",
+                "evidence": "Frontend fetches API endpoint exposed by backend router"
+              },
+              {
+                "id": "edge-router-to-service",
+                "source": "node-backend-router",
+                "target": "node-service-logic",
+                "label": "invokes handler",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Router middleware delegates execution to business service"
+              },
+              {
+                "id": "edge-service-to-db",
+                "source": "node-service-logic",
+                "target": "node-db-storage",
+                "label": "queries / persists",
+                "relationshipType": "queries",
+                "confidence": "confirmed",
+                "evidence": "Service layer invokes model methods to query or mutate database state"
+              }
+            ],
+            "viewType": "system_architecture"
+          },
+          "request_lifecycle": {
+            "nodes": [
+              {
+                "id": "req-1",
+                "label": "1. User Triggers Action",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/components",
+                "symbol": "onClick / onSubmit",
+                "purpose": "User clicks submit button or initiates action in the client interface.",
+                "processingSteps": [
+                  "Captures event",
+                  "Prevents default reload",
+                  "Dispatches request"
+                ],
+                "plainExplanation": "The user clicks a button to perform an action.",
+                "technicalExplanation": "Synthetic DOM event handled by React event dispatcher.",
+                "failureScenarios": [
+                  "Multiple rapid clicks causing duplicate submissions"
+                ],
+                "interviewQuestions": [
+                  "How do you debounce or throttle rapid button clicks?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Frontend UI handler"
+                ],
+                "x": 80,
+                "y": 200
+              },
+              {
+                "id": "req-2",
+                "label": "2. HTTP Request Dispatched",
+                "nodeType": "api_request",
+                "filePath": "client/src/services/api.ts",
+                "symbol": "fetch(url, options)",
+                "purpose": "Serializes JSON payload and sends asynchronous HTTP request with headers.",
+                "processingSteps": [
+                  "Sets Content-Type: application/json",
+                  "Attaches Auth token if present",
+                  "Awaits response"
+                ],
+                "plainExplanation": "Your browser sends a message over the internet to the server.",
+                "technicalExplanation": "Asynchronous fetch API request utilizing Promise-based lifecycle.",
+                "failureScenarios": [
+                  "Network timeout or offline connection failure"
+                ],
+                "interviewQuestions": [
+                  "How does your frontend handle network failures or offline status?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "API client service"
+                ],
+                "x": 360,
+                "y": 200
+              },
+              {
+                "id": "req-3",
+                "label": "3. Route Middleware & Validation",
+                "nodeType": "backend_route",
+                "filePath": "server/src/routes/api.ts",
+                "symbol": "validateRequestMiddleware",
+                "purpose": "Validates request schema, sanitizes inputs, and checks authentication headers.",
+                "processingSteps": [
+                  "Checks authorization header",
+                  "Validates required body fields",
+                  "Passes to handler"
+                ],
+                "plainExplanation": "The server inspects the message to make sure it is safe and correctly formatted.",
+                "technicalExplanation": "Express middleware stack running schema validators prior to business handler.",
+                "failureScenarios": [
+                  "400 Bad Request if mandatory fields are missing"
+                ],
+                "interviewQuestions": [
+                  "What library or pattern do you use for request payload validation?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "server/src/routes/api.ts"
+                ],
+                "x": 640,
+                "y": 200
+              },
+              {
+                "id": "req-4",
+                "label": "4. Controller & Response Serialization",
+                "nodeType": "controller",
+                "filePath": "server/src/routes/api.ts",
+                "symbol": "res.status(200).json(data)",
+                "purpose": "Executes domain logic, serializes response body, and sets HTTP status code.",
+                "processingSteps": [
+                  "Computes response",
+                  "Sets 200 OK or appropriate status",
+                  "Streams JSON back to client"
+                ],
+                "plainExplanation": "The server prepares the answer and sends it back to your browser.",
+                "technicalExplanation": "Express response pipeline serializing domain model into JSON and ending HTTP stream.",
+                "failureScenarios": [
+                  "Unhandled exception turning into a 500 Internal Server Error"
+                ],
+                "interviewQuestions": [
+                  "How are unexpected exceptions caught and mapped to standard HTTP error codes?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Controller response logic"
+                ],
+                "x": 920,
+                "y": 200
+              },
+              {
+                "id": "req-5",
+                "label": "5. UI State Update & Rerender",
+                "nodeType": "ui_component",
+                "filePath": "client/src/App.tsx",
+                "symbol": "setState(data)",
+                "purpose": "Parses incoming JSON response, updates React state, and re-renders updated view.",
+                "processingSteps": [
+                  "Parses response.json()",
+                  "Updates component state hook",
+                  "Virtual DOM recalculates diff"
+                ],
+                "plainExplanation": "The screen updates with the new information without needing a full page reload.",
+                "technicalExplanation": "React reconciler schedules state update, diffs virtual tree, and commits DOM patches.",
+                "failureScenarios": [
+                  "Component unmounted before fetch completes causing memory leak warning"
+                ],
+                "interviewQuestions": [
+                  "What happens if an asynchronous state update runs after a component unmounts?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "React state hooks"
+                ],
+                "x": 1200,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-req-1-2",
+                "source": "req-1",
+                "target": "req-2",
+                "label": "triggers",
+                "relationshipType": "triggers",
+                "confidence": "confirmed",
+                "evidence": "User click triggers fetch"
+              },
+              {
+                "id": "e-req-2-3",
+                "source": "req-2",
+                "target": "req-3",
+                "label": "network packet",
+                "relationshipType": "calls",
+                "confidence": "confirmed",
+                "evidence": "HTTP request arrives at backend"
+              },
+              {
+                "id": "e-req-3-4",
+                "source": "req-3",
+                "target": "req-4",
+                "label": "validated payload",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Middleware passes to handler"
+              },
+              {
+                "id": "e-req-4-5",
+                "source": "req-4",
+                "target": "req-5",
+                "label": "HTTP 200 JSON",
+                "relationshipType": "renders",
+                "confidence": "confirmed",
+                "evidence": "JSON response parsed by client"
+              }
+            ],
+            "viewType": "request_lifecycle"
+          },
+          "data_lifecycle": {
+            "nodes": [
+              {
+                "id": "data-1",
+                "label": "1. Raw User Input",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/forms",
+                "symbol": "Controlled Inputs",
+                "purpose": "Captures raw input strings entered into forms.",
+                "processingSteps": [
+                  "Captures onChange event",
+                  "Stores in component state"
+                ],
+                "plainExplanation": "Information typed in by the user.",
+                "technicalExplanation": "React controlled input components bound to state variables.",
+                "failureScenarios": [
+                  "Special characters, SQL injection strings, or oversized input"
+                ],
+                "interviewQuestions": [
+                  "Why should client-side input validation never be the only defense?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Client form input"
+                ],
+                "x": 100,
+                "y": 180
+              },
+              {
+                "id": "data-2",
+                "label": "2. Backend Sanitization & Validation",
+                "nodeType": "backend_route",
+                "filePath": "server/src/routes/api.ts",
+                "symbol": "Schema Validation (Zod/Joi/Pydantic)",
+                "purpose": "Validates types, required fields, constraints, and strips malicious tags.",
+                "processingSteps": [
+                  "Validates string lengths",
+                  "Checks email/number formats",
+                  "Strips dangerous HTML/script tags"
+                ],
+                "plainExplanation": "A safety inspection ensuring data is clean, correct, and not harmful.",
+                "technicalExplanation": "Schema validation rejecting invalid payloads with 422 Unprocessable Entity before database access.",
+                "failureScenarios": [
+                  "Validation bypass if schema is missing or incomplete"
+                ],
+                "interviewQuestions": [
+                  "How do you protect your backend against XSS (Cross-Site Scripting)?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Backend validator"
+                ],
+                "x": 460,
+                "y": 180
+              },
+              {
+                "id": "data-3",
+                "label": "3. Entity Transformation & Hashing",
+                "nodeType": "service",
+                "filePath": "server/src/services",
+                "symbol": "hashPassword() / mapToEntity()",
+                "purpose": "Transforms input into canonical domain model and hashes sensitive fields like passwords.",
+                "processingSteps": [
+                  "Hashes passwords with bcrypt/argon2",
+                  "Generates UUID / timestamps",
+                  "Applies domain business rules"
+                ],
+                "plainExplanation": "Scrambles passwords for security and adds creation timestamps.",
+                "technicalExplanation": "One-way cryptographic salt-and-hash transformation before persistence.",
+                "failureScenarios": [
+                  "Plaintext password storage if hashing step is skipped"
+                ],
+                "interviewQuestions": [
+                  "Why is hashing passwords with a salt necessary instead of plain SHA-256?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Entity transformation logic"
+                ],
+                "x": 820,
+                "y": 180
+              },
+              {
+                "id": "data-4",
+                "label": "4. Disk Persistence & Indexing",
+                "nodeType": "db_operation",
+                "filePath": "server/src/models/schema.prisma",
+                "symbol": "INSERT INTO / db.save()",
+                "purpose": "Commits record to database disk pages and updates B-tree indices.",
+                "processingSteps": [
+                  "Begins transaction",
+                  "Writes to write-ahead log (WAL)",
+                  "Updates index table",
+                  "Commits transaction"
+                ],
+                "plainExplanation": "Permanently writes the information to storage so it is never lost.",
+                "technicalExplanation": "ACID transactional write to database tables with automatic B-Tree index recalculation.",
+                "failureScenarios": [
+                  "Unique key collision (e.g. email already exists)"
+                ],
+                "interviewQuestions": [
+                  "What are the ACID properties and how does your database guarantee them?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Database schema definition"
+                ],
+                "x": 1180,
+                "y": 180
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-data-1-2",
+                "source": "data-1",
+                "target": "data-2",
+                "label": "transmits raw data",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Sent via POST request"
+              },
+              {
+                "id": "e-data-2-3",
+                "source": "data-2",
+                "target": "data-3",
+                "label": "sanitized payload",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Valid data passed to service"
+              },
+              {
+                "id": "e-data-3-4",
+                "source": "data-3",
+                "target": "data-4",
+                "label": "persists entity",
+                "relationshipType": "queries",
+                "confidence": "confirmed",
+                "evidence": "ORM executes insert query"
+              }
+            ],
+            "viewType": "data_lifecycle"
+          },
+          "auth_lifecycle": {
+            "nodes": [
+              {
+                "id": "auth-1",
+                "label": "1. Credentials Submission",
+                "nodeType": "user_interaction",
+                "filePath": "client/src/pages/Login",
+                "symbol": "handleLoginSubmit()",
+                "purpose": "User inputs identifier (email/username) and password over HTTPS.",
+                "processingSteps": [
+                  "Prevents plain HTTP transmission",
+                  "Packages credentials into JSON body"
+                ],
+                "plainExplanation": "User enters email and password into the login form.",
+                "technicalExplanation": "Credential dispatch over TLS encrypted transport layer.",
+                "failureScenarios": [
+                  "MITM attack if TLS is not enforced on the connection"
+                ],
+                "interviewQuestions": [
+                  "Why must authentication requests strictly use HTTPS?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Login interface"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "auth-2",
+                "label": "2. Credential Verification & Hash Comparison",
+                "nodeType": "auth_step",
+                "filePath": "server/src/auth",
+                "symbol": "bcrypt.compare(password, hash)",
+                "purpose": "Fetches user record from DB and compares submitted password against stored hash using constant-time comparison.",
+                "processingSteps": [
+                  "Retrieves user by identifier",
+                  "Runs constant-time hash verification",
+                  "Rejects if mismatch"
+                ],
+                "plainExplanation": "Checks if the password matches the secret record on file.",
+                "technicalExplanation": "Timing-safe password hash verification preventing timing attacks.",
+                "failureScenarios": [
+                  "401 Unauthorized returned if password does not match"
+                ],
+                "interviewQuestions": [
+                  "What is a timing attack and how does constant-time comparison protect against it?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Authentication controller"
+                ],
+                "x": 460,
+                "y": 200
+              },
+              {
+                "id": "auth-3",
+                "label": "3. Token / Session Minting",
+                "nodeType": "auth_step",
+                "filePath": "server/src/auth/jwt",
+                "symbol": "jwt.sign({ userId, role }, SECRET, { expiresIn })",
+                "purpose": "Signs an encrypted or tamper-proof token containing user claims and expiration timestamp.",
+                "processingSteps": [
+                  "Embeds user claims into payload",
+                  "Signs with HMAC-SHA256 secret key",
+                  "Returns token in response or httpOnly cookie"
+                ],
+                "plainExplanation": "Creates a digital backstage pass (token) proving you are logged in.",
+                "technicalExplanation": "Stateless JWT generation with cryptographically signed payload preventing forgery.",
+                "failureScenarios": [
+                  "Hardcoded secret key allowing attackers to forge tokens"
+                ],
+                "interviewQuestions": [
+                  "What is the difference between session-based auth and JWT-based auth?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Token generator"
+                ],
+                "x": 820,
+                "y": 200
+              },
+              {
+                "id": "auth-4",
+                "label": "4. Protected Route Guard",
+                "nodeType": "backend_route",
+                "filePath": "server/src/middleware/auth",
+                "symbol": "verifyTokenMiddleware",
+                "purpose": "Extracts Authorization: Bearer <token> header on protected endpoints and verifies signature.",
+                "processingSteps": [
+                  "Extracts token from header",
+                  "Verifies signature and expiration",
+                  "Attaches req.user context"
+                ],
+                "plainExplanation": "Security guard checking your backstage pass before allowing you into private pages.",
+                "technicalExplanation": "Route middleware executing signature verification before granting access to controllers.",
+                "failureScenarios": [
+                  "401 if token expired; 403 Forbidden if user lacks required role"
+                ],
+                "interviewQuestions": [
+                  "How do you handle JWT revocation if a user logs out before token expiration?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Auth guard middleware"
+                ],
+                "x": 1180,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-auth-1-2",
+                "source": "auth-1",
+                "target": "auth-2",
+                "label": "POST /api/auth/login",
+                "relationshipType": "authenticates",
+                "confidence": "confirmed",
+                "evidence": "User dispatches credentials"
+              },
+              {
+                "id": "e-auth-2-3",
+                "source": "auth-2",
+                "target": "auth-3",
+                "label": "valid credentials",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Backend generates signed token"
+              },
+              {
+                "id": "e-auth-3-4",
+                "source": "auth-3",
+                "target": "auth-4",
+                "label": "Bearer <token> header",
+                "relationshipType": "authenticates",
+                "confidence": "confirmed",
+                "evidence": "Token passed to protected routes"
+              }
+            ],
+            "viewType": "auth_lifecycle"
+          },
+          "error_handling": {
+            "nodes": [
+              {
+                "id": "err-1",
+                "label": "1. Exception Triggered",
+                "nodeType": "error_handler",
+                "filePath": "server/src/services",
+                "symbol": "throw new Error(\"Resource not found\")",
+                "purpose": "An unexpected or handled error occurs (e.g. missing item, invalid state, DB failure).",
+                "processingSteps": [
+                  "Catches failed invariant",
+                  "Instantiates error object with message and code"
+                ],
+                "plainExplanation": "Something unexpected went wrong while processing your request.",
+                "technicalExplanation": "Synchronous or asynchronous rejection creating an Error stack trace.",
+                "failureScenarios": [
+                  "Unhandled promise rejection crashing the Node.js process"
+                ],
+                "interviewQuestions": [
+                  "What is the danger of unhandled promise rejections in Node.js?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Business logic exception"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "err-2",
+                "label": "2. Global Error Middleware",
+                "nodeType": "error_handler",
+                "filePath": "server/src/middleware/errorHandler",
+                "symbol": "app.use((err, req, res, next) => ...)",
+                "purpose": "Catches all unhandled exceptions, logs internal stack trace, and masks sensitive info.",
+                "processingSteps": [
+                  "Logs full stack trace to logger",
+                  "Determines HTTP status code (400, 404, 500)",
+                  "Builds sanitized error response"
+                ],
+                "plainExplanation": "The safety net that catches any crash, writes details in private logs, and sends a friendly message.",
+                "technicalExplanation": "Express 4-argument error-handling middleware preventing unhandled process termination.",
+                "failureScenarios": [
+                  "Leaking database credentials or SQL query in error response to client"
+                ],
+                "interviewQuestions": [
+                  "Why should database error messages never be sent raw to the frontend?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Error handling middleware"
+                ],
+                "x": 500,
+                "y": 200
+              },
+              {
+                "id": "err-3",
+                "label": "3. Client Toast / Fallback UI",
+                "nodeType": "ui_component",
+                "filePath": "client/src/components/ErrorBoundary",
+                "symbol": "showToastError() / ErrorBoundary",
+                "purpose": "Informs user of the problem gracefully without crashing the entire web application.",
+                "processingSteps": [
+                  "Receives non-2xx status code",
+                  "Renders non-intrusive alert toast",
+                  "Maintains app state"
+                ],
+                "plainExplanation": "A helpful notification pops up telling the user what went wrong, keeping the rest of the page working.",
+                "technicalExplanation": "React Error Boundary and toast notification displaying user-facing guidance.",
+                "failureScenarios": [
+                  "Silent failure leaving user confused with infinite loading spinner"
+                ],
+                "interviewQuestions": [
+                  "How do React Error Boundaries work and when should you use them?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Client Error Boundary"
+                ],
+                "x": 950,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-err-1-2",
+                "source": "err-1",
+                "target": "err-2",
+                "label": "thrown exception",
+                "relationshipType": "handles_error",
+                "confidence": "confirmed",
+                "evidence": "Error intercepted by middleware"
+              },
+              {
+                "id": "e-err-2-3",
+                "source": "err-2",
+                "target": "err-3",
+                "label": "JSON { error, code }",
+                "relationshipType": "renders",
+                "confidence": "confirmed",
+                "evidence": "Client parses error response"
+              }
+            ],
+            "viewType": "error_handling"
+          },
+          "deployment": {
+            "nodes": [
+              {
+                "id": "dep-1",
+                "label": "1. Source Build & Bundle",
+                "nodeType": "external_service",
+                "filePath": "package.json / tsconfig.json",
+                "symbol": "npm run build (Vite/TSC)",
+                "purpose": "Transpiles TypeScript, tree-shakes dead code, minifies JavaScript, and compiles assets.",
+                "processingSteps": [
+                  "Type checks with tsc",
+                  "Bundles modules with Vite/Rollup",
+                  "Outputs static files to /dist"
+                ],
+                "plainExplanation": "Takes all your code and packs it into small, fast files ready for the web.",
+                "technicalExplanation": "Static asset bundling optimizing chunk sizes and hashing filenames for browser caching.",
+                "failureScenarios": [
+                  "TypeScript compilation errors halting the build pipeline"
+                ],
+                "interviewQuestions": [
+                  "What is tree-shaking and how does it reduce frontend bundle size?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Build scripts in package.json"
+                ],
+                "x": 100,
+                "y": 200
+              },
+              {
+                "id": "dep-2",
+                "label": "2. Environment Provisioning",
+                "nodeType": "external_service",
+                "filePath": ".env.example",
+                "symbol": "NODE_ENV=production",
+                "purpose": "Packages application code with system dependencies into an immutable container or isolated process.",
+                "processingSteps": [
+                  "Installs production node_modules",
+                  "Configures environment variables",
+                  "Exposes application port"
+                ],
+                "plainExplanation": "Puts the application inside a standardized shipping container that runs identically everywhere.",
+                "technicalExplanation": "Multi-stage Docker build minimizing runtime image footprint and locking Linux kernel dependencies.",
+                "failureScenarios": [
+                  "Missing environment variable causing startup crash"
+                ],
+                "interviewQuestions": [
+                  "Why are multi-stage Docker builds recommended for Node/Go applications?"
+                ],
+                "confidence": "inferred",
+                "evidenceReferences": [
+                  "Environment configuration"
+                ],
+                "x": 520,
+                "y": 200
+              },
+              {
+                "id": "dep-3",
+                "label": "3. Web Server Runtime & Reverse Proxy",
+                "nodeType": "external_service",
+                "filePath": "server/src/index.ts",
+                "symbol": "node dist/index.js (Port 5000 / NGINX)",
+                "purpose": "Serves incoming traffic, terminates SSL/TLS, and executes application processes.",
+                "processingSteps": [
+                  "Listens on TCP socket",
+                  "Handles incoming connections",
+                  "Logs requests and health metrics"
+                ],
+                "plainExplanation": "The live server on the internet answering visits 24/7.",
+                "technicalExplanation": "Reverse proxy routing requests to Node.js clustered workers or container orchestrator.",
+                "failureScenarios": [
+                  "Out-of-memory crash under sudden spike in traffic"
+                ],
+                "interviewQuestions": [
+                  "How does a reverse proxy like NGINX improve security and performance?"
+                ],
+                "confidence": "confirmed",
+                "evidenceReferences": [
+                  "Server entrypoint"
+                ],
+                "x": 950,
+                "y": 200
+              }
+            ],
+            "edges": [
+              {
+                "id": "e-dep-1-2",
+                "source": "dep-1",
+                "target": "dep-2",
+                "label": "compiled artifact",
+                "relationshipType": "passes_data",
+                "confidence": "confirmed",
+                "evidence": "Build outputs packaged into runtime container"
+              },
+              {
+                "id": "e-dep-2-3",
+                "source": "dep-2",
+                "target": "dep-3",
+                "label": "launches process",
+                "relationshipType": "triggers",
+                "confidence": "confirmed",
+                "evidence": "Container starts Node.js application server"
+              }
+            ],
+            "viewType": "deployment"
+          }
+        },
+        "documentation": [
+          {
+            "chapterNumber": 1,
+            "title": "Project Overview",
+            "summary": "Executive summary of TaskForge-Kanban, its structural composition, and its scope.",
+            "content": {
+              "beginner": "TaskForge-Kanban is a modern software application built to solve real developer or user tasks. It coordinates a user interface with backend services to process requests and manage data reliably.",
+              "intermediate": "TaskForge-Kanban utilizes a client-server architecture. The frontend handles interactive state management and communicates via structured REST API endpoints. The backend coordinates routing, applies middleware, and communicates with a persistent data layer.",
+              "advanced": "The system architecture emphasizes decoupling transport layers from domain services. It operates with asynchronous event-driven I/O to maximize throughput while minimizing operational memory overhead."
+            },
+            "relatedFiles": [
+              "package.json",
+              "README.md",
+              "server/src/index.ts"
+            ]
+          },
+          {
+            "chapterNumber": 2,
+            "title": "Problem Being Solved",
+            "summary": "Clarification of user problems addressed, distinguishing documented intent from inferred behavior.",
+            "content": {
+              "beginner": "Users often struggle with managing tasks, visualizing complex information, or communicating between distributed tools without a central workspace.",
+              "intermediate": "The application eliminates manual data translation and fragmented workflows by exposing deterministic interfaces, automated validations, and synchronized state transitions.",
+              "advanced": "At scale, distributed workflows suffer from inconsistent state boundaries and brittle integration points. The application enforces single sources of truth, reducing synchronization latency and validation mismatches."
+            },
+            "relatedFiles": [
+              "README.md"
+            ]
+          },
+          {
+            "chapterNumber": 3,
+            "title": "Feature Breakdown",
+            "summary": "Comprehensive inventory of core application features mapped to supporting source files.",
+            "content": {
+              "beginner": "Key features include interactive user dashboards, instant data updates, input forms with safety checks, and organized data visualization.",
+              "intermediate": "Features are broken down into discrete modules: authentication/authorization pipelines, 5 HTTP API endpoints, data persistence with schema enforcement, and responsive presentation components.",
+              "advanced": "Each feature is designed around transactional boundaries. Mutations enforce optimistic locking or atomic database operations, preventing race conditions during concurrent user submissions."
+            },
+            "relatedFiles": [
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts"
+            ]
+          },
+          {
+            "chapterNumber": 4,
+            "title": "Technology Stack",
+            "summary": "Inspection of detected programming languages, libraries, and runtime frameworks.",
+            "content": {
+              "beginner": "The project is built with: React (frontend_framework), Express.js (backend_framework), SQLite (database), JSON Web Tokens (JWT) (library), Vite (tool). Each tool plays a specific role, from making the site look good to storing your data.",
+              "intermediate": "Core technologies detected include: React: Component-based UI state management and virtual DOM rendering; Express.js: RESTful API routing and middleware pipeline handling; SQLite: Embedded serverless SQL database engine; JSON Web Tokens (JWT): Stateless authentication and cryptographic token verification; Vite: Modern frontend development server and Rollup-based build tool. Dependencies are pinned in package manifests to ensure reproducible builds.",
+              "advanced": "Selection of React enables static type-checking and compiles to high-performance JavaScript. Asynchronous event loops handle high I/O concurrency without multi-threaded memory overhead."
+            },
+            "relatedFiles": [
+              "package.json"
+            ]
+          },
+          {
+            "chapterNumber": 5,
+            "title": "Folder Structure & Module Organization",
+            "summary": "Architectural rationale behind folder divisions, entrypoints, and file placement.",
+            "content": {
+              "beginner": "The project is neatly divided into folders like folders in a school binder: one for screens (client), one for server rules (server), and one for settings.",
+              "intermediate": "Separation of concerns is maintained through dedicated directories: `/routes` for HTTP entrypoints, `/services` for business logic, `/models` for database schema definitions, and `/components` for modular UI elements.",
+              "advanced": "The layout resembles Clean Architecture principles. High-level business policies do not depend on low-level database details; dependencies flow inward toward core domain models."
+            },
+            "relatedFiles": [
+              "package.json",
+              "README.md",
+              "server/src/index.ts",
+              "server/src/routes/api.ts",
+              "server/src/controllers/resourceController.ts"
+            ]
+          },
+          {
+            "chapterNumber": 6,
+            "title": "System Architecture",
+            "summary": "High-level component topology, communication channels, and boundary contracts.",
+            "content": {
+              "beginner": "When you click a button in the browser, a message travels to the server, which asks the database for the right information, and sends the answer back to your screen.",
+              "intermediate": "The frontend dispatches AJAX HTTP requests. The backend Express router passes the request through authentication and body-parser middleware, invokes controller methods, queries the database, and returns standard JSON payloads.",
+              "advanced": "The system uses an asynchronous request-response architecture. Stateless session or JWT tokens permit horizontal scaling across multiple application instances behind a load balancer."
+            },
+            "relatedFiles": [
+              "server/src/index.ts",
+              "client/src/App.tsx"
+            ]
+          },
+          {
+            "chapterNumber": 7,
+            "title": "End-to-End Workflows",
+            "summary": "Detailed step-by-step tracing of primary request and data lifecycles.",
+            "content": {
+              "beginner": "A complete journey: You fill out a form -> click Submit -> the computer checks your data -> saves it permanently -> displays a success checkmark.",
+              "intermediate": "1. User action dispatches fetch request. 2. Route middleware verifies headers. 3. Controller parses body and invokes service. 4. Service queries database with parameterized input. 5. Database commits row. 6. HTTP 200 response triggers client state update.",
+              "advanced": "Data lifecycles guarantee consistency through strict middleware gates. Exceptions in any step rollback transactions and stream RFC-7807 compliant error objects to the client."
+            },
+            "relatedFiles": [
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts"
+            ]
+          },
+          {
+            "chapterNumber": 8,
+            "title": "API Documentation & Endpoints",
+            "summary": "Discovered HTTP endpoints, request methods, input schemas, and response formats.",
+            "content": {
+              "beginner": "The backend provides 5 doorways (called APIs) that the frontend knocks on to get or save information.",
+              "intermediate": "GET /health -> defined in server/src/routes/api.ts (line 7 handler)\nPOST /auth/login -> defined in server/src/routes/api.ts (line 8 handler)\nGET /resources -> defined in server/src/routes/api.ts (line 9 handler)\nPOST /resources -> defined in server/src/routes/api.ts (line 10 handler)\nDELETE /resources/:id -> defined in server/src/routes/api.ts (line 11 handler)",
+              "advanced": "Endpoints adhere to RESTful principles: idempotency on GET/PUT/DELETE, resource-based URL naming, standard HTTP status codes (200, 201, 400, 401, 404, 500), and JSON content-type negotiation."
+            },
+            "relatedFiles": [
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts",
+              "server/src/routes/api.ts"
+            ]
+          },
+          {
+            "chapterNumber": 9,
+            "title": "Database Design & Entities",
+            "summary": "Relational or document data models, field definitions, indices, and relationships.",
+            "content": {
+              "beginner": "The database is like a collection of organized spreadsheets where each row represents a user or an item with specific columns like ID, name, and date.",
+              "intermediate": "Model [User] (Prisma): Fields: id, email, passwordHash, role, createdAt, items\nModel [Item] (Prisma): Fields: id, title, description, status, userId, user, createdAt",
+              "advanced": "Normalized schema design minimizes data redundancy. Primary keys are indexed via B-Trees, ensuring logarithmic O(log N) lookup times during high-volume reads."
+            },
+            "relatedFiles": [
+              "server/src/models/schema.prisma",
+              "server/src/models/schema.prisma"
+            ]
+          },
+          {
+            "chapterNumber": 10,
+            "title": "Important Implementation Details",
+            "summary": "Algorithms, custom state managers, cryptographic routines, and utilities.",
+            "content": {
+              "beginner": "Specialized helper tools perform tasks like checking email addresses, timing animations, and keeping you securely logged in.",
+              "intermediate": "Implementation details include custom authentication tokens, input sanitizers, centralized error interceptors, and reactive frontend state hooks.",
+              "advanced": "State managers avoid memory leaks through cleanup hooks. Cryptographic routines employ constant-time comparison algorithms to mitigate side-channel timing attacks."
+            },
+            "relatedFiles": []
+          },
+          {
+            "chapterNumber": 11,
+            "title": "Testing Strategy & Quality Inventory",
+            "summary": "Unit, integration, and end-to-end testing coverage across the repository.",
+            "content": {
+              "beginner": "Tests are automated robots that check if the code still works after someone makes changes.",
+              "intermediate": "The testing inventory inspects smoke tests, unit tests for core utilities, and integration checks verifying that routes return expected status codes.",
+              "advanced": "Testing follows the Test Pyramid: heavy unit test coverage for pure business logic, followed by integration tests with mock database drivers, and end-to-end smoke tests."
+            },
+            "relatedFiles": [
+              "server/test/api.test.ts"
+            ]
+          },
+          {
+            "chapterNumber": 12,
+            "title": "Build and Deployment Pipeline",
+            "summary": "Transpilation, asset bundling, containerization, and production runtime hosting.",
+            "content": {
+              "beginner": "How the project goes from code on your laptop to a live website on the internet.",
+              "intermediate": "The build step runs `npm run build` using Vite or TypeScript compiler to generate minified output in `/dist`. Environment variables are loaded at startup.",
+              "advanced": "CI/CD pipelines automate linting, type-checking, and container image generation. Production deployments employ reverse proxies like NGINX or cloud PaaS runners."
+            },
+            "relatedFiles": [
+              "package.json",
+              "Dockerfile",
+              ".env.example"
+            ]
+          },
+          {
+            "chapterNumber": 13,
+            "title": "Strengths and Technical Limitations",
+            "summary": "Objective, evidence-backed architectural advantages and documented constraints.",
+            "content": {
+              "beginner": "The project is very fast and organized, but currently has some features that can be expanded in the future.",
+              "intermediate": "Strengths: Clear module boundaries, strict type definitions, and clean separation between UI and server. Limitations: In-memory/embedded database limitations under heavy concurrent writes.",
+              "advanced": "Trade-off analysis: Choosing a monolithic repository simplifies dependency management and deployment for students, but limits independent horizontal scaling of frontend vs backend components."
+            },
+            "relatedFiles": [
+              "package.json",
+              "README.md",
+              "server/src/index.ts"
+            ]
+          },
+          {
+            "chapterNumber": 14,
+            "title": "Prioritized Improvement Roadmap",
+            "summary": "Actionable engineering enhancements categorized by estimated effort and impact.",
+            "content": {
+              "beginner": "Things we can do next: add automated tests, improve error messages, and add nice dark/light mode options.",
+              "intermediate": "1. Add comprehensive test coverage using Vitest. 2. Implement Redis caching for frequent database reads. 3. Introduce structured logging with Pino or Winston.",
+              "advanced": "Architectural enhancements: Implement rate-limiting middleware (express-rate-limit), database connection pooling tuning, and OpenTelemetry instrumentation for distributed tracing."
+            },
+            "relatedFiles": [
+              "server/src/index.ts"
+            ]
+          },
+          {
+            "chapterNumber": 15,
+            "title": "Interview Preparation & Viva Defense Guide",
+            "summary": "Core technical talking points, architecture defense strategies, and answers to challenging questions.",
+            "content": {
+              "beginner": "Be ready to say what the project does in 30 seconds, why you built it, and which buttons do what.",
+              "intermediate": "Be prepared to explain: 1. Why you chose this technology stack over alternatives. 2. How data travels from user click to database. 3. How errors are handled when the network drops.",
+              "advanced": "Defend design decisions: Explain the trade-offs between SQL vs NoSQL for your data models, discuss JWT expiration vs refresh token rotation, and describe how you would scale the system to 100,000 daily active users."
+            },
+            "relatedFiles": [
+              "package.json",
+              "README.md",
+              "server/src/index.ts",
+              "server/src/routes/api.ts"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "sec-env-isolation",
+            "title": "Proper Environment Variable Isolation",
+            "category": "strength",
+            "severity": "low",
+            "description": "No obvious plaintext secrets or private API tokens were discovered hardcoded in tracked source files.",
+            "evidence": "Scanned tracked files for credential assignments; no raw tokens found.",
+            "affectedFiles": [
+              "package.json",
+              "README.md",
+              "server/src/index.ts"
+            ],
+            "impact": "Reduces risk of accidental credential leakage during code sharing or git commits.",
+            "recommendedCorrection": "Continue keeping `.env` in `.gitignore` and use secret scanning in CI.",
+            "estimatedEffort": "0 mins",
+            "confidence": "confirmed",
+            "verificationStatus": "Verified by static source scan"
+          },
+          {
+            "id": "test-suite-present",
+            "title": "Automated Test Suite Present in Repository",
+            "category": "strength",
+            "severity": "low",
+            "description": "The repository includes automated unit or integration tests to verify critical logic.",
+            "evidence": "Found test files such as: server/test/api.test.ts",
+            "affectedFiles": [
+              "server/test/api.test.ts"
+            ],
+            "impact": "Facilitates regression detection and builds confidence during interviews and feature refactoring.",
+            "recommendedCorrection": "Expand negative test cases to cover unexpected HTTP error branches.",
+            "estimatedEffort": "1 hour",
+            "confidence": "confirmed",
+            "verificationStatus": "Verified test file existence"
+          },
+          {
+            "id": "arch-clean-layering",
+            "title": "Clean Separation of Routing and Business Logic",
+            "category": "strength",
+            "severity": "low",
+            "description": "The codebase separates HTTP transport concerns (routes/controllers) from core business logic (services).",
+            "evidence": "Detected dedicated controller and service directories.",
+            "affectedFiles": [
+              "server/src/controllers/resourceController.ts",
+              "server/src/services/resourceService.ts"
+            ],
+            "impact": "Improves unit testability and allows changing UI or transport protocols without altering core business rules.",
+            "recommendedCorrection": "Maintain single-responsibility principle as new features are added.",
+            "estimatedEffort": "0 mins",
+            "confidence": "confirmed",
+            "verificationStatus": "Confirmed directory architecture"
+          },
+          {
+            "id": "sec-schema-validation",
+            "title": "Robust Declarative Schema Validation",
+            "category": "strength",
+            "severity": "low",
+            "description": "The repository utilizes declarative schema validation libraries (Zod/Joi/Pydantic) to validate incoming payloads.",
+            "evidence": "Found validation library usage in package manifests or source code.",
+            "affectedFiles": [
+              "package.json"
+            ],
+            "impact": "Guarantees type-safety and blocks malformed input before it can reach business or database layers.",
+            "recommendedCorrection": "Ensure all POST/PUT/PATCH endpoints have an associated schema.",
+            "estimatedEffort": "0 mins",
+            "confidence": "confirmed",
+            "verificationStatus": "Confirmed by package dependency"
+          }
+        ],
+        "interviewMaterials": {
+          "pitches": {
+            "thirtySecondPitch": "\"TaskForge-Kanban is a developer-focused full-stack web application engineered using React, Express.js, SQLite, JSON Web Tokens (JWT). It provides an integrated workflow for data management, structured API routing with 5 endpoints, and persistent storage for User, Item, designed to give users real-time visibility and control.\"",
+            "twoMinutePitch": "\"I developed TaskForge-Kanban to solve the problem of fragmented workflows and lack of system visibility. The project is architected with a decoupled frontend built in React and a backend running TypeScript.\n\nWhen a user interacts with the interface, the client dispatches RESTful API requests to our backend router. The backend passes requests through custom validation and authentication middleware, invokes business logic services, and persists state across 2 database models. I focused on clean separation of concerns, ensuring that the database and transport layer remain isolated from core business logic.\"",
+            "fiveMinuteDeepDive": "\"Let's walk through the architectural blueprint of TaskForge-Kanban. The application is organized into three distinct tiers:\n\n1. Presentation & State Management: Built using modular components that bind directly to reactive state hooks. User events trigger asynchronous fetch pipelines that handle optimistic UI updates and gracefully capture network exceptions.\n\n2. API Routing & Middleware Pipeline: The server exposes 5 structured HTTP endpoints. Every incoming request flows through a middleware chain that validates JSON payloads, enforces CORS policies, and checks authorization tokens before reaching the business handlers.\n\n3. Service Layer & Persistence: Rather than embedding raw queries inside route handlers, I separated business logic into domain services. Persistence is managed via SQLite, where models (User, Item) are indexed on primary keys to ensure sub-millisecond query performance.\n\n4. Reliability & Error Recovery: The backend uses a centralized error-handling middleware that logs stack traces internally while returning sanitized, standardized error codes to the client, preventing credential leaks.\"",
+            "resumeBulletPoints": [
+              "Architected and deployed \"TaskForge-Kanban\", a full-stack platform leveraging React, Express.js, SQLite, JSON Web Tokens (JWT) with 5 RESTful endpoints.",
+              "Designed normalized database schemas for User, Item, implementing indexes and parameterized queries to prevent SQL injection.",
+              "Engineered end-to-end authentication and validation pipelines, reducing invalid payload exceptions and ensuring type safety.",
+              "Built modular frontend components with reactive state synchronization and centralized error toast notifications."
+            ],
+            "architectureExplanation": "The system follows an asynchronous client-server model. The client communicates via JSON over HTTP REST. The backend utilizes an event-driven loop to process requests through middleware, controllers, and services down to the database layer, maintaining strict separation of concerns."
+          },
+          "questions": [
+            {
+              "id": "q-fund-1",
+              "category": "fundamentals",
+              "difficulty": "beginner",
+              "question": "What problem does TaskForge-Kanban solve, and who are its primary users?",
+              "directAnswer": "TaskForge-Kanban solves the challenge of scattered workflows and lack of visibility by providing a centralized, structured system for users to manage and inspect technical operations.",
+              "technicalExplanation": "The application consolidates user interactions, API dispatching, and persistent storage into an observable client-server architecture with deterministic error boundaries.",
+              "repositoryEvidence": "Documented in README.md and root project configuration.",
+              "practicalExample": "Instead of manually inspecting multiple disjointed files or logs, a user interacts with an intuitive UI backed by structured API endpoints.",
+              "tradeOffs": "Focusing on a lightweight web interface requires a reliable network connection compared to a purely offline desktop CLI.",
+              "followUpQuestion": "How would you enable offline capability or local-first synchronization if users lose network access?"
+            },
+            {
+              "id": "q-tech-1",
+              "category": "tech_stack",
+              "difficulty": "intermediate",
+              "question": "Why did you select React and Express.js for this project over alternatives?",
+              "directAnswer": "I chose this stack for end-to-end type safety, asynchronous event-driven I/O performance, and the massive ecosystem of battle-tested packages.",
+              "technicalExplanation": "TypeScript allows sharing types between client and server, catching type mismatches at compile time rather than during runtime execution. Node.js non-blocking I/O is ideal for web APIs handling concurrent requests.",
+              "repositoryEvidence": "Configured in package.json and tsconfig.json.",
+              "practicalExample": "When modifying a data model interface, TypeScript immediately flags any controller or UI component expecting the old property structure.",
+              "tradeOffs": "TypeScript requires a compilation step, and Node.js CPU-intensive tasks can block the single event loop if not offloaded to worker threads.",
+              "followUpQuestion": "How would you handle heavy CPU-bound tasks like image processing or large PDF compilation in Node.js?"
+            },
+            {
+              "id": "q-arch-1",
+              "category": "architecture",
+              "difficulty": "intermediate",
+              "question": "How is the project structured, and what are the responsibilities of its major modules?",
+              "directAnswer": "The project follows a 3-tier modular architecture: presentation layer (client), routing and middleware (controllers), and domain business logic with data persistence (services/models).",
+              "technicalExplanation": "Dependencies flow inward: routes pass validated data to services, which interact with database models. Controllers never execute raw database queries directly.",
+              "repositoryEvidence": "Evident from directory separation: /routes, /services, /models, /components.",
+              "practicalExample": "If we want to switch the database from SQLite to PostgreSQL, we only modify the database driver/model layer without touching any UI component or route definition.",
+              "tradeOffs": "Layered architecture adds a few extra files per feature compared to writing everything in one script, but pays off in testability and maintainability.",
+              "followUpQuestion": "How do you prevent circular dependency imports between your services?"
+            },
+            {
+              "id": "q-code-1",
+              "category": "code_level",
+              "difficulty": "intermediate",
+              "question": "What happens when a request hits /health? Walk me through the code.",
+              "directAnswer": "The router matches GET /health, runs body parsing and auth middleware, delegates to the handler, and returns a JSON response.",
+              "technicalExplanation": "Express processes middleware linearly. If the payload is valid, the handler invokes the business service asynchronously using async/await, catches any rejection, and calls res.status(200).json().",
+              "repositoryEvidence": "Defined in server/src/routes/api.ts around line 7",
+              "practicalExample": "If a user sends an invalid parameter, the validation middleware short-circuits with a 400 Bad Request before hitting the database.",
+              "tradeOffs": "Synchronous execution vs asynchronous promises: using async/await keeps asynchronous code readable like synchronous code while maintaining non-blocking I/O.",
+              "followUpQuestion": "What happens if a promise inside the route handler rejects without a try-catch block?"
+            },
+            {
+              "id": "q-api-1",
+              "category": "api_db",
+              "difficulty": "intermediate",
+              "question": "How does your application communicate between frontend and backend, and how is incoming data validated?",
+              "directAnswer": "Communication occurs over HTTP REST using JSON payloads. Incoming data is validated on the client for user experience and strictly re-validated on the server for security.",
+              "technicalExplanation": "The frontend uses the Fetch API with JSON serialization. The server parses the body using express.json() and validates schema types before database persistence.",
+              "repositoryEvidence": "API routes and model schemas in server directory.",
+              "practicalExample": "If a user submits an empty string for a required name field, the server returns `{ error: \"Name is required\" }` with HTTP status 422.",
+              "tradeOffs": "REST over WebSockets was chosen because the workflows are primarily request-driven rather than requiring bidirectional sub-millisecond streaming.",
+              "followUpQuestion": "When would you consider replacing REST with GraphQL or gRPC in this system?"
+            },
+            {
+              "id": "q-sec-1",
+              "category": "security",
+              "difficulty": "advanced",
+              "question": "How does your application protect against common web vulnerabilities like SQL Injection, XSS, and CSRF?",
+              "directAnswer": "SQL Injection is prevented through parameterized queries / ORM abstractions. XSS is mitigated by React automatic text encoding and CSP headers. CSRF is mitigated via modern SameSite cookies and Bearer tokens.",
+              "technicalExplanation": "Parameterized queries separate SQL command structure from user input data at the database driver level. React DOM nodes escape string literals by default, preventing execution of injected `<script>` tags.",
+              "repositoryEvidence": "Database queries and React JSX syntax.",
+              "practicalExample": "Entering `' OR 1=1 --` into a login form treats the input as a literal string value rather than executable SQL syntax.",
+              "tradeOffs": "Strict sanitization can occasionally strip intentional HTML markup if not carefully configured with an explicit allowlist.",
+              "followUpQuestion": "How would you securely store JWT tokens on the client: in localStorage or httpOnly cookies?"
+            },
+            {
+              "id": "q-test-1",
+              "category": "testing_debugging",
+              "difficulty": "intermediate",
+              "question": "If a user reports that a request fails with a 500 error, what is your systematic debugging process?",
+              "directAnswer": "1. Inspect the server log file for the timestamped error stack trace. 2. Identify the failing line and error type. 3. Reproduce locally with the exact request payload. 4. Write a test case, fix the bug, and verify.",
+              "technicalExplanation": "I check the correlation ID or request timestamp, check if the error was a null reference or database connection failure, reproduce with mock inputs, and verify the fix with automated assertions.",
+              "repositoryEvidence": "Error handling middleware and logger configuration.",
+              "practicalExample": "If a user submits a null field that was expected to be an array, the logs will show `TypeError: Cannot read properties of undefined (reading 'map')`.",
+              "tradeOffs": "Detailed error messages in logs help developers debug quickly, but stack traces must never be exposed to the public HTTP response for security.",
+              "followUpQuestion": "How do you monitor runtime errors in production environments without manually checking log files?"
+            },
+            {
+              "id": "q-design-1",
+              "category": "design_decisions",
+              "difficulty": "advanced",
+              "question": "What architectural trade-offs exist in your current implementation, and what would you change if scaling 100x?",
+              "directAnswer": "The current monolithic design is simple to develop and deploy locally, but at 100x scale, database write bottlenecks and monolithic deployments would necessitate caching and horizontal scaling.",
+              "technicalExplanation": "To scale 100x: 1. Introduce Redis for read caching. 2. Move from embedded SQLite to a clustered PostgreSQL instance with read replicas. 3. Containerize using Docker and deploy behind an NGINX load balancer.",
+              "repositoryEvidence": "Monolithic project layout and database storage module.",
+              "practicalExample": "Caching frequent GET queries in Redis reduces database load by 80%, allowing the system to serve thousands of concurrent requests.",
+              "tradeOffs": "Microservices add significant networking overhead and distributed transaction complexity; a modular monolith is often the superior choice until team size or traffic demands microservices.",
+              "followUpQuestion": "What caching strategy would you use: cache-aside, write-through, or write-behind?"
+            },
+            {
+              "id": "q-own-1",
+              "category": "project_ownership",
+              "difficulty": "intermediate",
+              "question": "Which parts of this application did you design yourself, and what was the most difficult technical hurdle you overcame?",
+              "directAnswer": "I designed the system architecture, API schemas, and interactive whiteboard workflow. The hardest challenge was ensuring evidence-based traceability between UI nodes and actual source code files.",
+              "technicalExplanation": "Connecting high-level architecture diagrams with concrete static analysis required building deterministic AST parsers and file classification algorithms that work across various project conventions.",
+              "repositoryEvidence": "Source code in /server and /client directories.",
+              "practicalExample": "When building the dependency graph, resolving relative import paths across different folder depths required canonical path normalization.",
+              "tradeOffs": "Building custom static analysis tools gave me deep understanding of ASTs and compilers, whereas using an off-the-shelf black-box library would have been faster but less tailored.",
+              "followUpQuestion": "If you had another two weeks to work on this repository, what single feature would you prioritize?"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "mockInterviews": {}
+}

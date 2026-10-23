@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viva-Bachao</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-box">V</div>
+        <div class="brand-text">
+          <h1>Viva-Bachao</h1>
+          <span class="tagline">viva defense & whiteboard</span>
+        </div>
+      </div>
+      <div id="connection-status" class="status-indicator checking">
+        <span class="dot"></span>
+        <span class="status-text">Checking</span>
+      </div>
+    </header>
+
+    <!-- Main Content Box -->
+    <main class="content">
+      <div class="sketch-card">
+        <label for="repo-url" class="field-label">Target GitHub Repository</label>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="repo-url"
+            class="sketch-input"
+            placeholder="https://github.com/owner/repo"
+          />
+        </div>
+        <div id="detected-badge" class="detected-badge hidden">
+          <span>✓ Detected from active browser tab</span>
+        </div>
+      </div>
+
+      <!-- Analysis Status Display -->
+      <div id="status-box" class="status-box hidden">
+        <div class="progress-bar-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <p id="status-message" class="status-message">Parsing AST and routes...</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button id="analyze-btn" class="sketch-btn primary-btn">
+          ⚡ Analyze Repository
+        </button>
+        <button id="open-web-btn" class="sketch-btn secondary-btn">
+          📋 Open Viva-Bachao Explorer
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Viva-Bachao Local Intelligence v1.0</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

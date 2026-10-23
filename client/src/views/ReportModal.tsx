@@ -1,7 +1,6 @@
 import React from 'react';
 import { X, Printer, Download, BookOpen, Layers, ShieldCheck, Check } from 'lucide-react';
 import { Project } from '../types';
-import { SketchBox } from '../components/SketchBox';
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -67,27 +66,27 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs overflow-y-auto print:p-0 print:bg-white print:fixed print:inset-0">
-      <div className="w-full max-w-4xl max-h-[92vh] flex flex-col bg-white rounded-lg shadow-2xl border-2 border-[#2b2f33] overflow-hidden print:max-h-none print:border-none print:shadow-none">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto print:p-0 print:bg-white print:fixed print:inset-0">
+      <div className="w-full max-w-4xl max-h-[92vh] flex flex-col bg-[#0b1020] text-slate-100 rounded-2xl shadow-2xl border border-slate-800 overflow-hidden print:max-h-none print:border-none print:shadow-none print:bg-white print:text-black">
         {/* Modal Controls Bar */}
-        <div className="p-3 bg-[#fbfaf6] border-b-2 border-[#2b2f33] flex items-center justify-between print:hidden">
+        <div className="p-4 bg-[#0d1428] border-b border-slate-800 flex items-center justify-between print:hidden">
           <div className="flex items-center gap-2">
-            <span className="font-mono font-bold text-sm text-[#1f2421]">
+            <span className="font-mono font-bold text-sm text-white">
               Printable Technical Report & Viva Defense Binder
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               onClick={handleDownloadMarkdown}
-              className="sketch-btn sketch-btn-sm"
+              className="btn-secondary text-xs py-1.5 px-3 flex items-center gap-1.5"
               title="Download as Markdown"
             >
-              <Download size={13} />
+              <Download size={13} className="text-cyan-400" />
               <span>Download .MD</span>
             </button>
             <button
               onClick={handlePrint}
-              className="sketch-btn sketch-btn-sm sketch-btn-primary"
+              className="btn-primary text-xs py-1.5 px-3 flex items-center gap-1.5"
               title="Print to PDF"
             >
               <Printer size={13} />
@@ -95,7 +94,7 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
             </button>
             <button
               onClick={onClose}
-              className="p-1 hover:bg-[#e8e4db] rounded border border-transparent hover:border-[#222]"
+              className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors"
             >
               <X size={18} />
             </button>
@@ -103,55 +102,55 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
         </div>
 
         {/* Printable Document Body */}
-        <div className="flex-1 overflow-y-auto p-8 sm:p-12 space-y-8 print:p-0 print:overflow-visible font-sans bg-white">
+        <div className="flex-1 overflow-y-auto p-8 sm:p-12 space-y-8 print:p-0 print:overflow-visible font-sans bg-[#090d1a] print:bg-white print:text-black">
           {/* Cover Header */}
-          <div className="border-b-4 border-[#2b2f33] pb-6 space-y-2">
+          <div className="border-b border-slate-800 print:border-black pb-6 space-y-2">
             <div className="flex items-center justify-between">
-              <span className="font-mono font-bold text-xs uppercase tracking-widest text-[#1d4ed8]">
-                Viva-Bachao Project Intelligence Report
+              <span className="font-mono font-bold text-xs uppercase tracking-widest text-cyan-400 print:text-indigo-700">
+                Viva-Bachao Technical Intelligence Report
               </span>
-              <span className="font-mono text-xs text-[#5c6770]">
+              <span className="font-mono text-xs text-slate-400 print:text-gray-600">
                 Date: {new Date().toLocaleDateString()}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold font-mono text-[#1f2421]">
+            <h1 className="text-3xl sm:text-4xl font-extrabold font-mono text-white print:text-black">
               {project.name}
             </h1>
-            <p className="font-mono text-xs text-[#5c6770]">
+            <p className="font-mono text-xs text-slate-400 print:text-gray-600">
               Repository: {project.repoUrl} | Stack: {project.mainLanguage} ({project.primaryFramework})
             </p>
           </div>
 
           {/* Section 1: Executive Summary */}
           <div className="space-y-2">
-            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-[#1f2421] border-b-2 border-[#2b2f33] pb-1">
+            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-cyan-400 print:text-black border-b border-slate-800 print:border-black pb-1">
               1. Executive Summary & Purpose
             </h2>
-            <p className="text-xs sm:text-sm text-[#343a40] leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 print:text-gray-800 leading-relaxed">
               {analysis?.summary}
             </p>
           </div>
 
           {/* Section 2: Technology Stack Inventory */}
           <div className="space-y-2">
-            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-[#1f2421] border-b-2 border-[#2b2f33] pb-1">
+            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-cyan-400 print:text-black border-b border-slate-800 print:border-black pb-1">
               2. Technology Stack & Role Analysis
             </h2>
-            <div className="border border-[#2b2f33] rounded overflow-hidden">
+            <div className="border border-slate-800 print:border-gray-300 rounded-lg overflow-hidden">
               <table className="w-full text-left text-xs font-mono">
-                <thead className="bg-[#f1ede4] border-b border-[#2b2f33]">
+                <thead className="bg-slate-900 print:bg-gray-100 border-b border-slate-800 print:border-gray-300 text-slate-300 print:text-black">
                   <tr>
-                    <th className="p-2 border-r border-[#2b2f33]">Technology</th>
-                    <th className="p-2 border-r border-[#2b2f33]">Category</th>
-                    <th className="p-2">Architectural Responsibility</th>
+                    <th className="p-2.5 border-r border-slate-800 print:border-gray-300">Technology</th>
+                    <th className="p-2.5 border-r border-slate-800 print:border-gray-300">Category</th>
+                    <th className="p-2.5">Architectural Responsibility</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e9ecef]">
+                <tbody className="divide-y divide-slate-800 print:divide-gray-200">
                   {analysis?.technologies.map((t, idx) => (
-                    <tr key={idx} className="hover:bg-[#faf9f5]">
-                      <td className="p-2 font-bold border-r border-[#e9ecef]">{t.name}</td>
-                      <td className="p-2 border-r border-[#e9ecef] text-[#555]">{t.category}</td>
-                      <td className="p-2 text-[#333] font-sans">{t.role}</td>
+                    <tr key={idx} className="hover:bg-slate-900/40">
+                      <td className="p-2.5 font-bold border-r border-slate-800 print:border-gray-200 text-white print:text-black">{t.name}</td>
+                      <td className="p-2.5 border-r border-slate-800 print:border-gray-200 text-slate-400 print:text-gray-600">{t.category}</td>
+                      <td className="p-2.5 text-slate-300 print:text-gray-800 font-sans">{t.role}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -161,16 +160,16 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
 
           {/* Section 3: 15-Chapter Documentation Highlights */}
           <div className="space-y-3">
-            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-[#1f2421] border-b-2 border-[#2b2f33] pb-1">
+            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-cyan-400 print:text-black border-b border-slate-800 print:border-black pb-1">
               3. 15-Chapter Technical Architecture Digest
             </h2>
             <div className="space-y-3">
               {analysis?.documentation.map((chap) => (
-                <div key={chap.chapterNumber} className="border border-[#e9ecef] p-3 rounded text-xs">
-                  <div className="font-mono font-bold text-[#1d4ed8] text-[11px] mb-0.5">
+                <div key={chap.chapterNumber} className="border border-slate-800 print:border-gray-200 p-3.5 rounded-lg text-xs bg-slate-900/30 print:bg-white">
+                  <div className="font-mono font-bold text-cyan-400 print:text-indigo-700 text-[11px] mb-1">
                     Chapter {chap.chapterNumber}: {chap.title}
                   </div>
-                  <p className="text-[#333] leading-relaxed font-sans">{chap.content.intermediate}</p>
+                  <p className="text-slate-300 print:text-gray-800 leading-relaxed font-sans">{chap.content.intermediate}</p>
                 </div>
               ))}
             </div>
@@ -178,18 +177,18 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
 
           {/* Section 4: Audit & Findings */}
           <div className="space-y-3">
-            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-[#1f2421] border-b-2 border-[#2b2f33] pb-1">
+            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-cyan-400 print:text-black border-b border-slate-800 print:border-black pb-1">
               4. Code Quality & Security Audit
             </h2>
             <div className="space-y-2">
               {analysis?.findings.map((f) => (
-                <div key={f.id} className="border border-[#e9ecef] p-3 rounded text-xs space-y-1">
+                <div key={f.id} className="border border-slate-800 print:border-gray-200 p-3.5 rounded-lg text-xs space-y-1.5 bg-slate-900/30 print:bg-white">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono font-bold text-[#1f2421]">{f.title}</span>
-                    <span className="font-mono uppercase text-[10px] text-[#b91c1c] font-bold">[{f.severity}]</span>
+                    <span className="font-mono font-bold text-white print:text-black">{f.title}</span>
+                    <span className="font-mono uppercase text-[10px] text-rose-400 font-bold">[{f.severity}]</span>
                   </div>
-                  <p className="text-[#555] font-sans">{f.description}</p>
-                  <div className="text-[#15803d] font-mono text-[11px]">
+                  <p className="text-slate-400 print:text-gray-600 font-sans">{f.description}</p>
+                  <div className="text-emerald-400 font-mono text-[11px]">
                     <strong>Fix:</strong> {f.recommendedCorrection}
                   </div>
                 </div>
@@ -199,19 +198,19 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
 
           {/* Section 5: Top Viva Questions */}
           <div className="space-y-3">
-            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-[#1f2421] border-b-2 border-[#2b2f33] pb-1">
-              5. Viva Examination Cheat Sheet
+            <h2 className="text-base font-bold font-mono uppercase tracking-wider text-cyan-400 print:text-black border-b border-slate-800 print:border-black pb-1">
+              5. Predicted Viva Examination Defense
             </h2>
             <div className="space-y-3">
               {analysis?.interviewMaterials.questions.map((q, idx) => (
-                <div key={q.id} className="border border-[#e9ecef] p-3 rounded text-xs space-y-1 bg-[#fdfcf9]">
-                  <div className="font-mono font-bold text-[#1f2421]">
+                <div key={q.id} className="border border-slate-800 print:border-gray-200 p-3.5 rounded-lg text-xs space-y-1.5 bg-slate-900/40 print:bg-white">
+                  <div className="font-mono font-bold text-white print:text-black">
                     Q{idx + 1}: {q.question}
                   </div>
-                  <p className="text-[#15803d] font-sans font-semibold">
-                    <strong>Answer:</strong> {q.directAnswer}
+                  <p className="text-emerald-400 font-sans font-semibold">
+                    <strong>Direct Answer:</strong> {q.directAnswer}
                   </p>
-                  <p className="text-[#333] font-sans">
+                  <p className="text-slate-300 print:text-gray-800 font-sans">
                     <strong>Technical Detail:</strong> {q.technicalExplanation}
                   </p>
                 </div>
@@ -220,8 +219,8 @@ export const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, proje
           </div>
 
           {/* Footer */}
-          <div className="pt-6 border-t-2 border-[#2b2f33] text-center font-mono text-xs text-[#888]">
-            Generated by Viva-Bachao Platform | Turn your repository into interview confidence.
+          <div className="pt-6 border-t border-slate-800 print:border-gray-300 text-center font-mono text-xs text-slate-500">
+            Generated by Viva-Bachao Platform • Turn your repository into interview confidence.
           </div>
         </div>
       </div>

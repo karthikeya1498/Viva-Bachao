@@ -74,14 +74,14 @@ export function App() {
 
   if (loading && projects.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#fbfaf6]">
-        <div className="sketch-box p-8 text-center bg-white space-y-3">
-          <Loader2 size={36} className="animate-spin mx-auto text-[#1d4ed8]" />
-          <h2 className="font-mono font-bold text-lg text-[#1f2421]">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#070a12] text-slate-100">
+        <div className="glass-card p-8 text-center space-y-4 max-w-md">
+          <Loader2 size={36} className="animate-spin mx-auto text-cyan-400" />
+          <h2 className="font-mono font-bold text-lg text-white">
             Viva-Bachao Engine Loading...
           </h2>
-          <p className="text-xs text-[#5c6770] font-mono">
-            Initializing local SQLite database and static analysis pipelines.
+          <p className="text-xs text-slate-400 font-mono">
+            Initializing local SQLite database and static AST analysis pipelines.
           </p>
         </div>
       </div>
@@ -89,8 +89,8 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fbfaf6]">
-      {/* Top Paper Sketch Navbar */}
+    <div className="min-h-screen flex flex-col bg-[#070a12] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+      {/* Top Glassmorphic Executive Navbar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -101,10 +101,11 @@ export function App() {
         onOpenReportModal={() => setIsReportModalOpen(true)}
       />
 
-      {/* Main View Router */}
-      <main className="flex-1">
+      {/* Main View Router with Key-based Dynamic Repo Switching */}
+      <main className="flex-1 flex flex-col min-h-0">
         {activeTab === 'dashboard' && (
           <DashboardView
+            key={`dashboard-${currentProject?.id || 'none'}`}
             projects={projects}
             currentProject={currentProject}
             onSelectProject={handleSelectProject}
@@ -115,19 +116,31 @@ export function App() {
         )}
 
         {activeTab === 'whiteboard' && currentProject && (
-          <WhiteboardView project={currentProject} />
+          <WhiteboardView
+            key={`whiteboard-${currentProject.id}`}
+            project={currentProject}
+          />
         )}
 
         {activeTab === 'docs' && currentProject && (
-          <DocumentationView project={currentProject} />
+          <DocumentationView
+            key={`docs-${currentProject.id}`}
+            project={currentProject}
+          />
         )}
 
         {activeTab === 'quality' && currentProject && (
-          <QualityView project={currentProject} />
+          <QualityView
+            key={`quality-${currentProject.id}`}
+            project={currentProject}
+          />
         )}
 
         {activeTab === 'interview' && currentProject && (
-          <InterviewStudioView project={currentProject} />
+          <InterviewStudioView
+            key={`interview-${currentProject.id}`}
+            project={currentProject}
+          />
         )}
       </main>
 

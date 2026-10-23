@@ -10,7 +10,6 @@ import {
   Code2
 } from 'lucide-react';
 import { Project, DocChapter, ExplanationLevel } from '../types';
-import { SketchBox } from '../components/SketchBox';
 
 interface DocumentationViewProps {
   project: Project;
@@ -32,51 +31,51 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
   const activeChapter = chapters.find((c) => c.chapterNumber === selectedChapterNumber) || chapters[0];
 
   return (
-    <div className="container-paper py-4">
+    <div className="container-executive py-6 text-slate-100">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b-2 border-[#2b2f33] mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800 mb-6">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold font-mono text-[#1f2421]">
-              15-Chapter Technical Project Guide
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl font-bold font-mono text-white tracking-tight">
+              15-Chapter Technical Project Architecture Guide
             </h1>
-            <span className="sketch-badge sketch-badge-blue text-xs">
+            <span className="badge-blue text-xs font-mono font-bold">
               Evidence-Backed
             </span>
           </div>
-          <p className="text-xs text-[#5c6770] mt-0.5">
+          <p className="text-xs text-slate-400 mt-1 font-sans">
             Grounded architectural documentation generated strictly from inspected repository source files.
           </p>
         </div>
 
         {/* 3-Level Depth Switcher */}
-        <div className="flex items-center gap-1 bg-[#f1ede4] p-1 border-2 border-[#2b2f33] rounded-[255px_15px_225px_15px/15px_225px_15px_255px]">
+        <div className="flex items-center gap-1.5 bg-slate-900/80 p-1 border border-slate-800 rounded-xl">
           <button
             onClick={() => setLevel('beginner')}
-            className={`px-3 py-1 text-xs font-mono font-bold rounded ${
+            className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-all ${
               level === 'beginner'
-                ? 'bg-[#15803d] text-white shadow-[1px_2px_0_#222]'
-                : 'text-[#444] hover:bg-[#e4decb]'
+                ? 'bg-emerald-600 text-white font-bold shadow-[0_0_12px_rgba(16,185,129,0.5)]'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             🟢 Beginner
           </button>
           <button
             onClick={() => setLevel('intermediate')}
-            className={`px-3 py-1 text-xs font-mono font-bold rounded ${
+            className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-all ${
               level === 'intermediate'
-                ? 'bg-[#1d4ed8] text-white shadow-[1px_2px_0_#222]'
-                : 'text-[#444] hover:bg-[#e4decb]'
+                ? 'bg-indigo-600 text-white font-bold shadow-[0_0_12px_rgba(99,102,241,0.5)]'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             🟡 Intermediate
           </button>
           <button
             onClick={() => setLevel('advanced')}
-            className={`px-3 py-1 text-xs font-mono font-bold rounded ${
+            className={`px-3 py-1.5 text-xs font-mono font-medium rounded-lg transition-all ${
               level === 'advanced'
-                ? 'bg-[#6d28d9] text-white shadow-[1px_2px_0_#222]'
-                : 'text-[#444] hover:bg-[#e4decb]'
+                ? 'bg-purple-600 text-white font-bold shadow-[0_0_12px_rgba(168,85,247,0.5)]'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             🔴 Advanced
@@ -91,12 +90,12 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
           <div className="relative">
             <input
               type="text"
-              placeholder="Filter chapters..."
+              placeholder="Search 15 chapters..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="sketch-input py-1 px-3 text-xs w-full"
+              className="input-executive py-2 px-3 text-xs w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-lg pr-8"
             />
-            <Search className="absolute right-2.5 top-2 w-3.5 h-3.5 text-[#888]" />
+            <Search className="absolute right-2.5 top-2.5 w-4 h-4 text-slate-500" />
           </div>
 
           <div className="space-y-1.5 max-h-[70vh] overflow-y-auto pr-1">
@@ -106,19 +105,19 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
                 <div
                   key={chap.chapterNumber}
                   onClick={() => setSelectedChapterNumber(chap.chapterNumber)}
-                  className={`p-2.5 border-2 border-[#2b2f33] rounded-[15px_225px_15px_255px/255px_15px_225px_15px] cursor-pointer transition-all select-none ${
+                  className={`p-3 rounded-xl border cursor-pointer transition-all select-none ${
                     isSelected
-                      ? 'bg-white shadow-[3px_3px_0_#2b2f33] translate-x-1 font-bold'
-                      : 'bg-[#faf8f4] hover:bg-white text-[#4b5563]'
+                      ? 'glass-card border-cyan-400/60 shadow-[0_0_15px_rgba(6,182,212,0.25)] translate-x-1 font-bold'
+                      : 'bg-slate-900/40 hover:bg-slate-800/50 border-slate-800 text-slate-400 hover:text-slate-200'
                   }`}
                 >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono text-[11px] font-bold text-[#1d4ed8]">
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="font-mono text-[11px] font-bold text-cyan-400">
                       Chapter {chap.chapterNumber}
                     </span>
-                    <ChevronRight size={13} className={isSelected ? 'text-[#1d4ed8]' : 'text-[#aaa]'} />
+                    <ChevronRight size={14} className={isSelected ? 'text-cyan-400' : 'text-slate-600'} />
                   </div>
-                  <h4 className="text-xs font-mono text-[#1f2421] truncate mt-0.5">
+                  <h4 className="text-xs font-mono text-white truncate">
                     {chap.title}
                   </h4>
                 </div>
@@ -130,32 +129,32 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
         {/* Right Column: In-Middle Explanation Document Reader */}
         <div className="md:col-span-8 lg:col-span-8">
           {activeChapter ? (
-            <SketchBox className="p-6 sm:p-8 bg-white space-y-6">
+            <div className="glass-card p-6 sm:p-8 rounded-xl border border-slate-800/80 space-y-6">
               {/* Chapter Header */}
-              <div className="border-b-2 border-[#2b2f33] pb-4">
-                <div className="flex items-center justify-between gap-2 mb-1">
-                  <span className="font-mono text-xs font-bold text-[#1d4ed8] uppercase tracking-wider">
+              <div className="border-b border-slate-800 pb-4">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-wider">
                     Chapter {activeChapter.chapterNumber} of 15
                   </span>
-                  <span className="sketch-badge text-xs uppercase font-mono">
+                  <span className="badge-purple text-xs uppercase font-mono font-bold">
                     Mode: {level}
                   </span>
                 </div>
-                <h2 className="text-2xl font-bold font-mono text-[#1f2421]">
+                <h2 className="text-2xl font-bold font-mono text-white">
                   {activeChapter.title}
                 </h2>
-                <p className="text-xs text-[#5c6770] font-sans mt-1">
+                <p className="text-xs text-slate-400 font-sans mt-1">
                   {activeChapter.summary}
                 </p>
               </div>
 
               {/* In-Middle Explanation Content */}
               <div className="space-y-4">
-                <div className="sketch-box-subtle p-4 bg-[#fdfcf9] border-l-4 border-l-[#1d4ed8]">
-                  <span className="text-[11px] font-mono uppercase font-bold text-[#1d4ed8] block mb-2">
+                <div className="glass-card p-5 rounded-lg border-l-4 border-l-cyan-400 bg-slate-900/50">
+                  <span className="text-[11px] font-mono uppercase font-bold text-cyan-400 block mb-2">
                     {level.toUpperCase()} TECHNICAL PERSPECTIVE:
                   </span>
-                  <div className="text-sm text-[#2b2f33] leading-relaxed whitespace-pre-line font-sans">
+                  <div className="text-sm text-slate-200 leading-relaxed whitespace-pre-line font-sans">
                     {activeChapter.content[level]}
                   </div>
                 </div>
@@ -163,32 +162,32 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
                 {/* Supporting Code or Structure */}
                 {activeChapter.codeSnippets && activeChapter.codeSnippets.length > 0 && (
                   <div className="space-y-2">
-                    <span className="text-xs font-mono font-bold text-[#333] flex items-center gap-1.5">
-                      <Code2 size={14} />
+                    <span className="text-xs font-mono font-bold text-slate-300 flex items-center gap-1.5">
+                      <Code2 size={14} className="text-cyan-400" />
                       Associated Code Evidence:
                     </span>
                     {activeChapter.codeSnippets.map((snip, idx) => (
-                      <div key={idx} className="code-box">
-                        <div className="text-[11px] font-mono font-bold text-[#666] mb-1">
+                      <div key={idx} className="code-box bg-slate-950/80 border border-slate-800 rounded-lg p-3 space-y-1">
+                        <div className="text-[11px] font-mono font-bold text-slate-400 mb-1">
                           {snip.title}
                         </div>
-                        <pre className="overflow-x-auto text-xs">{snip.code}</pre>
+                        <pre className="overflow-x-auto text-xs font-mono text-cyan-200/90">{snip.code}</pre>
                       </div>
                     ))}
                   </div>
                 )}
 
                 {/* Related Repository Files */}
-                <div className="sketch-sticky p-3.5">
-                  <span className="text-xs font-mono font-bold text-[#854d0e] block mb-1.5 flex items-center gap-1.5">
-                    <FileCode size={13} />
+                <div className="glass-card p-4 rounded-lg border border-amber-500/30">
+                  <span className="text-xs font-mono font-bold text-amber-400 block mb-2 flex items-center gap-1.5">
+                    <FileCode size={14} />
                     Inspected Files Supporting This Chapter:
                   </span>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {activeChapter.relatedFiles.map((rf, idx) => (
                       <span
                         key={idx}
-                        className="font-mono text-xs bg-white/80 border border-[#854d0e] px-2 py-0.5 rounded text-[#713f12]"
+                        className="font-mono text-xs bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-cyan-300"
                       >
                         {rf}
                       </span>
@@ -198,28 +197,28 @@ export const DocumentationView: React.FC<DocumentationViewProps> = ({ project })
               </div>
 
               {/* Chapter Pager */}
-              <div className="pt-4 border-t-2 border-[#2b2f33] flex items-center justify-between text-xs font-mono">
+              <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
                 <button
                   disabled={activeChapter.chapterNumber <= 1}
                   onClick={() => setSelectedChapterNumber(activeChapter.chapterNumber - 1)}
-                  className="sketch-btn sketch-btn-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="btn-secondary text-xs disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   ← Previous Chapter
                 </button>
-                <span>
+                <span className="text-slate-400">
                   {activeChapter.chapterNumber} / {chapters.length}
                 </span>
                 <button
                   disabled={activeChapter.chapterNumber >= chapters.length}
                   onClick={() => setSelectedChapterNumber(activeChapter.chapterNumber + 1)}
-                  className="sketch-btn sketch-btn-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="btn-secondary text-xs disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   Next Chapter →
                 </button>
               </div>
-            </SketchBox>
+            </div>
           ) : (
-            <div className="text-center py-12">No chapter selected</div>
+            <div className="text-center py-12 text-slate-400 font-mono text-xs">No chapter selected</div>
           )}
         </div>
       </div>

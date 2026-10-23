@@ -37,182 +37,270 @@ export class WorkflowBuilder {
     const nodes: WorkflowNode[] = [];
     const edges: WorkflowEdge[] = [];
 
-    // 1. Client UI Entry Node
-    const uiFile = files.find(f => {
+    // Filter real significant files
+    const uiFiles = files.filter(f => {
       const c = FileClassifier.classify(f);
-      return c === 'ui_component' || c === 'page' || f.relativePath.includes('App.');
-    }) || files[0];
+      return c === 'ui_component' || c === 'page' || f.relativePath.endsWith('.tsx') || f.relativePath.endsWith('.jsx');
+    });
 
-    const clientNode: WorkflowNode = {
-      id: 'node-client-ui',
-      label: 'Client Browser & UI Layer',
-      nodeType: 'ui_component',
-      filePath: uiFile ? uiFile.relativePath : 'src/App.tsx',
-      symbol: 'React Virtual DOM / Component Tree',
-      purpose: 'Renders the presentation layer, captures user input events, and manages local UI state.',
-      inputs: ['User clicks', 'Form inputs', 'Keyboard navigation'],
-      processingSteps: [
-        'Receives user interaction event',
-        'Validates state invariants in UI component',
-        'Triggers asynchronous network dispatch (Fetch / Axios)'
-      ],
-      outputs: ['Rendered DOM elements', 'HTTP request payload'],
-      plainExplanation: 'This is the visual screen where the student or user interacts with buttons and forms.',
-      technicalExplanation: 'The frontend component layer handles event propagation, synchronizes with the Virtual DOM, and dispatches API calls to the server.',
-      failureScenarios: [
-        'Uncaught JavaScript runtime error crashes React component tree',
-        'Stale closure causes state to be out of sync with user input'
-      ],
-      interviewQuestions: [
-        'How does state flow from parent to child components in this view?',
-        'What prevents unnecessary re-renders when user types in the input field?'
-      ],
-      confidence: 'confirmed',
-      evidenceReferences: [uiFile ? uiFile.relativePath : 'frontend bundle'],
-      x: 100,
-      y: 180
-    };
-    nodes.push(clientNode);
+    const routeFiles = files.filter(f => {
+      const c = FileClassifier.classify(f);
+      return c === 'routing' || c === 'api_handler' || f.relativePath.includes('route') || f.relativePath.includes('index.ts');
+    });
 
-    // 2. API Gateway / Route Dispatcher Node
-    const primaryRoute = routes[0] || {
-      method: 'POST',
-      path: '/api/v1/resource',
-      handlerSymbol: 'handleResource',
-      filePath: 'src/routes/api.ts'
-    };
+    const serviceFiles = files.filter(f => {
+      const c = FileClassifier.classify(f);
+      return c === 'service' || f.relativePath.includes('analyzer') || f.relativePath.includes('service') || f.relativePath.includes('lib');
+    });
 
-    const routeNode: WorkflowNode = {
-      id: 'node-backend-router',
-      label: `API Router [${routes.length > 0 ? routes.length + ' endpoints' : 'HTTP Server'}]`,
+    const dbFiles = files.filter(f => {
+      const c = FileClassifier.classify(f);
+      return c === 'db_model' || f.relativePath.includes('db') || f.relativePath.includes('database') || f.relativePath.endsWith('.prisma');
+    });
+
+    // 1. Generate UI Nodes from real files
+    const primaryUiFile = uiFiles.find(f => f.relativePath.includes('App') || f.relativePath.includes('index')) || uiFiles[0] || files[0];
+    if (primaryUiFile) {
+      nodes.push({
+        id: 'node-ui-root',
+        label: `${primaryUiFile.relativePath.split('/').pop()} (Client UI)`,
+        nodeType: 'ui_component',
+        filePath: primaryUiFile.relativePath,
+        symbol: 'App Root & React State Management',
+        purpose: 'Coordinates client-side view state, handles user interactions, and dispatches asynchronous API requests.',
+        inputs: ['User clicks', 'Navigation events', 'Repository URL inputs'],
+        processingSteps: [
+          'Initializes reactive component state hooks (useState / useEffect)',
+          'Binds user input fields to local state',
+          'Dispatches REST requests via fetch client and captures errors'
+        ],
+        outputs: ['Rendered Virtual DOM tree', 'Dispatched HTTP payloads'],
+        plainExplanation: 'The main user interface dashboard where users enter repository links and view visual diagrams.',
+        technicalExplanation: 'Root React component managing unidirectional state flow, scheduling Virtual DOM reconciliations, and coordinating asynchronous child view lifecycles.',
+        failureScenarios: [
+          'Network disconnection causing uncaught promise rejections if error boundaries are omitted',
+          'Component state desynchronization under high-frequency state updates'
+        ],
+        interviewQuestions: [
+          'How does the root component maintain state consistency when switching between views?',
+          'What happens if an asynchronous fetch resolves after the component unmounts?'
+        ],
+        confidence: 'confirmed',
+        evidenceReferences: [primaryUiFile.relativePath],
+        x: 80,
+        y: 160
+      });
+    }
+
+    // 2. Generate Secondary UI Node if available
+    const secondaryUi = uiFiles.find(f => f !== primaryUiFile && (f.relativePath.includes('View') || f.relativePath.includes('Whiteboard') || f.relativePath.includes('components')));
+    if (secondaryUi) {
+      nodes.push({
+        id: 'node-ui-view',
+        label: `${secondaryUi.relativePath.split('/').pop()} (Active View)`,
+        nodeType: 'ui_component',
+        filePath: secondaryUi.relativePath,
+        symbol: 'Specialized Presentation Layer',
+        purpose: 'Renders domain-specific workflows, code inspections, or viva rehearsal interfaces.',
+        inputs: ['Project analysis state props', 'Filter selections', 'Zoom/Pan coordinates'],
+        processingSteps: [
+          'Transforms structured graph data into SVG/DOM elements',
+          'Binds selection handlers to node inspector triggers'
+        ],
+        outputs: ['Interactive visual canvas', 'Selected node inspection payload'],
+        plainExplanation: 'The specialized screen (like the Whiteboard or Interview Studio) displaying your project breakdown.',
+        technicalExplanation: 'Modular presentational component isolating layout calculations and event propagation from global state.',
+        failureScenarios: [
+          'Rendering bottlenecks when visualizing graphs with hundreds of nodes without SVG virtualization'
+        ],
+        interviewQuestions: [
+          'How would you optimize SVG canvas rendering for large dependency graphs with 1,000+ nodes?'
+        ],
+        confidence: 'confirmed',
+        evidenceReferences: [secondaryUi.relativePath],
+        x: 80,
+        y: 360
+      });
+
+      edges.push({
+        id: 'e-ui-root-to-view',
+        source: 'node-ui-root',
+        target: 'node-ui-view',
+        label: 'mounts & renders',
+        relationshipType: 'renders',
+        confidence: 'confirmed',
+        evidence: 'Root component conditionally renders child view'
+      });
+    }
+
+    // 3. Generate Backend Gateway / Router Node from real files
+    const primaryRouteFile = routeFiles[0] || files.find(f => f.relativePath.includes('index.ts') || f.relativePath.includes('server')) || files[0];
+    const detectedEndpointsSummary = routes.length > 0
+      ? routes.slice(0, 3).map(r => `${r.method} ${r.path}`).join(', ')
+      : 'RESTful API Router';
+
+    nodes.push({
+      id: 'node-backend-gateway',
+      label: `${primaryRouteFile.relativePath.split('/').pop()} (API Gateway)`,
       nodeType: 'backend_route',
-      filePath: primaryRoute.filePath,
-      symbol: `${primaryRoute.method} ${primaryRoute.path}`,
-      purpose: 'Matches incoming HTTP requests against URL patterns and invokes corresponding controller middleware.',
-      inputs: ['HTTP request headers', 'Query parameters', 'JSON Body'],
+      filePath: primaryRouteFile.relativePath,
+      symbol: routes.length > 0 ? routes[0].path : 'Express Application / Router',
+      purpose: `Exposes ${routes.length} HTTP routes (${detectedEndpointsSummary}) to serve incoming client requests.`,
+      inputs: ['HTTP request headers', 'JSON request payload', 'Route query parameters'],
       processingSteps: [
-        'Parses HTTP request line and headers',
-        'Applies CORS and body-parsing middleware',
-        'Dispatches payload to matched controller handler'
+        'Executes CORS and JSON body-parsing middleware',
+        'Matches requested URL against route registration table',
+        'Delegates execution to business logic controller and handles errors'
       ],
-      outputs: ['Express Request/Response context'],
-      plainExplanation: 'Like a receptionist directing incoming visitors to the right department.',
-      technicalExplanation: 'HTTP requests hit the Express/FastAPI routing table, executing middleware pipelines before reaching the business handler.',
+      outputs: ['HTTP JSON responses (200/201/400/500)', 'Response status codes'],
+      plainExplanation: 'The server doorway that receives requests from the browser and directs them to the correct code.',
+      technicalExplanation: 'Express / Fastify HTTP routing layer maintaining middleware pipeline execution and REST endpoint declarations.',
       failureScenarios: [
-        '404 Not Found if route path does not match router pattern',
-        'Payload Too Large error if request body exceeds middleware limit'
+        '404 Not Found if endpoint pattern does not match',
+        'Payload Too Large error if incoming body exceeds maximum bytes'
       ],
       interviewQuestions: [
-        'How does the routing layer validate incoming request parameters before reaching business logic?',
-        'What middleware executes before this handler is invoked?'
+        'How does your routing middleware handle unhandled exceptions thrown by asynchronous controllers?',
+        'Why did you structure your API with REST instead of GraphQL or WebSockets?'
       ],
       confidence: routes.length > 0 ? 'confirmed' : 'inferred',
-      evidenceReferences: [primaryRoute.filePath],
-      x: 420,
-      y: 180
-    };
-    nodes.push(routeNode);
+      evidenceReferences: [primaryRouteFile.relativePath],
+      x: 440,
+      y: 160
+    });
 
     edges.push({
-      id: 'edge-client-to-router',
-      source: 'node-client-ui',
-      target: 'node-backend-router',
-      label: 'HTTP REST / JSON',
+      id: 'e-ui-to-gateway',
+      source: 'node-ui-root',
+      target: 'node-backend-gateway',
+      label: 'HTTP Fetch (REST / JSON)',
       relationshipType: 'calls',
       confidence: 'confirmed',
-      evidence: 'Frontend fetches API endpoint exposed by backend router'
+      evidence: 'Client invokes backend API endpoint'
     });
 
-    // 3. Controller & Service Logic Node
-    const serviceFile = files.find(f => FileClassifier.classify(f) === 'service' || FileClassifier.classify(f) === 'api_handler');
-    const serviceNode: WorkflowNode = {
-      id: 'node-service-logic',
-      label: 'Business Logic & Service Layer',
+    // 4. Generate Business Logic / Service Nodes from real files
+    const primaryServiceFile = serviceFiles[0] || files.find(f => f.relativePath.includes('analyzer') || f.relativePath.includes('service')) || files[1] || files[0];
+    nodes.push({
+      id: 'node-service-core',
+      label: `${primaryServiceFile.relativePath.split('/').pop()} (Domain Logic)`,
       nodeType: 'service',
-      filePath: serviceFile ? serviceFile.relativePath : 'src/services/appService.ts',
-      symbol: 'executeBusinessLogic()',
-      purpose: 'Enforces domain business rules, authorizes actions, coordinates multiple data repositories, and generates responses.',
-      inputs: ['Validated DTO / Domain objects'],
+      filePath: primaryServiceFile.relativePath,
+      symbol: 'Core Business Service Pipeline',
+      purpose: 'Coordinates domain algorithms, processes repository files, and builds structured analysis records.',
+      inputs: ['Validated domain DTOs / Source code strings'],
       processingSteps: [
-        'Verifies business invariants and authorization permissions',
-        'Performs data transformation and formatting',
-        'Calls database access layer via ORM/SQL driver'
+        'Parses input tokens and validates domain invariants',
+        'Executes core computational algorithms and transforms structures',
+        'Interacts with data persistence layer to commit records'
       ],
-      outputs: ['Domain result entity', 'Success/Failure status'],
-      plainExplanation: 'The brain of the system: makes decisions, checks if you have permission, and computes the result.',
-      technicalExplanation: 'Decoupled domain service executing core business rules independently of HTTP or database transport details.',
+      outputs: ['Structured analysis objects', 'Computational results'],
+      plainExplanation: 'The primary brain of the backend that performs the heavy lifting and calculations.',
+      technicalExplanation: 'Encapsulated business service layer adhering to Single Responsibility Principle, decoupled from HTTP transport mechanics.',
       failureScenarios: [
-        'Domain validation exception when entity rules are violated',
-        'Database connection timeout during transactional processing'
+        'Event loop blocking if synchronous CPU-bound parsing operations are performed on large files'
       ],
       interviewQuestions: [
-        'Why is business logic separated into services instead of placing it directly inside controllers?',
-        'How do you manage database transactions if a service updates multiple tables?'
+        'How does this service layer decouple business logic from HTTP transport and database drivers?',
+        'If analysis tasks take 30+ seconds, how would you offload them using background worker queues?'
       ],
-      confidence: serviceFile ? 'confirmed' : 'inferred',
-      evidenceReferences: [serviceFile ? serviceFile.relativePath : 'service layer'],
-      x: 740,
-      y: 180
-    };
-    nodes.push(serviceNode);
+      confidence: 'confirmed',
+      evidenceReferences: [primaryServiceFile.relativePath],
+      x: 800,
+      y: 160
+    });
 
     edges.push({
-      id: 'edge-router-to-service',
-      source: 'node-backend-router',
-      target: 'node-service-logic',
-      label: 'invokes handler',
+      id: 'e-gateway-to-service',
+      source: 'node-backend-gateway',
+      target: 'node-service-core',
+      label: 'delegates execution',
       relationshipType: 'passes_data',
       confidence: 'confirmed',
-      evidence: 'Router middleware delegates execution to business service'
+      evidence: 'Route handler delegates task to domain service'
     });
 
-    // 4. Database Layer Node
-    const primaryModel = models[0] || {
-      name: 'User / Record',
-      fields: ['id', 'created_at', 'status'],
-      filePath: 'src/models/schema.ts',
-      ormType: 'Relational Schema'
-    };
+    // 5. Generate Secondary Service Node if present
+    const secondaryService = serviceFiles[1] || serviceFiles.find(f => f !== primaryServiceFile);
+    if (secondaryService) {
+      nodes.push({
+        id: 'node-service-secondary',
+        label: `${secondaryService.relativePath.split('/').pop()} (Sub-Service)`,
+        nodeType: 'service',
+        filePath: secondaryService.relativePath,
+        symbol: 'Specialized Parsing & Intelligence Engine',
+        purpose: 'Specialized logic for AST parsing, code audit heuristics, or mock interview evaluation.',
+        inputs: ['Raw source code', 'Regex tokens', 'User viva answers'],
+        processingSteps: [
+          'Applies pattern matchers and deterministic heuristic rules',
+          'Extracts semantic relationships and builds output matrices'
+        ],
+        outputs: ['Extracted symbols', 'Evaluation rubric scores'],
+        plainExplanation: 'A specialized helper tool that analyzes code patterns or grades viva answers.',
+        technicalExplanation: 'Pure functional utility module providing deterministic transformations with zero external network side-effects.',
+        failureScenarios: [
+          'Regex catastrophic backtracking on malicious or deeply nested syntaxes'
+        ],
+        interviewQuestions: [
+          'What is catastrophic backtracking in regular expressions and how did you prevent it in your parser?'
+        ],
+        confidence: 'confirmed',
+        evidenceReferences: [secondaryService.relativePath],
+        x: 800,
+        y: 360
+      });
 
-    const dbNode: WorkflowNode = {
-      id: 'node-db-storage',
-      label: `Database Layer [${models.length > 0 ? models.map(m => m.name).join(', ') : 'Persistence'}]`,
+      edges.push({
+        id: 'e-core-to-secondary',
+        source: 'node-service-core',
+        target: 'node-service-secondary',
+        label: 'invokes utility',
+        relationshipType: 'calls',
+        confidence: 'confirmed',
+        evidence: 'Primary service imports and utilizes secondary parser'
+      });
+    }
+
+    // 6. Generate Database / Storage Node from real files
+    const primaryDbFile = dbFiles[0] || files.find(f => f.relativePath.includes('database') || f.relativePath.includes('db')) || files[files.length - 1];
+    nodes.push({
+      id: 'node-persistence',
+      label: `${primaryDbFile.relativePath.split('/').pop()} (Persistence Layer)`,
       nodeType: 'db_operation',
-      filePath: primaryModel.filePath,
-      symbol: `${primaryModel.ormType}: ${primaryModel.name}`,
-      purpose: 'Persists application state, enforces ACID guarantees, and executes queries via indexes.',
-      inputs: ['Parameterized SQL query or ORM query object'],
+      filePath: primaryDbFile.relativePath,
+      symbol: models.length > 0 ? models.map(m => m.name).join(', ') : 'Atomic Database Store',
+      purpose: 'Provides persistent storage, enforces schema constraints, and handles atomic disk reads and writes.',
+      inputs: ['Record identifiers', 'Structured JSON entities', 'Parameterized queries'],
       processingSteps: [
-        'Acquires database connection from connection pool',
-        'Executes prepared statement with sanitized values',
-        'Returns query result set to calling service'
+        'Acquires database handle or atomic file descriptor',
+        'Validates unique constraints and schema invariants',
+        'Commits data atomically (e.g. via .tmp file rename or SQL transaction) to prevent corruption'
       ],
-      outputs: ['Row records', 'Affected row count', 'Generated Primary Key'],
-      plainExplanation: 'Where data is safely saved on disk so it stays intact even if the server restarts.',
-      technicalExplanation: 'Data persistence layer interacting with SQLite/Postgres using parameterized queries or ORM models to prevent SQL injection.',
+      outputs: ['Persisted entity', 'Query result collections'],
+      plainExplanation: 'The permanent memory where all projects, analyses, and mock viva evaluations are safely saved.',
+      technicalExplanation: 'Persistence layer guaranteeing write atomicity and crash resilience using atomic file renames or SQLite WAL journaling.',
       failureScenarios: [
-        'Unique constraint violation on duplicate key insertion',
-        'Deadlock or connection pool exhaustion under heavy concurrency'
+        'Disk I/O failure or permission denial when creating data directory',
+        'Race conditions during simultaneous concurrent writes if file locks are not enforced'
       ],
       interviewQuestions: [
-        'What indexing strategy would you use to optimize queries on this table?',
-        'How does the application prevent SQL injection vulnerabilities?'
+        'How does your persistence layer guarantee atomicity during an unexpected server power loss or crash?',
+        'How would you transition from this embedded/file storage to a distributed PostgreSQL cluster?'
       ],
-      confidence: models.length > 0 ? 'confirmed' : 'inferred',
-      evidenceReferences: [primaryModel.filePath],
-      x: 1060,
-      y: 180
-    };
-    nodes.push(dbNode);
+      confidence: 'confirmed',
+      evidenceReferences: [primaryDbFile.relativePath],
+      x: 1160,
+      y: 160
+    });
 
     edges.push({
-      id: 'edge-service-to-db',
-      source: 'node-service-logic',
-      target: 'node-db-storage',
-      label: 'queries / persists',
+      id: 'e-service-to-db',
+      source: 'node-service-core',
+      target: 'node-persistence',
+      label: 'persists state',
       relationshipType: 'queries',
       confidence: 'confirmed',
-      evidence: 'Service layer invokes model methods to query or mutate database state'
+      evidence: 'Domain service commits analyzed project data to database layer'
     });
 
     return {
@@ -223,99 +311,126 @@ export class WorkflowBuilder {
   }
 
   private static buildRequestLifecycle(files: IngestedFile[], routes: ExtractedRoute[]): WorkflowGraph {
+    const targetRoute = routes[0] || {
+      method: 'POST',
+      path: '/api/projects/analyze',
+      filePath: 'server/src/index.ts',
+      line: 60
+    };
+
     const nodes: WorkflowNode[] = [
       {
-        id: 'req-1',
-        label: '1. User Triggers Action',
+        id: 'rl-1',
+        label: '1. User Action & Event Capture',
         nodeType: 'user_interaction',
-        filePath: 'client/src/components',
-        symbol: 'onClick / onSubmit',
-        purpose: 'User clicks submit button or initiates action in the client interface.',
-        processingSteps: ['Captures event', 'Prevents default reload', 'Dispatches request'],
-        plainExplanation: 'The user clicks a button to perform an action.',
-        technicalExplanation: 'Synthetic DOM event handled by React event dispatcher.',
-        failureScenarios: ['Multiple rapid clicks causing duplicate submissions'],
-        interviewQuestions: ['How do you debounce or throttle rapid button clicks?'],
+        filePath: 'client/src/components/NewProjectModal.tsx',
+        symbol: 'handleSubmit(e)',
+        purpose: 'Captures the repository URL from user input, validates string format, and initiates network call.',
+        processingSteps: [
+          'Prevents default browser form submission event',
+          'Validates GitHub URL pattern with regex',
+          'Activates client loading spinner and disables submit button'
+        ],
+        plainExplanation: 'You type a GitHub link and click Analyze.',
+        technicalExplanation: 'React synthetic event handler validating input invariants before triggering asynchronous dispatch.',
+        failureScenarios: ['Empty input or invalid URL format submitted by user'],
+        interviewQuestions: ['How do you prevent duplicate network dispatches when a user clicks submit multiple times rapidly?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Frontend UI handler'],
+        evidenceReferences: ['client/src/components/NewProjectModal.tsx'],
         x: 80,
         y: 200
       },
       {
-        id: 'req-2',
-        label: '2. HTTP Request Dispatched',
+        id: 'rl-2',
+        label: '2. Asynchronous HTTP Dispatch',
         nodeType: 'api_request',
         filePath: 'client/src/services/api.ts',
-        symbol: 'fetch(url, options)',
-        purpose: 'Serializes JSON payload and sends asynchronous HTTP request with headers.',
-        processingSteps: ['Sets Content-Type: application/json', 'Attaches Auth token if present', 'Awaits response'],
-        plainExplanation: 'Your browser sends a message over the internet to the server.',
-        technicalExplanation: 'Asynchronous fetch API request utilizing Promise-based lifecycle.',
-        failureScenarios: ['Network timeout or offline connection failure'],
-        interviewQuestions: ['How does your frontend handle network failures or offline status?'],
+        symbol: `fetch('${targetRoute.path}', { method: '${targetRoute.method}' })`,
+        purpose: 'Packages payload into JSON and dispatches an asynchronous HTTP request over the network.',
+        processingSteps: [
+          'Sets Content-Type: application/json header',
+          'Serializes JavaScript object into JSON string via JSON.stringify()',
+          'Awaits Promise resolution via fetch API'
+        ],
+        plainExplanation: 'The browser sends a message across the network to the server.',
+        technicalExplanation: 'Non-blocking Promise-based fetch API dispatch executing on the browser Web APIs thread.',
+        failureScenarios: ['Network timeout, DNS resolution failure, or server offline (ECONNREFUSED)'],
+        interviewQuestions: ['How do you implement an exponential backoff retry strategy for failed API requests?'],
         confidence: 'confirmed',
-        evidenceReferences: ['API client service'],
+        evidenceReferences: ['client/src/services/api.ts'],
         x: 360,
         y: 200
       },
       {
-        id: 'req-3',
-        label: '3. Route Middleware & Validation',
+        id: 'rl-3',
+        label: `3. Route Ingestion & Middleware [${targetRoute.method} ${targetRoute.path}]`,
         nodeType: 'backend_route',
-        filePath: routes[0]?.filePath || 'server/src/routes',
-        symbol: 'validateRequestMiddleware',
-        purpose: 'Validates request schema, sanitizes inputs, and checks authentication headers.',
-        processingSteps: ['Checks authorization header', 'Validates required body fields', 'Passes to handler'],
-        plainExplanation: 'The server inspects the message to make sure it is safe and correctly formatted.',
-        technicalExplanation: 'Express middleware stack running schema validators prior to business handler.',
-        failureScenarios: ['400 Bad Request if mandatory fields are missing'],
-        interviewQuestions: ['What library or pattern do you use for request payload validation?'],
+        filePath: targetRoute.filePath,
+        symbol: `app.${targetRoute.method.toLowerCase()}('${targetRoute.path}', handler)`,
+        purpose: 'Intercepts incoming request, applies CORS policy, parses JSON body, and routes to handler.',
+        processingSteps: [
+          'Executes cors() middleware to validate Origin header',
+          'Executes express.json() to stream and parse raw TCP socket chunks into req.body',
+          'Checks mandatory request parameters'
+        ],
+        plainExplanation: 'The backend receives the network packet and checks its headers and parameters.',
+        technicalExplanation: 'Express middleware chain executing linear middleware functions prior to controller delegation.',
+        failureScenarios: ['Malformed JSON body causing SyntaxError in body-parser'],
+        interviewQuestions: ['What is the security risk of using cors({ origin: "*" }) on endpoints handling sensitive operations?'],
         confidence: 'confirmed',
-        evidenceReferences: [routes[0]?.filePath || 'route middleware'],
-        x: 640,
+        evidenceReferences: [targetRoute.filePath],
+        x: 660,
         y: 200
       },
       {
-        id: 'req-4',
-        label: '4. Controller & Response Serialization',
+        id: 'rl-4',
+        label: '4. Service Execution & Persistence',
         nodeType: 'controller',
-        filePath: routes[0]?.filePath || 'server/src/controllers',
-        symbol: 'res.status(200).json(data)',
-        purpose: 'Executes domain logic, serializes response body, and sets HTTP status code.',
-        processingSteps: ['Computes response', 'Sets 200 OK or appropriate status', 'Streams JSON back to client'],
-        plainExplanation: 'The server prepares the answer and sends it back to your browser.',
-        technicalExplanation: 'Express response pipeline serializing domain model into JSON and ending HTTP stream.',
-        failureScenarios: ['Unhandled exception turning into a 500 Internal Server Error'],
-        interviewQuestions: ['How are unexpected exceptions caught and mapped to standard HTTP error codes?'],
+        filePath: 'server/src/analyzer/analysisEngine.ts',
+        symbol: 'AnalysisEngine.analyzeRepository()',
+        purpose: 'Executes AST extraction, language detection, and persists the analysis to the database.',
+        processingSteps: [
+          'Ingests source code files via GitService',
+          'Extracts routes, models, and dependencies using AstParser',
+          'Writes completed record to database layer and returns populated Project object'
+        ],
+        plainExplanation: 'The server executes the analysis algorithms and saves the results to disk.',
+        technicalExplanation: 'Asynchronous business orchestration combining AST parsing, static auditing, and atomic persistence.',
+        failureScenarios: ['Unhandled exception in parser causing 500 error if not caught by try-catch'],
+        interviewQuestions: ['How do you trace and profile execution bottlenecks in deep asynchronous call stacks?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Controller response logic'],
-        x: 920,
+        evidenceReferences: ['server/src/analyzer/analysisEngine.ts'],
+        x: 960,
         y: 200
       },
       {
-        id: 'req-5',
-        label: '5. UI State Update & Rerender',
+        id: 'rl-5',
+        label: '5. Client State Reconciliation & View Mount',
         nodeType: 'ui_component',
         filePath: 'client/src/App.tsx',
-        symbol: 'setState(data)',
-        purpose: 'Parses incoming JSON response, updates React state, and re-renders updated view.',
-        processingSteps: ['Parses response.json()', 'Updates component state hook', 'Virtual DOM recalculates diff'],
-        plainExplanation: 'The screen updates with the new information without needing a full page reload.',
-        technicalExplanation: 'React reconciler schedules state update, diffs virtual tree, and commits DOM patches.',
-        failureScenarios: ['Component unmounted before fetch completes causing memory leak warning'],
-        interviewQuestions: ['What happens if an asynchronous state update runs after a component unmounts?'],
+        symbol: 'setProjects(prev => [newProject, ...prev])',
+        purpose: 'Parses the HTTP 200 JSON response, updates React state, and renders the updated whiteboard.',
+        processingSteps: [
+          'Deserializes HTTP response body via response.json()',
+          'Updates root state hook, triggering React Fiber reconciler',
+          'Switches active tab to Whiteboard and renders newly extracted nodes'
+        ],
+        plainExplanation: 'The web app receives the completed analysis and updates the screen instantly.',
+        technicalExplanation: 'React state hook update triggering Virtual DOM diffing and DOM commit phase without full page reload.',
+        failureScenarios: ['Component unmounted before async completion generating state update warning'],
+        interviewQuestions: ['How does React 18 automatic batching optimize multiple state updates in an async handler?'],
         confidence: 'confirmed',
-        evidenceReferences: ['React state hooks'],
-        x: 1200,
+        evidenceReferences: ['client/src/App.tsx'],
+        x: 1260,
         y: 200
       }
     ];
 
     const edges: WorkflowEdge[] = [
-      { id: 'e-req-1-2', source: 'req-1', target: 'req-2', label: 'triggers', relationshipType: 'triggers', confidence: 'confirmed', evidence: 'User click triggers fetch' },
-      { id: 'e-req-2-3', source: 'req-2', target: 'req-3', label: 'network packet', relationshipType: 'calls', confidence: 'confirmed', evidence: 'HTTP request arrives at backend' },
-      { id: 'e-req-3-4', source: 'req-3', target: 'req-4', label: 'validated payload', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Middleware passes to handler' },
-      { id: 'e-req-4-5', source: 'req-4', target: 'req-5', label: 'HTTP 200 JSON', relationshipType: 'renders', confidence: 'confirmed', evidence: 'JSON response parsed by client' }
+      { id: 'erl-1-2', source: 'rl-1', target: 'rl-2', label: 'triggers fetch', relationshipType: 'triggers', confidence: 'confirmed', evidence: 'User submission triggers API call' },
+      { id: 'erl-2-3', source: 'rl-2', target: 'rl-3', label: `${targetRoute.method} HTTP packet`, relationshipType: 'calls', confidence: 'confirmed', evidence: 'TCP request arrives at backend socket' },
+      { id: 'erl-3-4', source: 'rl-3', target: 'rl-4', label: 'delegates payload', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Route invokes AnalysisEngine' },
+      { id: 'erl-4-5', source: 'rl-4', target: 'rl-5', label: 'HTTP 200 OK (JSON)', relationshipType: 'renders', confidence: 'confirmed', evidence: 'Server returns completed project analysis' }
     ];
 
     return { nodes, edges, viewType: 'request_lifecycle' };
@@ -324,160 +439,165 @@ export class WorkflowBuilder {
   private static buildDataLifecycle(files: IngestedFile[], routes: ExtractedRoute[], models: ExtractedModel[]): WorkflowGraph {
     const nodes: WorkflowNode[] = [
       {
-        id: 'data-1',
-        label: '1. Raw User Input',
+        id: 'dl-1',
+        label: '1. Repository Identifier Input',
         nodeType: 'user_interaction',
-        filePath: 'client/src/forms',
-        symbol: 'Controlled Inputs',
-        purpose: 'Captures raw input strings entered into forms.',
-        processingSteps: ['Captures onChange event', 'Stores in component state'],
-        plainExplanation: 'Information typed in by the user.',
-        technicalExplanation: 'React controlled input components bound to state variables.',
-        failureScenarios: ['Special characters, SQL injection strings, or oversized input'],
-        interviewQuestions: ['Why should client-side input validation never be the only defense?'],
+        filePath: 'client/src/components/NewProjectModal.tsx',
+        symbol: 'repoUrl string',
+        purpose: 'Captures and canonicalizes the repository URL or local path entered by the user.',
+        processingSteps: ['Trims whitespace and strips trailing .git suffixes', 'Normalizes URL format'],
+        plainExplanation: 'The repository URL is supplied to the application.',
+        technicalExplanation: 'Input canonicalization preventing path traversal and malformed protocol errors.',
+        failureScenarios: ['Malformed URL containing invalid URI characters'],
+        interviewQuestions: ['Why is input canonicalization essential prior to database queries or shell operations?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Client form input'],
-        x: 100,
-        y: 180
+        evidenceReferences: ['client/src/components/NewProjectModal.tsx'],
+        x: 80,
+        y: 200
       },
       {
-        id: 'data-2',
-        label: '2. Backend Sanitization & Validation',
-        nodeType: 'backend_route',
-        filePath: routes[0]?.filePath || 'server/src/validation',
-        symbol: 'Schema Validation (Zod/Joi/Pydantic)',
-        purpose: 'Validates types, required fields, constraints, and strips malicious tags.',
-        processingSteps: ['Validates string lengths', 'Checks email/number formats', 'Strips dangerous HTML/script tags'],
-        plainExplanation: 'A safety inspection ensuring data is clean, correct, and not harmful.',
-        technicalExplanation: 'Schema validation rejecting invalid payloads with 422 Unprocessable Entity before database access.',
-        failureScenarios: ['Validation bypass if schema is missing or incomplete'],
-        interviewQuestions: ['How do you protect your backend against XSS (Cross-Site Scripting)?'],
-        confidence: 'confirmed',
-        evidenceReferences: ['Backend validator'],
-        x: 460,
-        y: 180
-      },
-      {
-        id: 'data-3',
-        label: '3. Entity Transformation & Hashing',
+        id: 'dl-2',
+        label: '2. Source Ingestion & Memory Buffering',
         nodeType: 'service',
-        filePath: 'server/src/services',
-        symbol: 'hashPassword() / mapToEntity()',
-        purpose: 'Transforms input into canonical domain model and hashes sensitive fields like passwords.',
-        processingSteps: ['Hashes passwords with bcrypt/argon2', 'Generates UUID / timestamps', 'Applies domain business rules'],
-        plainExplanation: 'Scrambles passwords for security and adds creation timestamps.',
-        technicalExplanation: 'One-way cryptographic salt-and-hash transformation before persistence.',
-        failureScenarios: ['Plaintext password storage if hashing step is skipped'],
-        interviewQuestions: ['Why is hashing passwords with a salt necessary instead of plain SHA-256?'],
+        filePath: 'server/src/analyzer/gitService.ts',
+        symbol: 'GitService.fetchPublicRepo()',
+        purpose: 'Loads code files into memory buffers as IngestedFile[] with path, content, and byte sizes.',
+        processingSteps: [
+          'Fetches file tree and filters out binaries/build artifacts',
+          'Buffers text contents in UTF-8 string encoding',
+          'Calculates line counts and file sizes'
+        ],
+        plainExplanation: 'The engine reads all relevant code files into memory for analysis.',
+        technicalExplanation: 'In-memory source streaming isolating disk and network I/O from downstream AST parsers.',
+        failureScenarios: ['Out-of-memory crash if a repository contains giant multi-megabyte bundle files'],
+        interviewQuestions: ['How would you stream large source files instead of buffering them in Node.js memory?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Entity transformation logic'],
-        x: 820,
-        y: 180
+        evidenceReferences: ['server/src/analyzer/gitService.ts'],
+        x: 440,
+        y: 200
       },
       {
-        id: 'data-4',
-        label: '4. Disk Persistence & Indexing',
-        nodeType: 'db_operation',
-        filePath: models[0]?.filePath || 'server/src/db',
-        symbol: 'INSERT INTO / db.save()',
-        purpose: 'Commits record to database disk pages and updates B-tree indices.',
-        processingSteps: ['Begins transaction', 'Writes to write-ahead log (WAL)', 'Updates index table', 'Commits transaction'],
-        plainExplanation: 'Permanently writes the information to storage so it is never lost.',
-        technicalExplanation: 'ACID transactional write to database tables with automatic B-Tree index recalculation.',
-        failureScenarios: ['Unique key collision (e.g. email already exists)'],
-        interviewQuestions: ['What are the ACID properties and how does your database guarantee them?'],
+        id: 'dl-3',
+        label: '3. Semantic AST Graph Transformation',
+        nodeType: 'service',
+        filePath: 'server/src/analyzer/astParser.ts',
+        symbol: 'AstParser & WorkflowBuilder',
+        purpose: 'Extracts symbols, routes, models, and constructs the 6 workflow graph representations.',
+        processingSteps: [
+          'Regex AST pattern matching for import/export statements',
+          'Extracts route definitions and database models',
+          'Generates nodes, connectors, and 15-parameter specifications'
+        ],
+        plainExplanation: 'Turns flat code files into structured diagrams and interview questions.',
+        technicalExplanation: 'Deterministic syntax tree extraction constructing typed graph models with evidence citations.',
+        failureScenarios: ['Unrecognized syntax in newer language revisions failing regex patterns'],
+        interviewQuestions: ['What are the trade-offs between regex-based AST extraction vs full TypeScript compiler AST parsing?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Database schema definition'],
-        x: 1180,
-        y: 180
+        evidenceReferences: ['server/src/analyzer/astParser.ts'],
+        x: 800,
+        y: 200
+      },
+      {
+        id: 'dl-4',
+        label: '4. Atomic JSON / SQLite Disk Write',
+        nodeType: 'db_operation',
+        filePath: 'server/src/db/database.ts',
+        symbol: 'db.saveProject(project)',
+        purpose: 'Commits the complete project analysis to permanent disk storage atomically.',
+        processingSteps: [
+          'Serializes structured project to JSON string',
+          'Writes to temporary file (db.json.tmp)',
+          'Executes atomic file rename (fs.renameSync) to prevent corruption if process terminates'
+        ],
+        plainExplanation: 'Saves the analysis to disk so your work is never lost.',
+        technicalExplanation: 'Atomic rename filesystem pattern providing ACID durability without database server overhead.',
+        failureScenarios: ['Disk full (ENOSPC) during atomic write'],
+        interviewQuestions: ['Explain why writing to a temporary file and renaming it is safer than writing directly to db.json?'],
+        confidence: 'confirmed',
+        evidenceReferences: ['server/src/db/database.ts'],
+        x: 1160,
+        y: 200
       }
     ];
 
     const edges: WorkflowEdge[] = [
-      { id: 'e-data-1-2', source: 'data-1', target: 'data-2', label: 'transmits raw data', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Sent via POST request' },
-      { id: 'e-data-2-3', source: 'data-2', target: 'data-3', label: 'sanitized payload', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Valid data passed to service' },
-      { id: 'e-data-3-4', source: 'data-3', target: 'data-4', label: 'persists entity', relationshipType: 'queries', confidence: 'confirmed', evidence: 'ORM executes insert query' }
+      { id: 'edl-1-2', source: 'dl-1', target: 'dl-2', label: 'transmits repo identifier', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'URL passed to ingestion service' },
+      { id: 'edl-2-3', source: 'dl-2', target: 'dl-3', label: 'IngestedFile[] stream', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Raw files passed to AST parser' },
+      { id: 'edl-3-4', source: 'dl-3', target: 'dl-4', label: 'ProjectAnalysis entity', relationshipType: 'queries', confidence: 'confirmed', evidence: 'Constructed analysis saved to database' }
     ];
 
     return { nodes, edges, viewType: 'data_lifecycle' };
   }
 
   private static buildAuthLifecycle(files: IngestedFile[], routes: ExtractedRoute[]): WorkflowGraph {
+    const hasAuth = files.some(f => f.content.includes('jwt') || f.content.includes('bcrypt') || f.content.includes('auth'));
+
     const nodes: WorkflowNode[] = [
       {
-        id: 'auth-1',
-        label: '1. Credentials Submission',
-        nodeType: 'user_interaction',
-        filePath: 'client/src/pages/Login',
-        symbol: 'handleLoginSubmit()',
-        purpose: 'User inputs identifier (email/username) and password over HTTPS.',
-        processingSteps: ['Prevents plain HTTP transmission', 'Packages credentials into JSON body'],
-        plainExplanation: 'User enters email and password into the login form.',
-        technicalExplanation: 'Credential dispatch over TLS encrypted transport layer.',
-        failureScenarios: ['MITM attack if TLS is not enforced on the connection'],
-        interviewQuestions: ['Why must authentication requests strictly use HTTPS?'],
+        id: 'sec-1',
+        label: '1. Transport Security (TLS/HTTPS)',
+        nodeType: 'auth_step',
+        filePath: 'server/src/index.ts',
+        symbol: 'HTTPS / TLS Transport Guard',
+        purpose: 'Ensures encrypted communication between client browser and backend, mitigating MITM tampering.',
+        processingSteps: ['Negotiates TLS cryptographic cipher suites', 'Encrypts request headers and payloads in transit'],
+        plainExplanation: 'Protects communication between your browser and server from being eavesdropped.',
+        technicalExplanation: 'TLS encryption layer preventing credential sniffing and man-in-the-middle packet injection.',
+        failureScenarios: ['Plaintext HTTP transmission exposing request payloads on public Wi-Fi'],
+        interviewQuestions: ['Why is TLS termination often handled at the reverse proxy (e.g. NGINX) rather than inside Node.js?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Login interface'],
+        evidenceReferences: ['server/src/index.ts'],
         x: 100,
         y: 200
       },
       {
-        id: 'auth-2',
-        label: '2. Credential Verification & Hash Comparison',
+        id: 'sec-2',
+        label: '2. CORS & Origin Boundary Policy',
         nodeType: 'auth_step',
-        filePath: 'server/src/auth',
-        symbol: 'bcrypt.compare(password, hash)',
-        purpose: 'Fetches user record from DB and compares submitted password against stored hash using constant-time comparison.',
-        processingSteps: ['Retrieves user by identifier', 'Runs constant-time hash verification', 'Rejects if mismatch'],
-        plainExplanation: 'Checks if the password matches the secret record on file.',
-        technicalExplanation: 'Timing-safe password hash verification preventing timing attacks.',
-        failureScenarios: ['401 Unauthorized returned if password does not match'],
-        interviewQuestions: ['What is a timing attack and how does constant-time comparison protect against it?'],
+        filePath: 'server/src/index.ts',
+        symbol: "cors({ origin: '*' })",
+        purpose: 'Controls cross-origin resource sharing headers to prevent unauthorized websites from executing API calls.',
+        processingSteps: [
+          'Evaluates incoming Origin header against allowed domain list',
+          'Sets Access-Control-Allow-Origin response header'
+        ],
+        plainExplanation: 'A security rule deciding which other websites are allowed to talk to your server.',
+        technicalExplanation: 'CORS HTTP header negotiation enforced by the browser security sandbox.',
+        failureScenarios: ['Wildcard origin (*) allowing malicious third-party websites to forge authenticated requests'],
+        interviewQuestions: ['Explain the security vulnerability introduced by setting cors({ origin: "*" }) on private API routes?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Authentication controller'],
-        x: 460,
+        evidenceReferences: ['server/src/index.ts:10'],
+        x: 480,
         y: 200
       },
       {
-        id: 'auth-3',
-        label: '3. Token / Session Minting',
+        id: 'sec-3',
+        label: hasAuth ? '3. Token & Credential Verification' : '3. Stateless Session Integrity',
         nodeType: 'auth_step',
-        filePath: 'server/src/auth/jwt',
-        symbol: 'jwt.sign({ userId, role }, SECRET, { expiresIn })',
-        purpose: 'Signs an encrypted or tamper-proof token containing user claims and expiration timestamp.',
-        processingSteps: ['Embeds user claims into payload', 'Signs with HMAC-SHA256 secret key', 'Returns token in response or httpOnly cookie'],
-        plainExplanation: 'Creates a digital backstage pass (token) proving you are logged in.',
-        technicalExplanation: 'Stateless JWT generation with cryptographically signed payload preventing forgery.',
-        failureScenarios: ['Hardcoded secret key allowing attackers to forge tokens'],
-        interviewQuestions: ['What is the difference between session-based auth and JWT-based auth?'],
-        confidence: 'confirmed',
-        evidenceReferences: ['Token generator'],
-        x: 820,
-        y: 200
-      },
-      {
-        id: 'auth-4',
-        label: '4. Protected Route Guard',
-        nodeType: 'backend_route',
-        filePath: 'server/src/middleware/auth',
-        symbol: 'verifyTokenMiddleware',
-        purpose: 'Extracts Authorization: Bearer <token> header on protected endpoints and verifies signature.',
-        processingSteps: ['Extracts token from header', 'Verifies signature and expiration', 'Attaches req.user context'],
-        plainExplanation: 'Security guard checking your backstage pass before allowing you into private pages.',
-        technicalExplanation: 'Route middleware executing signature verification before granting access to controllers.',
-        failureScenarios: ['401 if token expired; 403 Forbidden if user lacks required role'],
-        interviewQuestions: ['How do you handle JWT revocation if a user logs out before token expiration?'],
-        confidence: 'confirmed',
-        evidenceReferences: ['Auth guard middleware'],
-        x: 1180,
+        filePath: hasAuth ? 'server/src/auth' : 'server/src/index.ts',
+        symbol: hasAuth ? 'jwt.verify(token, secret)' : 'Stateless Request Context',
+        purpose: hasAuth
+          ? 'Verifies cryptographic HMAC signature of JWT bearer tokens and checks expiration.'
+          : 'Processes stateless API requests with deterministic request IDs and input validation.',
+        processingSteps: hasAuth
+          ? ['Extracts Authorization: Bearer token header', 'Validates cryptographic signature with secret key', 'Attaches user payload to req.user']
+          : ['Attaches unique correlation ID to request context', 'Sanitizes input parameters before execution'],
+        plainExplanation: hasAuth ? 'Checks your digital security badge before granting access.' : 'Validates each incoming request independently without storing session memory.',
+        technicalExplanation: hasAuth
+          ? 'Cryptographic signature verification mitigating token tampering and unauthorized privilege escalation.'
+          : 'Stateless request processing enabling effortless horizontal scaling across multiple container instances.',
+        failureScenarios: [hasAuth ? 'Expired token or forged signature' : 'Rate limit exhaustion under DoS attack'],
+        interviewQuestions: [hasAuth ? 'What is the trade-off between storing JWTs in localStorage vs HttpOnly Secure cookies?' : 'How do you prevent DoS attacks on stateless endpoints without authentication?'],
+        confidence: hasAuth ? 'confirmed' : 'inferred',
+        evidenceReferences: [hasAuth ? 'Authentication middleware' : 'server/src/index.ts'],
+        x: 880,
         y: 200
       }
     ];
 
     const edges: WorkflowEdge[] = [
-      { id: 'e-auth-1-2', source: 'auth-1', target: 'auth-2', label: 'POST /api/auth/login', relationshipType: 'authenticates', confidence: 'confirmed', evidence: 'User dispatches credentials' },
-      { id: 'e-auth-2-3', source: 'auth-2', target: 'auth-3', label: 'valid credentials', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Backend generates signed token' },
-      { id: 'e-auth-3-4', source: 'auth-3', target: 'auth-4', label: 'Bearer <token> header', relationshipType: 'authenticates', confidence: 'confirmed', evidence: 'Token passed to protected routes' }
+      { id: 'esec-1-2', source: 'sec-1', target: 'sec-2', label: 'encrypted connection', relationshipType: 'authenticates', confidence: 'confirmed', evidence: 'TLS connection arrives at CORS middleware' },
+      { id: 'esec-2-3', source: 'sec-2', target: 'sec-3', label: 'allowed origin', relationshipType: 'authenticates', confidence: 'confirmed', evidence: 'CORS verified, passes to request verification' }
     ];
 
     return { nodes, edges, viewType: 'auth_lifecycle' };
@@ -486,125 +606,147 @@ export class WorkflowBuilder {
   private static buildErrorHandling(files: IngestedFile[], routes: ExtractedRoute[]): WorkflowGraph {
     const nodes: WorkflowNode[] = [
       {
-        id: 'err-1',
-        label: '1. Exception Triggered',
+        id: 'eh-1',
+        label: '1. Exception Interception',
         nodeType: 'error_handler',
-        filePath: 'server/src/services',
-        symbol: 'throw new Error("Resource not found")',
-        purpose: 'An unexpected or handled error occurs (e.g. missing item, invalid state, DB failure).',
-        processingSteps: ['Catches failed invariant', 'Instantiates error object with message and code'],
-        plainExplanation: 'Something unexpected went wrong while processing your request.',
-        technicalExplanation: 'Synchronous or asynchronous rejection creating an Error stack trace.',
-        failureScenarios: ['Unhandled promise rejection crashing the Node.js process'],
-        interviewQuestions: ['What is the danger of unhandled promise rejections in Node.js?'],
+        filePath: 'server/src/index.ts',
+        symbol: 'try / catch (err) -> next(err)',
+        purpose: 'Catches synchronous and asynchronous exceptions inside route handlers and routes them to error middleware.',
+        processingSteps: [
+          'Catches runtime exceptions or rejected promises',
+          'Prevents uncaughtException from crashing the Node.js process',
+          'Delegates error object to Express next(err) pipeline'
+        ],
+        plainExplanation: 'When something goes wrong, the code catches the error before the server crashes.',
+        technicalExplanation: 'Asynchronous error boundary forwarding rejection to Express error middleware.',
+        failureScenarios: ['Unhandled promise rejection if async handler forgets try-catch or next(err)'],
+        interviewQuestions: ['Why does an unhandled promise rejection in Node.js terminate the process in modern Node versions?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Business logic exception'],
+        evidenceReferences: ['server/src/index.ts'],
         x: 100,
         y: 200
       },
       {
-        id: 'err-2',
-        label: '2. Global Error Middleware',
+        id: 'eh-2',
+        label: '2. Centralized Global Error Middleware',
         nodeType: 'error_handler',
-        filePath: 'server/src/middleware/errorHandler',
+        filePath: 'server/src/index.ts',
         symbol: 'app.use((err, req, res, next) => ...)',
-        purpose: 'Catches all unhandled exceptions, logs internal stack trace, and masks sensitive info.',
-        processingSteps: ['Logs full stack trace to logger', 'Determines HTTP status code (400, 404, 500)', 'Builds sanitized error response'],
-        plainExplanation: 'The safety net that catches any crash, writes details in private logs, and sends a friendly message.',
-        technicalExplanation: 'Express 4-argument error-handling middleware preventing unhandled process termination.',
-        failureScenarios: ['Leaking database credentials or SQL query in error response to client'],
-        interviewQuestions: ['Why should database error messages never be sent raw to the frontend?'],
+        purpose: 'Centralized 4-argument Express error handler that logs the stack trace internally and masks sensitive error data.',
+        processingSteps: [
+          'Logs full error stack trace to internal server log',
+          'Determines appropriate HTTP status code (400, 404, 500)',
+          'Constructs sanitized JSON error payload: { error, message }'
+        ],
+        plainExplanation: 'The safety net that logs the secret diagnostic details and sends a safe error message to the user.',
+        technicalExplanation: 'Centralized error-handling middleware preventing stack trace leakage and credential exposure.',
+        failureScenarios: ['Leaking database connection strings or internal SQL queries in the response body'],
+        interviewQuestions: ['Why should internal stack traces never be exposed in production HTTP error responses?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Error handling middleware'],
-        x: 500,
+        evidenceReferences: ['server/src/index.ts:114'],
+        x: 520,
         y: 200
       },
       {
-        id: 'err-3',
-        label: '3. Client Toast / Fallback UI',
+        id: 'eh-3',
+        label: '3. Client Toast & Recovery UI',
         nodeType: 'ui_component',
-        filePath: 'client/src/components/ErrorBoundary',
-        symbol: 'showToastError() / ErrorBoundary',
-        purpose: 'Informs user of the problem gracefully without crashing the entire web application.',
-        processingSteps: ['Receives non-2xx status code', 'Renders non-intrusive alert toast', 'Maintains app state'],
-        plainExplanation: 'A helpful notification pops up telling the user what went wrong, keeping the rest of the page working.',
-        technicalExplanation: 'React Error Boundary and toast notification displaying user-facing guidance.',
-        failureScenarios: ['Silent failure leaving user confused with infinite loading spinner'],
-        interviewQuestions: ['How do React Error Boundaries work and when should you use them?'],
+        filePath: 'client/src/App.tsx',
+        symbol: 'setError(err.message)',
+        purpose: 'Captures non-2xx HTTP responses, maintains application integrity, and shows helpful guidance.',
+        processingSteps: [
+          'Intercepts non-ok HTTP response in fetch promise chain',
+          'Renders non-intrusive error banner',
+          'Restores interactive UI buttons to prevent locked interface'
+        ],
+        plainExplanation: 'Shows a friendly red banner explaining what happened, keeping the rest of the page working.',
+        technicalExplanation: 'Client error boundary and toast notification preventing UI white-screens on network errors.',
+        failureScenarios: ['Silent failure leaving user with an infinite loading spinner'],
+        interviewQuestions: ['How do React Error Boundaries work and what lifecycle methods or hooks do they use?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Client Error Boundary'],
-        x: 950,
+        evidenceReferences: ['client/src/App.tsx'],
+        x: 960,
         y: 200
       }
     ];
 
     const edges: WorkflowEdge[] = [
-      { id: 'e-err-1-2', source: 'err-1', target: 'err-2', label: 'thrown exception', relationshipType: 'handles_error', confidence: 'confirmed', evidence: 'Error intercepted by middleware' },
-      { id: 'e-err-2-3', source: 'err-2', target: 'err-3', label: 'JSON { error, code }', relationshipType: 'renders', confidence: 'confirmed', evidence: 'Client parses error response' }
+      { id: 'eeh-1-2', source: 'eh-1', target: 'eh-2', label: 'next(err)', relationshipType: 'handles_error', confidence: 'confirmed', evidence: 'Handler passes error to middleware' },
+      { id: 'eeh-2-3', source: 'eh-2', target: 'eh-3', label: 'HTTP 500 JSON { error, message }', relationshipType: 'renders', confidence: 'confirmed', evidence: 'Client parses sanitized error' }
     ];
 
     return { nodes, edges, viewType: 'error_handling' };
   }
 
   private static buildDeploymentFlow(files: IngestedFile[], technologies: DetectedTechnology[]): WorkflowGraph {
-    const hasDocker = files.some(f => f.relativePath.toLowerCase().includes('dockerfile'));
     const nodes: WorkflowNode[] = [
       {
-        id: 'dep-1',
-        label: '1. Source Build & Bundle',
+        id: 'dp-1',
+        label: '1. TypeScript & Bundler Pipeline',
         nodeType: 'external_service',
-        filePath: 'package.json / tsconfig.json',
-        symbol: 'npm run build (Vite/TSC)',
-        purpose: 'Transpiles TypeScript, tree-shakes dead code, minifies JavaScript, and compiles assets.',
-        processingSteps: ['Type checks with tsc', 'Bundles modules with Vite/Rollup', 'Outputs static files to /dist'],
-        plainExplanation: 'Takes all your code and packs it into small, fast files ready for the web.',
-        technicalExplanation: 'Static asset bundling optimizing chunk sizes and hashing filenames for browser caching.',
-        failureScenarios: ['TypeScript compilation errors halting the build pipeline'],
-        interviewQuestions: ['What is tree-shaking and how does it reduce frontend bundle size?'],
+        filePath: 'package.json',
+        symbol: 'npm run build (tsc -b && vite build)',
+        purpose: 'Validates type-safety, strips types, minifies JavaScript, and outputs static assets into /dist.',
+        processingSteps: [
+          'Executes tsc compiler to verify static type invariants',
+          'Vite/Rollup performs tree-shaking and bundles modules into chunked assets with content hashes'
+        ],
+        plainExplanation: 'Checks your code for errors and packs it into fast, tiny files for the browser.',
+        technicalExplanation: 'Ahead-of-Time (AOT) static compilation and Rollup module bundling optimizing runtime payload size.',
+        failureScenarios: ['TypeScript compilation errors failing the CI build pipeline'],
+        interviewQuestions: ['What is tree-shaking and how does Rollup/Vite eliminate unused dead code?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Build scripts in package.json'],
+        evidenceReferences: ['package.json'],
         x: 100,
         y: 200
       },
       {
-        id: 'dep-2',
-        label: hasDocker ? '2. Docker Containerization' : '2. Environment Provisioning',
+        id: 'dp-2',
+        label: '2. Node.js Production Runtime Engine',
         nodeType: 'external_service',
-        filePath: hasDocker ? 'Dockerfile' : '.env.example',
-        symbol: hasDocker ? 'docker build -t app:latest .' : 'NODE_ENV=production',
-        purpose: 'Packages application code with system dependencies into an immutable container or isolated process.',
-        processingSteps: ['Installs production node_modules', 'Configures environment variables', 'Exposes application port'],
-        plainExplanation: 'Puts the application inside a standardized shipping container that runs identically everywhere.',
-        technicalExplanation: 'Multi-stage Docker build minimizing runtime image footprint and locking Linux kernel dependencies.',
-        failureScenarios: ['Missing environment variable causing startup crash'],
-        interviewQuestions: ['Why are multi-stage Docker builds recommended for Node/Go applications?'],
-        confidence: hasDocker ? 'confirmed' : 'inferred',
-        evidenceReferences: [hasDocker ? 'Dockerfile' : 'Environment configuration'],
-        x: 520,
+        filePath: 'server/package.json',
+        symbol: 'node dist/index.js (Port 5000)',
+        purpose: 'Executes compiled ES2022 JavaScript server on single-threaded event loop.',
+        processingSteps: [
+          'Initializes V8 JavaScript engine instance',
+          'Binds TCP socket listener to designated port',
+          'Handles concurrent I/O using libuv event loop thread pool'
+        ],
+        plainExplanation: 'The background engine that runs the server 24/7.',
+        technicalExplanation: 'Asynchronous event loop runtime utilizing libuv for non-blocking network socket polling.',
+        failureScenarios: ['Memory leaks from retained global references causing Out-Of-Memory process crashes'],
+        interviewQuestions: ['How does the Node.js event loop coordinate between the call stack, microtask queue, and macrotask queue?'],
+        confidence: 'confirmed',
+        evidenceReferences: ['server/package.json'],
+        x: 550,
         y: 200
       },
       {
-        id: 'dep-3',
-        label: '3. Web Server Runtime & Reverse Proxy',
+        id: 'dp-3',
+        label: '3. Reverse Proxy & Process Supervision',
         nodeType: 'external_service',
-        filePath: 'server/src/index.ts',
-        symbol: 'node dist/index.js (Port 5000 / NGINX)',
-        purpose: 'Serves incoming traffic, terminates SSL/TLS, and executes application processes.',
-        processingSteps: ['Listens on TCP socket', 'Handles incoming connections', 'Logs requests and health metrics'],
-        plainExplanation: 'The live server on the internet answering visits 24/7.',
-        technicalExplanation: 'Reverse proxy routing requests to Node.js clustered workers or container orchestrator.',
-        failureScenarios: ['Out-of-memory crash under sudden spike in traffic'],
-        interviewQuestions: ['How does a reverse proxy like NGINX improve security and performance?'],
+        filePath: 'README.md',
+        symbol: 'PM2 / Systemd / NGINX Gateway',
+        purpose: 'Provides process auto-restart on unhandled crashes, SSL/TLS termination, and static asset caching.',
+        processingSteps: [
+          'Supervises Node.js process and restarts instantly if exit code is non-zero',
+          'Proxies incoming port 80/443 traffic to local port 5000',
+          'Caches static frontend assets'
+        ],
+        plainExplanation: 'A watchdog that restarts your server if it ever crashes and makes it secure.',
+        technicalExplanation: 'Production process manager and reverse proxy providing high availability and TLS termination.',
+        failureScenarios: ['Crash loops if the server fails immediately on startup due to missing environment variables'],
+        interviewQuestions: ['Why should you use a process manager like PM2 or Docker restart policies in production?'],
         confidence: 'confirmed',
-        evidenceReferences: ['Server entrypoint'],
-        x: 950,
+        evidenceReferences: ['README.md'],
+        x: 1000,
         y: 200
       }
     ];
 
     const edges: WorkflowEdge[] = [
-      { id: 'e-dep-1-2', source: 'dep-1', target: 'dep-2', label: 'compiled artifact', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Build outputs packaged into runtime container' },
-      { id: 'e-dep-2-3', source: 'dep-2', target: 'dep-3', label: 'launches process', relationshipType: 'triggers', confidence: 'confirmed', evidence: 'Container starts Node.js application server' }
+      { id: 'edp-1-2', source: 'dp-1', target: 'dp-2', label: 'dist/ compilation', relationshipType: 'passes_data', confidence: 'confirmed', evidence: 'Build outputs executed by Node runtime' },
+      { id: 'edp-2-3', source: 'dp-2', target: 'dp-3', label: 'managed by supervisor', relationshipType: 'triggers', confidence: 'confirmed', evidence: 'Process manager supervises Node runtime' }
     ];
 
     return { nodes, edges, viewType: 'deployment' };

@@ -12,10 +12,12 @@ import {
   Send,
   Loader2,
   FileText,
-  UserCheck
+  UserCheck,
+  ShieldCheck,
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import { Project, InterviewQuestion, QuestionCategory, MockEvaluationResult } from '../types';
-import { SketchBox } from '../components/SketchBox';
 import { api } from '../services/api';
 
 interface InterviewStudioViewProps {
@@ -75,45 +77,51 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
   };
 
   return (
-    <div className="container-paper py-4 space-y-6">
+    <div className="container-executive py-6 space-y-6 text-slate-100">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b-2 border-[#2b2f33]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold font-mono text-[#1f2421]">
-              Interview Preparation Studio & Mock Viva
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl font-bold font-mono text-white tracking-tight">
+              Predicted Viva Defense Studio & Simulator
             </h1>
-            <span className="sketch-badge sketch-badge-purple text-xs">
-              Candidate Defense Lab
+            <span className="badge-cyan text-xs font-mono font-bold">
+              High-Stakes Defense
             </span>
           </div>
-          <p className="text-xs text-[#5c6770] mt-0.5">
-            Master the art of explaining your code confidently, defending architectural decisions, and acing mock viva questions.
+          <p className="text-xs text-slate-400 mt-1 font-sans">
+            Prepare for senior examiner technical interrogations with predicted architectural questions, elevator pitches, and live mock scoring.
           </p>
         </div>
 
         {/* View Mode Tabs */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
           <button
             onClick={() => setActiveTab('pitches')}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'pitches' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+              activeTab === 'pitches'
+                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.4)] font-bold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
             }`}
           >
             ⏱️ Elevator Pitches
           </button>
           <button
             onClick={() => setActiveTab('questions')}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'questions' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+              activeTab === 'questions'
+                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.4)] font-bold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
             }`}
           >
-            ❓ Viva Questions Bank
+            ❓ Predicted Viva Bank
           </button>
           <button
             onClick={() => setActiveTab('mock')}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'mock' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+              activeTab === 'mock'
+                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.4)] font-bold'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
             }`}
           >
             🎯 Mock Viva Simulator
@@ -121,109 +129,89 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
         </div>
       </div>
 
-      {/* Tab 1: Elevator Pitches & Introductions */}
+      {/* Tab 1: Elevator Pitches */}
       {activeTab === 'pitches' && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* Pitch Length Selector */}
           <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => setSelectedPitch('30s')}
-              className={`sketch-btn sketch-btn-sm ${
-                selectedPitch === '30s' ? 'sketch-btn-primary' : 'sketch-btn-outline'
-              }`}
-            >
-              30-Second Quick Pitch
-            </button>
-            <button
-              onClick={() => setSelectedPitch('2m')}
-              className={`sketch-btn sketch-btn-sm ${
-                selectedPitch === '2m' ? 'sketch-btn-primary' : 'sketch-btn-outline'
-              }`}
-            >
-              2-Minute Interview Overview
-            </button>
-            <button
-              onClick={() => setSelectedPitch('5m')}
-              className={`sketch-btn sketch-btn-sm ${
-                selectedPitch === '5m' ? 'sketch-btn-primary' : 'sketch-btn-outline'
-              }`}
-            >
-              5-Minute Technical Deep-Dive
-            </button>
-            <button
-              onClick={() => setSelectedPitch('resume')}
-              className={`sketch-btn sketch-btn-sm ${
-                selectedPitch === 'resume' ? 'sketch-btn-primary' : 'sketch-btn-outline'
-              }`}
-            >
-              Resume Bullet Points
-            </button>
-            <button
-              onClick={() => setSelectedPitch('arch')}
-              className={`sketch-btn sketch-btn-sm ${
-                selectedPitch === 'arch' ? 'sketch-btn-primary' : 'sketch-btn-outline'
-              }`}
-            >
-              Architecture Defense Pitch
-            </button>
+            {[
+              { id: '30s', label: '30-Second Quick Pitch' },
+              { id: '2m', label: '2-Minute Interview Overview' },
+              { id: '5m', label: '5-Minute Technical Deep-Dive' },
+              { id: 'resume', label: 'Resume Bullet Points' },
+              { id: 'arch', label: 'Architecture Defense Pitch' }
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setSelectedPitch(item.id as any)}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                  selectedPitch === item.id
+                    ? 'bg-indigo-600 text-white border border-indigo-400/50 shadow-[0_0_12px_rgba(99,102,241,0.4)] font-bold'
+                    : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
           {/* Pitch Content Display Box */}
-          <SketchBox className="p-6 sm:p-8 bg-white space-y-4">
-            <div className="flex items-center justify-between border-b border-[#e9ecef] pb-3">
-              <span className="font-mono text-xs font-bold text-[#1d4ed8] uppercase tracking-wider">
-                {selectedPitch === '30s' && '⏱️ 30-Second Elevator Pitch (For HR / Recruiter Intro)'}
-                {selectedPitch === '2m' && '⏱️ 2-Minute Interview Overview (For Technical Round 1)'}
-                {selectedPitch === '5m' && '⏱️ 5-Minute Technical Deep-Dive (For Senior Architect Review)'}
-                {selectedPitch === 'resume' && '📝 Resume Action Bullet Points (Quantified Achievements)'}
-                {selectedPitch === 'arch' && '🏛️ Architecture Explanation (Decoupling & Data Flow)'}
+          <div className="glass-card p-6 sm:p-8 rounded-xl border border-slate-800/80 space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <span className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                <Sparkles size={14} />
+                {selectedPitch === '30s' && '30-Second Elevator Pitch (For HR / Technical Recruiter)'}
+                {selectedPitch === '2m' && '2-Minute Comprehensive Overview (For Technical Round 1)'}
+                {selectedPitch === '5m' && '5-Minute Architectural Deep-Dive (For Senior Architect / Examiner)'}
+                {selectedPitch === 'resume' && 'Resume Action Bullets (Quantified Engineering Accomplishments)'}
+                {selectedPitch === 'arch' && 'System Architecture Defense (Decoupled Layers & Data Flow)'}
               </span>
-              <span className="hand-annotation text-xs text-[#854d0e]">
-                grounded in {project.name}
+              <span className="badge-blue text-[11px] font-mono">
+                {project.name}
               </span>
             </div>
 
-            <div className="sketch-box-subtle p-5 bg-[#fdfcf9] border-l-4 border-l-[#1d4ed8]">
+            <div className="glass-card p-5 rounded-lg border-l-4 border-l-cyan-400 bg-slate-900/50">
               {selectedPitch === '30s' && (
-                <p className="text-base font-mono text-[#1f2421] leading-relaxed italic">
-                  {pitches?.thirtySecondPitch}
+                <p className="text-base font-mono text-slate-100 leading-relaxed italic">
+                  "{pitches?.thirtySecondPitch}"
                 </p>
               )}
 
               {selectedPitch === '2m' && (
-                <p className="text-sm text-[#2b2f33] leading-relaxed whitespace-pre-line font-sans">
+                <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-line font-sans">
                   {pitches?.twoMinutePitch}
                 </p>
               )}
 
               {selectedPitch === '5m' && (
-                <div className="text-sm text-[#2b2f33] leading-relaxed whitespace-pre-line font-sans">
+                <div className="text-sm text-slate-200 leading-relaxed whitespace-pre-line font-sans">
                   {pitches?.fiveMinuteDeepDive}
                 </div>
               )}
 
               {selectedPitch === 'resume' && (
-                <ul className="space-y-2.5 text-xs text-[#2b2f33] font-mono">
+                <ul className="space-y-3 text-xs text-slate-200 font-mono">
                   {pitches?.resumeBulletPoints.map((bp, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-[#1d4ed8] font-bold">▶</span>
-                      <span>{bp}</span>
+                    <li key={i} className="flex items-start gap-2.5">
+                      <span className="text-cyan-400 font-bold">▶</span>
+                      <span className="leading-relaxed">{bp}</span>
                     </li>
                   ))}
                 </ul>
               )}
 
               {selectedPitch === 'arch' && (
-                <p className="text-sm text-[#2b2f33] leading-relaxed font-sans">
+                <p className="text-sm text-slate-200 leading-relaxed font-sans">
                   {pitches?.architectureExplanation}
                 </p>
               )}
             </div>
 
-            <div className="p-3 bg-[#f8f9fa] border border-[#2b2f33] rounded text-xs font-mono text-[#5c6770] flex items-center justify-between">
-              <span>💡 Tip: Speak clearly, avoid robotic memorization, and relate claims to your actual file structure.</span>
+            <div className="p-3 bg-slate-900/80 border border-slate-800 rounded-lg text-xs font-mono text-slate-400 flex items-center justify-between">
+              <span>💡 Examiner Tip: Speak deliberately, avoid memorized jargon, and refer to your actual file structure for validation.</span>
             </div>
-          </SketchBox>
+          </div>
         </div>
       )}
 
@@ -234,22 +222,22 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-mono">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-all ${
                 selectedCategory === 'all'
-                  ? 'bg-[#2b2f33] text-white font-bold'
-                  : 'bg-white border border-[#2b2f33] text-[#444]'
+                  ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold shadow-[0_0_12px_rgba(99,102,241,0.4)]'
+                  : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
               }`}
             >
-              All Categories ({questions.length})
+              All Questions ({questions.length})
             </button>
             {(Object.keys(CATEGORY_LABELS) as QuestionCategory[]).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1 rounded whitespace-nowrap ${
+                className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-all ${
                   selectedCategory === cat
-                    ? 'bg-[#2b2f33] text-white font-bold'
-                    : 'bg-white border border-[#2b2f33] text-[#444]'
+                    ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold shadow-[0_0_12px_rgba(99,102,241,0.4)]'
+                    : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
                 }`}
               >
                 {CATEGORY_LABELS[cat]}
@@ -262,93 +250,97 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
             {filteredQuestions.map((q, idx) => {
               const isExpanded = expandedQuestionId === q.id;
               return (
-                <SketchBox key={q.id} className="p-4 sm:p-5 bg-white transition-all">
+                <div key={q.id} className="glass-card p-5 rounded-xl border border-slate-800/80 transition-all hover:border-slate-700">
                   <div
                     onClick={() => setExpandedQuestionId(isExpanded ? null : q.id)}
                     className="flex items-start justify-between gap-3 cursor-pointer select-none"
                   >
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono uppercase font-bold text-[#1d4ed8]">
+                        <span className="text-[10px] font-mono uppercase font-bold text-cyan-400">
                           {CATEGORY_LABELS[q.category]}
                         </span>
-                        <span className="sketch-badge text-[9px] uppercase font-mono">
+                        <span className="badge-purple text-[9px] uppercase font-mono font-bold">
                           {q.difficulty}
                         </span>
                       </div>
-                      <h3 className="text-sm sm:text-base font-bold font-mono text-[#1f2421]">
+                      <h3 className="text-sm sm:text-base font-bold font-mono text-white leading-snug">
                         {q.question}
                       </h3>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-2.5 shrink-0">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           handleStartMockForQuestion(q);
                         }}
-                        className="sketch-btn sketch-btn-sm text-xs bg-[#eff6ff] text-[#1d4ed8] border-[#1d4ed8]"
+                        className="btn-secondary text-xs py-1 px-3 flex items-center gap-1.5"
                       >
-                        <Mic size={12} />
+                        <Mic size={13} className="text-cyan-400" />
                         <span>Rehearse</span>
                       </button>
                       <ChevronDown
-                        size={16}
-                        className={`text-[#666] transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                        size={18}
+                        className={`text-slate-400 transition-transform ${isExpanded ? 'rotate-180 text-cyan-400' : ''}`}
                       />
                     </div>
                   </div>
 
                   {/* Expanded Answer Structure */}
                   {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-[#e9ecef] space-y-3.5 text-xs">
+                    <div className="mt-4 pt-4 border-t border-slate-800 space-y-3.5 text-xs">
                       {/* Direct Answer */}
-                      <div className="sketch-box-subtle p-3 bg-[#fdfcf9]">
-                        <span className="font-mono font-bold text-[#15803d] uppercase text-[10px] block mb-1">
-                          1. Direct Viva Answer:
+                      <div className="glass-card p-3.5 rounded-lg border-l-4 border-l-emerald-400 bg-emerald-950/10">
+                        <span className="font-mono font-bold text-emerald-400 uppercase text-[10px] block mb-1">
+                          1. Concise Viva Direct Answer:
                         </span>
-                        <p className="text-sm font-semibold text-[#1f2421]">{q.directAnswer}</p>
+                        <p className="text-sm font-semibold text-slate-100 leading-relaxed">{q.directAnswer}</p>
                       </div>
 
                       {/* Technical Explanation */}
-                      <div className="p-3 bg-white border border-[#2b2f33] rounded">
-                        <span className="font-mono font-bold text-[#1d4ed8] uppercase text-[10px] block mb-1">
-                          2. Technical Explanation & Mechanisms:
+                      <div className="glass-card p-3.5 rounded-lg border border-slate-800">
+                        <span className="font-mono font-bold text-cyan-400 uppercase text-[10px] block mb-1">
+                          2. Technical Explanation & Mechanics:
                         </span>
-                        <p className="text-xs text-[#343a40] leading-relaxed">{q.technicalExplanation}</p>
+                        <p className="text-xs text-slate-300 leading-relaxed font-sans">{q.technicalExplanation}</p>
                       </div>
 
                       {/* Repository Evidence & Practical Example */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="sketch-sticky p-2.5">
-                          <span className="font-mono font-bold text-[#854d0e] uppercase text-[10px] block mb-1">
+                        <div className="glass-card p-3 rounded-lg border border-amber-500/30">
+                          <span className="font-mono font-bold text-amber-400 uppercase text-[10px] block mb-1">
                             3. Grounded Repo Evidence:
                           </span>
-                          <p className="text-xs text-[#713f12] font-mono">{q.repositoryEvidence}</p>
+                          <p className="text-xs text-amber-200/90 font-mono">{q.repositoryEvidence}</p>
                         </div>
 
-                        <div className="sketch-box-subtle p-2.5 bg-white">
-                          <span className="font-mono font-bold text-[#4b5563] uppercase text-[10px] block mb-1">
+                        <div className="glass-card p-3 rounded-lg border border-indigo-500/30">
+                          <span className="font-mono font-bold text-indigo-400 uppercase text-[10px] block mb-1">
                             4. Practical Example:
                           </span>
-                          <p className="text-xs text-[#4b5563]">{q.practicalExample}</p>
+                          <p className="text-xs text-slate-300 font-sans">{q.practicalExample}</p>
                         </div>
                       </div>
 
                       {/* Trade-Offs & Likely Follow-up */}
-                      <div className="p-3 bg-[#f8f9fa] border-l-2 border-[#b45309] rounded-r text-xs">
-                        <span className="font-mono font-bold text-[#b45309] block mb-0.5">
-                          Architectural Trade-Off:
-                        </span>
-                        <p className="text-[#495057] mb-2">{q.tradeOffs}</p>
-                        <span className="font-mono font-bold text-[#1f2421] block mb-0.5">
-                          Likely Examiner Follow-Up:
-                        </span>
-                        <p className="text-[#1d4ed8] font-mono italic">"{q.followUpQuestion}"</p>
+                      <div className="glass-card p-3.5 rounded-lg border-l-2 border-rose-500 bg-slate-900/60 text-xs space-y-2">
+                        <div>
+                          <span className="font-mono font-bold text-rose-400 block mb-0.5">
+                            Architectural Trade-Off:
+                          </span>
+                          <p className="text-slate-300 font-sans">{q.tradeOffs}</p>
+                        </div>
+                        <div className="pt-2 border-t border-slate-800">
+                          <span className="font-mono font-bold text-amber-400 block mb-0.5">
+                            Examiner Trap Follow-Up Question:
+                          </span>
+                          <p className="text-cyan-300 font-mono italic">"{q.followUpQuestion}"</p>
+                        </div>
                       </div>
                     </div>
                   )}
-                </SketchBox>
+                </div>
               );
             })}
           </div>
@@ -358,70 +350,69 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
       {/* Tab 3: Interactive Mock Viva Simulator */}
       {activeTab === 'mock' && (
         <div className="space-y-6">
-          {/* Question Selector if none selected */}
           {!activeMockQuestion ? (
-            <SketchBox className="p-8 text-center bg-white max-w-lg mx-auto">
-              <Mic size={40} className="mx-auto text-[#1d4ed8] mb-3" />
-              <h3 className="text-base font-bold font-mono text-[#1f2421] mb-1">
-                Select A Question To Rehearse
+            <div className="glass-card p-8 text-center max-w-lg mx-auto rounded-xl border border-slate-800 space-y-3">
+              <Mic size={40} className="mx-auto text-cyan-400 mb-2" />
+              <h3 className="text-base font-bold font-mono text-white">
+                Select A Viva Question To Rehearse
               </h3>
-              <p className="text-xs text-[#5c6770] mb-4">
+              <p className="text-xs text-slate-400">
                 Choose any question from your project bank to simulate answering an external examiner.
               </p>
               <button
                 onClick={() => handleStartMockForQuestion(questions[0])}
-                className="sketch-btn sketch-btn-primary"
+                className="btn-primary text-xs"
               >
                 Start With Question #1
               </button>
-            </SketchBox>
+            </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               {/* Question & Answer Area */}
               <div className="lg:col-span-7 space-y-4">
-                <SketchBox className="p-5 bg-white space-y-3">
+                <div className="glass-card p-5 rounded-xl border border-slate-800 space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="sketch-badge sketch-badge-purple text-xs">
-                      Mock Viva Question
+                    <span className="badge-purple text-xs font-mono">
+                      Mock Viva Prompt
                     </span>
                     <button
                       onClick={() => setActiveTab('questions')}
-                      className="text-xs font-mono text-[#1d4ed8] underline"
+                      className="text-xs font-mono text-cyan-400 hover:underline"
                     >
                       Change Question
                     </button>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold font-mono text-[#1f2421]">
+                  <h3 className="text-base sm:text-lg font-bold font-mono text-white">
                     {activeMockQuestion.question}
                   </h3>
-                  <p className="text-xs text-[#5c6770]">
-                    Type your answer below as you would speak it in a viva interview. Mention specific mechanisms, files, and architectural reasons.
+                  <p className="text-xs text-slate-400 font-sans">
+                    Type your answer below as you would speak it in a technical viva. Mention specific files, design trade-offs, and error cases.
                   </p>
-                </SketchBox>
+                </div>
 
                 {/* Candidate Notebook Answer Area */}
-                <SketchBox className="p-4 bg-[#ffffff] space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono text-[#5c6770]">
-                    <span>Your Answer (Spoken or Written Defense):</span>
+                <div className="glass-card p-5 rounded-xl border border-slate-800 space-y-3">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+                    <span>Your Defense Answer:</span>
                     <span>{userAnswer.length} characters</span>
                   </div>
 
                   <textarea
                     rows={8}
-                    placeholder="In my project, this component is responsible for... When a user dispatches a request, the router intercepts the call and..."
+                    placeholder="In my project, this component is structured around... When a request arrives, the router intercepts it and... We handle failures by..."
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
-                    className="sketch-input font-sans text-sm p-3.5 leading-relaxed resize-y"
+                    className="input-executive w-full font-sans text-sm p-4 leading-relaxed resize-y bg-slate-900 border border-slate-700 text-slate-100 rounded-lg"
                   />
 
                   <div className="flex items-center justify-between pt-2">
-                    <span className="text-[11px] font-mono text-[#888]">
-                      Rubric checks for: direct answer, technical depth, and failure modes.
+                    <span className="text-[11px] font-mono text-slate-500">
+                      Evaluated on: directness, technical depth, and error resilience.
                     </span>
                     <button
                       onClick={handleEvaluateAnswer}
                       disabled={isEvaluating || !userAnswer.trim()}
-                      className="sketch-btn sketch-btn-primary text-xs"
+                      className="btn-primary text-xs flex items-center gap-1.5"
                     >
                       {isEvaluating ? (
                         <>
@@ -431,55 +422,55 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
                       ) : (
                         <>
                           <Send size={14} />
-                          <span>Submit & Score Answer</span>
+                          <span>Submit & Score Defense</span>
                         </>
                       )}
                     </button>
                   </div>
-                </SketchBox>
+                </div>
               </div>
 
               {/* Real-Time Evaluation Result */}
               <div className="lg:col-span-5">
                 {evaluation ? (
-                  <SketchBox className="p-5 bg-white space-y-4 sticky top-20">
-                    <div className="flex items-center justify-between border-b border-[#e9ecef] pb-3">
+                  <div className="glass-card p-5 rounded-xl border border-slate-800 space-y-4 sticky top-20">
+                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                       <div>
-                        <span className="text-[10px] font-mono uppercase text-[#6c757d] block">
+                        <span className="text-[10px] font-mono uppercase text-slate-400 block">
                           Examiner Score
                         </span>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-3xl font-extrabold font-mono text-[#1f2421]">
+                          <span className="text-3xl font-extrabold font-mono text-white">
                             {evaluation.score}
                           </span>
-                          <span className="text-sm font-mono text-[#888]">/ 100</span>
+                          <span className="text-sm font-mono text-slate-400">/ 100</span>
                           <span
-                            className={`sketch-badge text-xs uppercase ${
+                            className={`text-xs uppercase font-mono font-bold px-2 py-0.5 rounded-full ${
                               evaluation.verdict === 'Excellent'
-                                ? 'sketch-badge-green'
+                                ? 'badge-green'
                                 : evaluation.verdict === 'Good'
-                                ? 'sketch-badge-blue'
-                                : 'sketch-badge-amber'
+                                ? 'badge-blue'
+                                : 'badge-amber'
                             }`}
                           >
                             {evaluation.verdict}
                           </span>
                         </div>
                       </div>
-                      <Award size={32} className="text-[#b45309]" />
+                      <Award size={36} className="text-amber-400" />
                     </div>
 
-                    <div className="text-xs text-[#2b2f33] leading-relaxed">
+                    <div className="text-xs text-slate-300 leading-relaxed font-sans">
                       {evaluation.feedback}
                     </div>
 
                     {/* Well Explained Points */}
-                    <div className="sketch-box-subtle p-3 bg-[#f0fdf4] border-[#86efac]">
-                      <span className="text-[11px] font-mono font-bold text-[#15803d] block mb-1 flex items-center gap-1">
+                    <div className="glass-card p-3.5 rounded-lg border border-emerald-500/40 bg-emerald-950/20 space-y-1">
+                      <span className="text-[11px] font-mono font-bold text-emerald-400 block flex items-center gap-1.5">
                         <CheckCircle2 size={13} />
                         What You Explained Well:
                       </span>
-                      <ul className="text-xs text-[#14532d] space-y-1">
+                      <ul className="text-xs text-emerald-200/90 space-y-1">
                         {evaluation.wellExplainedPoints.map((p, i) => (
                           <li key={i}>• {p}</li>
                         ))}
@@ -487,12 +478,12 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
                     </div>
 
                     {/* Missing Points */}
-                    <div className="sketch-box-subtle p-3 bg-[#fffbeb] border-[#fde68a]">
-                      <span className="text-[11px] font-mono font-bold text-[#b45309] block mb-1 flex items-center gap-1">
+                    <div className="glass-card p-3.5 rounded-lg border border-amber-500/40 bg-amber-950/20 space-y-1">
+                      <span className="text-[11px] font-mono font-bold text-amber-400 block flex items-center gap-1.5">
                         <AlertCircle size={13} />
                         What You Should Add To Improve:
                       </span>
-                      <ul className="text-xs text-[#78350f] space-y-1">
+                      <ul className="text-xs text-amber-200/90 space-y-1">
                         {evaluation.missingPoints.map((p, i) => (
                           <li key={i}>• {p}</li>
                         ))}
@@ -500,25 +491,25 @@ export const InterviewStudioView: React.FC<InterviewStudioViewProps> = ({ projec
                     </div>
 
                     {/* Suggested Viva Follow-Up */}
-                    <div className="p-3 bg-[#f8f9fa] border-l-2 border-[#1d4ed8] rounded text-xs">
-                      <span className="font-mono font-bold text-[#1d4ed8] block mb-0.5">
-                        Follow-Up Examiner Question:
+                    <div className="glass-card p-3 rounded-lg border-l-2 border-cyan-400 bg-slate-900/60 text-xs">
+                      <span className="font-mono font-bold text-cyan-400 block mb-0.5">
+                        Follow-Up Examiner Challenge:
                       </span>
-                      <p className="text-[#333] font-mono text-[11px] italic">
+                      <p className="text-slate-200 font-mono text-[11px] italic">
                         "{evaluation.suggestedFollowUp}"
                       </p>
                     </div>
-                  </SketchBox>
+                  </div>
                 ) : (
-                  <SketchBox className="p-6 bg-white text-center text-xs text-[#666] space-y-2">
-                    <UserCheck size={32} className="mx-auto text-[#888]" />
-                    <p className="font-mono font-bold text-sm text-[#333]">
-                      Awaiting Your Response
+                  <div className="glass-card p-8 rounded-xl border border-slate-800 text-center text-xs text-slate-400 space-y-2.5">
+                    <UserCheck size={36} className="mx-auto text-slate-500" />
+                    <p className="font-mono font-bold text-sm text-slate-200">
+                      Awaiting Candidate Response
                     </p>
-                    <p>
-                      Type your answer on the left and click "Submit & Score Answer" to receive instant rubric scoring and follow-up viva questions.
+                    <p className="font-sans">
+                      Type your defense answer on the left and submit to receive instant automated viva rubric scoring and follow-up examiner challenges.
                     </p>
-                  </SketchBox>
+                  </div>
                 )}
               </div>
             </div>

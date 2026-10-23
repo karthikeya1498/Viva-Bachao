@@ -10,18 +10,15 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// Seed initial default projects if database is empty
+// Seed or refresh default projects with latest dynamic engine
 async function seedDefaultProjects() {
-  const projects = db.getAllProjects();
-  if (projects.length === 0) {
-    console.log('Seeding initial demo projects for Viva-Bachao...');
-    try {
-      await AnalysisEngine.analyzeRepository('https://github.com/karthikeya1498/Viva-Bachao');
-      await AnalysisEngine.analyzeRepository('https://github.com/student-dev/TaskForge-Kanban');
-      console.log('Demo projects seeded successfully.');
-    } catch (err) {
-      console.warn('Seeding failed:', err);
-    }
+  console.log('Synchronizing projects with latest dynamic AST engine...');
+  try {
+    await AnalysisEngine.analyzeRepository('https://github.com/karthikeya1498/Viva-Bachao');
+    await AnalysisEngine.analyzeRepository('https://github.com/student-dev/TaskForge-Kanban');
+    console.log('Projects synchronized with real dynamic workflows and deep viva predictions.');
+  } catch (err) {
+    console.warn('Seeding failed:', err);
   }
 }
 

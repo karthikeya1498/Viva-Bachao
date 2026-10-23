@@ -32,43 +32,43 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenReportModal
 }) => {
   return (
-    <header className="sticky top-0 z-40 bg-[#fbfaf6] border-b-2 border-[#2b2f33] shadow-[0_2px_0_rgba(43,47,51,0.15)]">
+    <header className="sticky top-0 z-50 bg-[#070a12]/95 backdrop-blur-xl border-b border-slate-800 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.7)]">
       <div className="max-w-[1440px] mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
         {/* Brand Logo & Tagline */}
         <div className="flex items-center gap-3">
           <div
             onClick={() => setActiveTab('dashboard')}
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-9 h-9 border-2 border-[#222] rounded-[15px_225px_15px_255px/255px_15px_225px_15px] bg-[#fff] flex items-center justify-center shadow-[1px_2px_0_#222] group-hover:rotate-3 transition-transform">
-              <span className="font-mono font-bold text-lg text-[#222]">V</span>
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-[#6366f1] to-[#06b6d4] flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:scale-105 transition-transform">
+              <span className="font-mono font-extrabold text-base text-white">V</span>
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-lg tracking-tight font-mono text-[#1f2421]">
+              <div className="flex items-center gap-2">
+                <span className="font-extrabold text-base tracking-tight font-mono text-white">
                   Viva-Bachao
                 </span>
-                <span className="text-[10px] font-mono uppercase bg-[#fef08a] border border-[#854d0e] px-1.5 py-0.2 rounded text-[#854d0e] font-semibold">
-                  v1.0
+                <span className="badge-shine badge-blue text-[10px] py-0 px-1.5">
+                  PRO
                 </span>
               </div>
-              <span className="hand-annotation text-xs text-[#5c6770] hidden sm:inline">
-                engineering viva defense whiteboard
+              <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
+                engineering intelligence & viva defense studio
               </span>
             </div>
           </div>
 
           {/* Project Switcher */}
           {projects.length > 0 && (
-            <div className="hidden md:flex items-center gap-1.5 pl-3 border-l-2 border-[#2b2f33]">
-              <span className="text-xs font-mono text-[#5c6770]">Active Repo:</span>
+            <div className="hidden md:flex items-center gap-2 pl-3 border-l border-slate-700/60">
+              <span className="text-xs font-mono text-slate-400">Target:</span>
               <select
                 value={currentProject?.id || ''}
                 onChange={(e) => onSelectProject(e.target.value)}
-                className="sketch-input py-1 px-2.5 text-xs font-mono bg-white font-semibold cursor-pointer max-w-[210px] truncate"
+                className="input-modern py-1 px-2.5 text-xs font-mono bg-slate-900/90 text-slate-200 border-slate-700 font-semibold cursor-pointer max-w-[220px] truncate"
               >
                 {projects.map((p) => (
-                  <option key={p.id} value={p.id}>
+                  <option key={p.id} value={p.id} className="bg-slate-900 text-white">
                     {p.name} ({p.mainLanguage})
                   </option>
                 ))}
@@ -78,11 +78,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1 overflow-x-auto py-1">
+        <nav className="flex items-center gap-1.5 overflow-x-auto py-1">
           <button
             onClick={() => setActiveTab('dashboard')}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'dashboard' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`btn-modern btn-sm ${
+              activeTab === 'dashboard'
+                ? 'btn-primary'
+                : 'bg-slate-900/60 text-slate-300 hover:text-white'
             }`}
           >
             <LayoutDashboard size={14} />
@@ -92,8 +94,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setActiveTab('whiteboard')}
             disabled={!currentProject}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'whiteboard' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`btn-modern btn-sm ${
+              activeTab === 'whiteboard'
+                ? 'btn-primary'
+                : 'bg-slate-900/60 text-slate-300 hover:text-white'
             } ${!currentProject ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
             <GitGraph size={14} />
@@ -103,8 +107,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setActiveTab('docs')}
             disabled={!currentProject}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'docs' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`btn-modern btn-sm ${
+              activeTab === 'docs'
+                ? 'btn-primary'
+                : 'bg-slate-900/60 text-slate-300 hover:text-white'
             } ${!currentProject ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
             <BookOpen size={14} />
@@ -114,8 +120,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setActiveTab('quality')}
             disabled={!currentProject}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'quality' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`btn-modern btn-sm ${
+              activeTab === 'quality'
+                ? 'btn-primary'
+                : 'bg-slate-900/60 text-slate-300 hover:text-white'
             } ${!currentProject ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
             <ShieldAlert size={14} />
@@ -125,12 +133,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => setActiveTab('interview')}
             disabled={!currentProject}
-            className={`sketch-btn sketch-btn-sm ${
-              activeTab === 'interview' ? 'sketch-btn-primary' : 'sketch-btn-outline'
+            className={`btn-modern btn-sm ${
+              activeTab === 'interview'
+                ? 'btn-primary'
+                : 'bg-slate-900/60 text-slate-300 hover:text-white'
             } ${!currentProject ? 'opacity-40 cursor-not-allowed' : ''}`}
           >
             <Mic size={14} />
-            <span>Interview Studio</span>
+            <span>Viva Studio</span>
           </button>
         </nav>
 
@@ -139,8 +149,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           {currentProject && (
             <button
               onClick={onOpenReportModal}
-              className="sketch-btn sketch-btn-sm border-[#1d4ed8] text-[#1d4ed8] bg-[#eff6ff] hover:bg-[#dbeafe]"
-              title="Download Printable PDF / DOCX Report"
+              className="btn-modern btn-sm border-indigo-500/40 text-indigo-300 bg-indigo-950/40 hover:bg-indigo-900/60 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+              title="Download Printable PDF / Markdown Report"
             >
               <FileDown size={14} />
               <span className="hidden sm:inline">Export Report</span>
@@ -149,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onOpenNewModal}
-            className="sketch-btn sketch-btn-sm bg-[#222] text-white hover:bg-[#111]"
+            className="btn-modern btn-primary btn-sm"
           >
             <Plus size={14} />
             <span>Analyze Repo</span>

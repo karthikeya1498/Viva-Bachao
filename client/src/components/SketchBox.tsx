@@ -15,12 +15,11 @@ export const SketchBox: React.FC<SketchBoxProps> = ({
   interactive = false,
   onClick
 }) => {
-  let variantClass = 'sketch-box';
-  if (variant === 'alt') variantClass = 'sketch-box-alt';
-  if (variant === 'subtle') variantClass = 'sketch-box-subtle';
-  if (variant === 'sticky') variantClass = 'sketch-sticky';
+  let variantClass = 'glass-card';
+  if (variant === 'subtle') variantClass = 'glass-card-subtle';
+  if (variant === 'sticky') variantClass = 'glass-card border-[rgba(245,158,11,0.3)] bg-[rgba(245,158,11,0.06)]';
 
-  const interactiveClass = interactive ? 'sketch-box-interactive cursor-pointer' : '';
+  const interactiveClass = interactive ? 'glass-card-interactive cursor-pointer' : '';
 
   return (
     <div onClick={onClick} className={`${variantClass} ${interactiveClass} ${className}`}>

@@ -1,0 +1,286 @@
+@import "tailwindcss" layer(base);
+
+:root {
+  --paper-bg: #fbfaf6;
+  --paper-card: #ffffff;
+  --paper-dot: #d8d3c7;
+  --pencil-black: #212529;
+  --pencil-dark: #343a40;
+  --pencil-gray: #5c6770;
+  --pencil-light-gray: #adb5bd;
+  --pencil-border: #2b2f33;
+  --pencil-blue: #1d4ed8;
+  --pencil-blue-bg: #eff6ff;
+  --pencil-green: #15803d;
+  --pencil-green-bg: #f0fdf4;
+  --pencil-amber: #b45309;
+  --pencil-amber-bg: #fefce8;
+  --pencil-red: #b91c1c;
+  --pencil-red-bg: #fef2f2;
+  --pencil-purple: #6d28d9;
+  --pencil-purple-bg: #f5f3ff;
+  --sticky-note: #fef08a;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --font-sketch: 'Caveat', cursive, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--paper-bg);
+  background-image: 
+    radial-gradient(circle, var(--paper-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--pencil-black);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Pencil Sketch Hand-Drawn Borders & Containers */
+.sketch-box {
+  background-color: var(--paper-card);
+  border: 2px solid var(--pencil-border);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: 2px 3px 0px rgba(33, 37, 41, 0.85);
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sketch-box-alt {
+  background-color: var(--paper-card);
+  border: 2px solid var(--pencil-border);
+  border-radius: 15px 225px 15px 255px/255px 15px 225px 15px;
+  box-shadow: 2px 3px 0px rgba(33, 37, 41, 0.85);
+  position: relative;
+}
+
+.sketch-box-subtle {
+  background-color: var(--paper-card);
+  border: 1.5px solid var(--pencil-border);
+  border-radius: 200px 10px 190px 10px/10px 190px 10px 200px;
+  box-shadow: 1px 2px 0px rgba(33, 37, 41, 0.4);
+}
+
+.sketch-box-interactive:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 3px 5px 0px rgba(33, 37, 41, 0.9);
+}
+
+.sketch-sticky {
+  background-color: var(--sticky-note);
+  border: 1.8px solid #854d0e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: 2px 3px 0px rgba(133, 77, 14, 0.4);
+}
+
+/* Pencil Buttons */
+.sketch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--pencil-border);
+  border-radius: 255px 25px 225px 25px/25px 225px 25px 255px;
+  background-color: var(--paper-card);
+  color: var(--pencil-black);
+  box-shadow: 2px 3px 0px var(--pencil-border);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.sketch-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 4px 0px var(--pencil-border);
+}
+
+.sketch-btn:active {
+  transform: translate(1px, 2px);
+  box-shadow: 1px 1px 0px var(--pencil-border);
+}
+
+.sketch-btn-primary {
+  background-color: var(--pencil-black);
+  color: #ffffff;
+  border-color: var(--pencil-black);
+  box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+.sketch-btn-primary:hover {
+  background-color: #0f1214;
+}
+
+.sketch-btn-danger {
+  background-color: var(--pencil-red);
+  color: #ffffff;
+  border-color: var(--pencil-red);
+}
+
+.sketch-btn-outline {
+  background-color: transparent;
+}
+
+.sketch-btn-sm {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  border-width: 1.5px;
+}
+
+/* Pencil Input Fields */
+.sketch-input {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--pencil-black);
+  background-color: #ffffff;
+  border: 2px solid var(--pencil-border);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sketch-input:focus {
+  border-color: var(--pencil-blue);
+  box-shadow: 2px 2px 0px var(--pencil-blue);
+}
+
+/* Hand-Drawn Badges & Pills */
+.sketch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1.5px solid var(--pencil-border);
+  border-radius: 180px 10px 170px 10px/10px 170px 10px 180px;
+  background-color: var(--paper-card);
+}
+
+.sketch-badge-blue {
+  background-color: var(--pencil-blue-bg);
+  border-color: var(--pencil-blue);
+  color: var(--pencil-blue);
+}
+
+.sketch-badge-green {
+  background-color: var(--pencil-green-bg);
+  border-color: var(--pencil-green);
+  color: var(--pencil-green);
+}
+
+.sketch-badge-amber {
+  background-color: var(--pencil-amber-bg);
+  border-color: var(--pencil-amber);
+  color: var(--pencil-amber);
+}
+
+.sketch-badge-red {
+  background-color: var(--pencil-red-bg);
+  border-color: var(--pencil-red);
+  color: var(--pencil-red);
+}
+
+.sketch-badge-purple {
+  background-color: var(--pencil-purple-bg);
+  border-color: var(--pencil-purple);
+  color: var(--pencil-purple);
+}
+
+/* Pencil Divider */
+.pencil-divider {
+  border: none;
+  height: 2px;
+  background-color: var(--pencil-border);
+  margin: 1.25rem 0;
+  position: relative;
+}
+
+.pencil-divider::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background-color: var(--pencil-border);
+  transform: rotate(-0.25deg);
+}
+
+/* Hand-Drawn Annotation Font */
+.hand-annotation {
+  font-family: var(--font-sketch);
+  font-size: 1.25rem;
+  color: #3b4252;
+  transform: rotate(-1.5deg);
+  display: inline-block;
+}
+
+/* Code Snippet Box (Grid Paper look) */
+.code-box {
+  background-color: #f8f9fa;
+  border: 1.8px solid var(--pencil-border);
+  border-radius: 12px 180px 15px 220px/200px 15px 220px 15px;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+  overflow-x: auto;
+  box-shadow: inset 1px 1px 4px rgba(0,0,0,0.04);
+}
+
+/* Whiteboard Engineering Canvas */
+.whiteboard-canvas {
+  background-color: #faf9f5;
+  background-image: 
+    linear-gradient(to right, #ece7dc 1px, transparent 1px),
+    linear-gradient(to bottom, #ece7dc 1px, transparent 1px);
+  background-size: 28px 28px;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Custom Scrollbar styled as pencil lead */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1ede4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #71767a;
+  border-radius: 4px;
+  border: 1px solid #2b2f33;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #495057;
+}
+
+/* Responsive layout utilities */
+.container-paper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
